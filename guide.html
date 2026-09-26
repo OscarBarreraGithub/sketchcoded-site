@@ -215,11 +215,24 @@ npm run dev</pre>
               agent reads first.
             </li>
             <li>
+              <code>skills/</code>: the agent's instructions, one file each:
+              read a board, build rules, describe pins, connect screens, plan
+              the backlog, resolve findings, walk the flow, talk to Sketchcoded.
+            </li>
+            <li>
               <code>review.json</code>: current findings and accepted exceptions
               with reasons.
             </li>
             <li><code>assets/</code>: the drawings.</li>
           </ul>
+          <p>
+            You rarely need the export while you work. Every view has a
+            <strong>Tell the agent</strong> button: it copies a prompt naming
+            exactly what you are looking at, with the address of a task brief
+            the running app serves for it, the skills to read and your rules.
+            The agent reads the live board on your computer and writes back
+            through the same local API.
+          </p>
         </section>
 
         <section id="faq">
