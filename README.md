@@ -6,7 +6,10 @@ The public landing page for [Sketchcoded](../sketchcoded), the local app that tu
 - `guide.html`: what it is, the example, set up, the automatic checks, build rules, what the AI gets, and an FAQ.
 - `links.js`: every external address in one place. The setup prompt is generated from the GitHub address so they never drift.
 - `styles.css`: the app's palette and type (DM Sans, Newsreader, Caveat), bundled in `assets/fonts` so the page loads nothing from third parties.
-- `assets/board.png`: the example image, a screenshot of the Sketchcoded board planning this site.
+- `demo.html`, `demo.css`, `demo.js`: the example board, read only and public. The cork board with its frames, pins and coloured yarn: pan it, zoom it, drag a frame, and click any screen to walk its flow from there. Nothing is editable and nothing is saved, so a reload puts every frame back.
+- `example/board.json` and `example/art/*.svg`: the demo's data, **generated, not hand written**. `npx tsx scripts/make-demo.ts` in the app repository writes them from `shared/demo.ts` and `server/demo-art.ts`, so the board on the site is the board the app opens with. Regenerate after changing the example board; never edit these by hand.
+- `_headers`: cache and safety headers for Cloudflare Pages. `.assetsignore` keeps this repository's own files out of the deployment.
+- `assets/board.png`: the example image on the landing page.
 
 ## Work on it
 
@@ -20,4 +23,14 @@ Keep the copy consistent with the app repository's `README.md` and `docs/FUNCTIO
 
 ## Deploy
 
-Any static host works: copy the folder as is. The intended home is sketchcoded.com.
+The site is a Cloudflare Pages project called `sketchcoded`, served at
+[sketchcoded.com](https://sketchcoded.com) and www, with `sketchcoded.pages.dev` as its own
+address. The domain is registered at Namecheap and uses Cloudflare's nameservers
+(`ophelia.ns.cloudflare.com`, `razvan.ns.cloudflare.com`); Namecheap's email forwarding records
+(five MX and the SPF TXT) were carried over and still work.
+
+```sh
+wrangler pages deploy . --project-name sketchcoded --branch main
+```
+
+Any other static host works too: copy the folder as it is.
