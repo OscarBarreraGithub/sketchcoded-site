@@ -1,0 +1,203 @@
+{
+  "name": "Little chat",
+  "screens": [
+    {
+      "id": "welcome",
+      "assetId": "art-1",
+      "title": "A warm welcome",
+      "purpose": "Sign in to your account. Successful authentication replaces the signed-out context.",
+      "entry": true,
+      "role": "auth",
+      "code": "F1"
+    },
+    {
+      "id": "inbox",
+      "assetId": "art-2",
+      "title": "Your people",
+      "purpose": "Recent conversations, with a name, avatar, last message, and presence.",
+      "entry": false,
+      "role": "screen",
+      "code": "F2"
+    },
+    {
+      "id": "conversation",
+      "assetId": "art-3",
+      "title": "A little conversation",
+      "purpose": "A reusable conversation screen for the selected person. Load by conversationId.",
+      "entry": false,
+      "role": "screen",
+      "code": "F3"
+    },
+    {
+      "id": "blocked",
+      "assetId": "art-4",
+      "title": "When a chat is blocked",
+      "purpose": "Explain that this person cannot be messaged without disclosing private account details.",
+      "entry": false,
+      "role": "screen",
+      "code": "F4"
+    }
+  ],
+  "assets": [
+    {
+      "id": "art-1",
+      "name": "01-welcome.svg",
+      "file": "01-welcome.svg",
+      "width": 760,
+      "height": 550,
+      "importedAt": "2026-09-27T00:00:00.000Z",
+      "code": "S1"
+    },
+    {
+      "id": "art-2",
+      "name": "02-inbox.svg",
+      "file": "02-inbox.svg",
+      "width": 760,
+      "height": 550,
+      "importedAt": "2026-09-27T00:00:00.000Z",
+      "code": "S2"
+    },
+    {
+      "id": "art-3",
+      "name": "03-conversation.svg",
+      "file": "03-conversation.svg",
+      "width": 760,
+      "height": 550,
+      "importedAt": "2026-09-27T00:00:00.000Z",
+      "code": "S3"
+    },
+    {
+      "id": "art-4",
+      "name": "04-blocked.svg",
+      "file": "04-blocked.svg",
+      "width": 760,
+      "height": 430,
+      "importedAt": "2026-09-27T00:00:00.000Z",
+      "code": "S4"
+    }
+  ],
+  "pins": [
+    {
+      "id": "login",
+      "screenId": "welcome",
+      "x": 0.5,
+      "y": 0.753,
+      "title": "Let me in",
+      "description": "Submit the credentials. When sign-in succeeds, show recent conversations. Invalid credentials stay here with an inline error."
+    },
+    {
+      "id": "open-chat",
+      "screenId": "inbox",
+      "x": 0.185,
+      "y": 0.421,
+      "title": "Open a recent chat",
+      "description": "This is a panel of recent chats. Clicking a row opens the conversation for that person, unless the relationship is blocked."
+    },
+    {
+      "id": "chat-back",
+      "screenId": "conversation",
+      "x": 0.077,
+      "y": 0.196,
+      "title": "Back to your people",
+      "description": "Return to the conversation list."
+    },
+    {
+      "id": "blocked-back",
+      "screenId": "blocked",
+      "x": 0.497,
+      "y": 0.791,
+      "title": "Back to your people",
+      "description": "Leave the unavailable conversation and return to the list."
+    }
+  ],
+  "transitions": [
+    {
+      "id": "signed-in",
+      "pinId": "login",
+      "target": "inbox",
+      "summary": "Signed in",
+      "condition": "Credentials are valid and a session has been established.",
+      "logic": "Clear the signed-out history. Invalid credentials remain on the welcome screen with an inline error.",
+      "context": "",
+      "fallback": false,
+      "navigation": "reset",
+      "color": "red"
+    },
+    {
+      "id": "chat-allowed",
+      "pinId": "open-chat",
+      "target": "conversation",
+      "summary": "You can message them",
+      "condition": "Neither participant has blocked the other and the conversation is available.",
+      "logic": "Load messages for the selected conversation. Show loading and retry states within this screen.",
+      "context": "conversationId, selectedUserId",
+      "fallback": false,
+      "navigation": "push",
+      "color": "red"
+    },
+    {
+      "id": "chat-blocked",
+      "pinId": "open-chat",
+      "target": "blocked",
+      "summary": "This person is blocked",
+      "condition": "Either participant has blocked the other, or messaging is unavailable.",
+      "logic": "Show a neutral unavailable message; do not expose who blocked whom.",
+      "context": "selectedUserId",
+      "fallback": true,
+      "navigation": "push",
+      "color": "gold"
+    },
+    {
+      "id": "chat-return",
+      "pinId": "chat-back",
+      "target": null,
+      "summary": "Back to your people",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "back",
+      "color": "olive"
+    },
+    {
+      "id": "blocked-return",
+      "pinId": "blocked-back",
+      "target": null,
+      "summary": "Back to your people",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "back",
+      "color": "olive"
+    }
+  ],
+  "layout": {
+    "welcome": {
+      "x": 30,
+      "y": 130,
+      "width": 250
+    },
+    "inbox": {
+      "x": 385,
+      "y": 85,
+      "width": 345
+    },
+    "conversation": {
+      "x": 885,
+      "y": 20,
+      "width": 330
+    },
+    "blocked": {
+      "x": 875,
+      "y": 475,
+      "width": 290
+    }
+  },
+  "colorLabels": {
+    "red": "Main path",
+    "gold": "Branch",
+    "blue": "Detour",
+    "olive": "Way back"
+  }
+}

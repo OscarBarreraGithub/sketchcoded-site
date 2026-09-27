@@ -4,8 +4,8 @@ window.SKETCHCODED_LINKS = {
   github: 'https://github.com/OscarBarreraGithub/sketchcoded',
   // Where "See more projects" goes.
   projects: 'https://sketchcoded.com/projects',
-  // The read-only demo. Until it exists, the guide explains how to run the example locally.
-  demo: 'guide.html#example',
+  // The example board, read only: move the frames, walk the flow, nothing is saved.
+  demo: 'demo.html',
 };
 document.querySelectorAll('[data-link]').forEach((el) => {
   const href = window.SKETCHCODED_LINKS[el.dataset.link];

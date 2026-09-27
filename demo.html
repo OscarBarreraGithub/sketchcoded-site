@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#c3ab7f" />
+    <title>The example board — Sketchcoded</title>
+    <meta
+      name="description"
+      content="A little chat app, planned on a Sketchcoded board. Move the frames around, and click any screen to walk the flow from there."
+    />
+    <meta property="og:title" content="Sketchcoded — the example board" />
+    <meta
+      property="og:description"
+      content="A little chat app on a cork board. Click any screen to walk its flow."
+    />
+    <meta property="og:image" content="assets/board.png" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body class="demo-body">
+    <header class="demo-header">
+      <a class="brand" href="./"><img src="assets/favicon.svg" alt="" />sketchcoded<span>.</span></a>
+      <p class="demo-intro">
+        <strong>The example board.</strong>
+        <span>A little chat app. Drag the frames; click a screen to walk it.</span>
+      </p>
+      <button class="button primary demo-play" type="button" data-play>
+        <svg viewBox="0 0 16 16" aria-hidden="true" width="14" height="14">
+          <path d="M4 2.5v11l9-5.5z" fill="currentColor" />
+        </svg>
+        Test the flow
+      </button>
+    </header>
+
+    <main class="demo-stage" data-stage aria-label="The example board">
+      <div class="demo-world" data-world>
+        <svg class="demo-yarn" data-yarn aria-hidden="true"></svg>
+        <div data-cards></div>
+        <div data-overlay></div>
+      </div>
+      <p class="demo-loading" data-loading>Bringing the board in…</p>
+      <div class="demo-legend" data-legend aria-label="What the colours mean"></div>
+      <div class="demo-controls">
+        <button class="icon-button" type="button" data-zoom-out aria-label="Zoom out">−</button>
+        <span class="demo-zoom" data-zoom>100%</span>
+        <button class="icon-button" type="button" data-zoom-in aria-label="Zoom in">+</button>
+        <button class="icon-button" type="button" data-fit aria-label="Fit the board">⤢</button>
+      </div>
+      <p class="demo-hint">
+        <span class="only-wide">Drag a frame to move it · drag the cork to pan · scroll to zoom</span>
+        <span class="only-narrow">Drag to move · pinch to zoom</span>
+        · reload to put it all back
+      </p>
+    </main>
+
+    <!-- Walking the flow: the drawing, its pins, and the paths the board says exist. -->
+    <div class="player" data-player hidden role="dialog" aria-modal="true" aria-label="Walking the flow">
+      <div class="player-bar">
+        <span class="player-where"><b data-code>F1</b> <span data-title>A screen</span></span>
+        <span class="player-kind" data-kind hidden>Dialog</span>
+        <span class="player-steps" data-steps>0 steps</span>
+        <button class="button small" type="button" data-rewind>Step back</button>
+        <button class="button small" type="button" data-restart>Restart</button>
+        <button class="button small player-close" type="button" data-close aria-label="Back to the board">
+          <span class="only-wide">Back to the board</span><span class="only-narrow">Board</span>
+        </button>
+      </div>
+      <div class="player-stage" data-player-stage>
+        <div class="player-frame" data-frame>
+          <img data-shot alt="" />
+        </div>
+      </div>
+      <p class="player-note" data-note>Click a numbered pin to take a path.</p>
+      <div class="player-choice" data-choice hidden>
+        <div class="player-choice-card">
+          <span class="eyebrow">CHOOSE WHAT HAPPENS</span>
+          <h2 data-choice-title>This interaction</h2>
+          <p data-choice-detail></p>
+          <div data-choice-list></div>
+          <button class="button small" type="button" data-choice-cancel>Stay on this screen</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="demo.js"></script>
+  </body>
+</html>
