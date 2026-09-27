@@ -8,7 +8,7 @@
       "purpose": "The public front door: what Sketchcoded is, a playable demo, what you can do, and how to run it on your computer.",
       "entry": true,
       "role": "screen",
-      "code": "F1"
+      "code": "P1"
     },
     {
       "id": "boards",
@@ -17,7 +17,7 @@
       "purpose": "Open a saved board, start a blank one, start the chat example, or import an exported project.",
       "entry": false,
       "role": "modal",
-      "code": "F2"
+      "code": "P2"
     },
     {
       "id": "board",
@@ -26,7 +26,7 @@
       "purpose": "The working board: sketch library on the left, cork board with frames, pins and yarn, review and test controls above.",
       "entry": true,
       "role": "screen",
-      "code": "F3"
+      "code": "P3"
     },
     {
       "id": "outline",
@@ -35,7 +35,7 @@
       "purpose": "The same app as a searchable directory: every screen once, with its pins and paths.",
       "entry": false,
       "role": "screen",
-      "code": "F4"
+      "code": "P4"
     },
     {
       "id": "planning",
@@ -44,7 +44,7 @@
       "purpose": "Every functionality idea, which screen it belongs on, and whether it has become a pin yet.",
       "entry": false,
       "role": "screen",
-      "code": "F5"
+      "code": "P5"
     },
     {
       "id": "screen-editor",
@@ -53,7 +53,7 @@
       "purpose": "One frame up close: web and mobile drawings side by side, pins, layouts, and the ideas planned for it.",
       "entry": false,
       "role": "modal",
-      "code": "F6"
+      "code": "P6"
     },
     {
       "id": "connection-editor",
@@ -62,7 +62,7 @@
       "purpose": "One yarn: source pin, destination, navigation, short summary, condition, details, and data needed.",
       "entry": false,
       "role": "modal",
-      "code": "F7"
+      "code": "P7"
     },
     {
       "id": "review",
@@ -71,7 +71,7 @@
       "purpose": "Findings about missing paths, unreachable screens and ways back, with reasoned exceptions that travel with the export.",
       "entry": false,
       "role": "screen",
-      "code": "F8"
+      "code": "P8"
     },
     {
       "id": "test-flow",
@@ -80,7 +80,7 @@
       "purpose": "Play through the sketches: pick a start, click pins, choose scenarios, switch web and mobile, rewind the test.",
       "entry": false,
       "role": "modal",
-      "code": "F9"
+      "code": "P9"
     },
     {
       "id": "help",
@@ -89,7 +89,7 @@
       "purpose": "Six steps from a sketch to a story, plus keyboard shortcuts.",
       "entry": false,
       "role": "modal",
-      "code": "F10"
+      "code": "P10"
     },
     {
       "id": "demo-readonly",
@@ -98,7 +98,7 @@
       "purpose": "A read-only view of the example board, reached from the landing page. Empty for now: drop a sketch from the library into this frame later.",
       "entry": false,
       "role": "screen",
-      "code": "F11"
+      "code": "P11"
     },
     {
       "id": "guide",
@@ -108,7 +108,7 @@
       "entry": false,
       "role": "screen",
       "leftToAi": true,
-      "code": "F12"
+      "code": "P12"
     }
   ],
   "assets": [
