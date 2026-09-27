@@ -7,7 +7,7 @@ The public landing page for [Sketchcoded](../sketchcoded), the local app that tu
 - `links.js`: every external address in one place. The setup prompt is generated from the GitHub address so they never drift.
 - `styles.css`: the app's palette and type (DM Sans, Newsreader, Caveat), bundled in `assets/fonts` so the page loads nothing from third parties.
 - `demo.html`, `demo.css`, `demo.js`: the example board, read only and public. The cork board with its frames, pins and coloured yarn: pan it, zoom it, drag a frame, and click any screen to walk its flow from there. Nothing is editable and nothing is saved, so a reload puts every frame back.
-- `example/board.json` and `example/art/*.svg`: the demo's data, **generated, not hand written**. `npx tsx scripts/make-demo.ts` in the app repository writes them from `shared/demo.ts` and `server/demo-art.ts`, so the board on the site is the board the app opens with. Regenerate after changing the example board; never edit these by hand.
+- `tools/make-example.mjs`, `example/board.json`, `example/art/*.svg`: the example board is **this website**, drawn as a Sketchcoded board: Home, the example board itself, the guide, the FAQ, and the app running on your computer. The JSON and the drawings are **generated, not hand written**: run `node tools/make-example.mjs` and commit what it writes. It is not a build step; visitors get the committed files. Every pin is placed from the same numbers that draw its element, so a pin can never drift off the thing it points at. Change the site's pages or its flow, then regenerate.
 - `_headers`: cache and safety headers for Cloudflare Pages. `.assetsignore` keeps this repository's own files out of the deployment.
 - `assets/board.png`: the example image on the landing page.
 

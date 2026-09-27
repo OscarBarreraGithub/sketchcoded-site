@@ -1,157 +1,240 @@
 {
-  "name": "Little chat",
+  "name": "sketchcoded.com",
   "screens": [
     {
-      "id": "welcome",
-      "assetId": "art-1",
-      "title": "A warm welcome",
-      "purpose": "Sign in to your account. Successful authentication replaces the signed-out context.",
+      "id": "home",
+      "code": "F1",
+      "assetId": "01",
+      "title": "Home",
+      "purpose": "Where you land: the name, what Sketchcoded is for, the example board, and the prompt you paste into your AI to set it up.",
       "entry": true,
-      "role": "auth",
-      "code": "F1"
+      "role": "screen"
     },
     {
-      "id": "inbox",
-      "assetId": "art-2",
-      "title": "Your people",
-      "purpose": "Recent conversations, with a name, avatar, last message, and presence.",
+      "id": "board",
+      "code": "F2",
+      "assetId": "02",
+      "title": "The example board",
+      "purpose": "This page. The site drawn as a Sketchcoded board: drag the frames, and click any screen to walk its flow from there.",
       "entry": false,
-      "role": "screen",
-      "code": "F2"
+      "role": "screen"
     },
     {
-      "id": "conversation",
-      "assetId": "art-3",
-      "title": "A little conversation",
-      "purpose": "A reusable conversation screen for the selected person. Load by conversationId.",
+      "id": "guide",
+      "code": "F3",
+      "assetId": "03",
+      "title": "The guide",
+      "purpose": "How a board becomes a plan, what the automatic checks look for, and what the AI is handed at the end.",
       "entry": false,
-      "role": "screen",
-      "code": "F3"
+      "role": "screen"
     },
     {
-      "id": "blocked",
-      "assetId": "art-4",
-      "title": "When a chat is blocked",
-      "purpose": "Explain that this person cannot be messaged without disclosing private account details.",
+      "id": "faq",
+      "code": "F4",
+      "assetId": "04",
+      "title": "FAQ",
+      "purpose": "The short answers: no account, no key, nothing uploaded, and what an AI actually receives.",
       "entry": false,
-      "role": "screen",
-      "code": "F4"
+      "role": "screen"
+    },
+    {
+      "id": "running",
+      "code": "F5",
+      "assetId": "05",
+      "title": "Sketchcoded on your computer",
+      "purpose": "The end of the journey on this site. The app is running locally and your own board is open; everything after this happens on your computer.",
+      "entry": false,
+      "role": "terminal"
     }
   ],
   "assets": [
     {
-      "id": "art-1",
-      "name": "01-welcome.svg",
-      "file": "01-welcome.svg",
+      "id": "01",
+      "name": "01-home.svg",
+      "file": "01-home.svg",
       "width": 760,
       "height": 550,
-      "importedAt": "2026-09-27T00:00:00.000Z",
-      "code": "S1"
+      "importedAt": "2026-09-27T00:00:00.000Z"
     },
     {
-      "id": "art-2",
-      "name": "02-inbox.svg",
-      "file": "02-inbox.svg",
+      "id": "02",
+      "name": "02-board.svg",
+      "file": "02-board.svg",
       "width": 760,
       "height": 550,
-      "importedAt": "2026-09-27T00:00:00.000Z",
-      "code": "S2"
+      "importedAt": "2026-09-27T00:00:00.000Z"
     },
     {
-      "id": "art-3",
-      "name": "03-conversation.svg",
-      "file": "03-conversation.svg",
+      "id": "03",
+      "name": "03-guide.svg",
+      "file": "03-guide.svg",
       "width": 760,
       "height": 550,
-      "importedAt": "2026-09-27T00:00:00.000Z",
-      "code": "S3"
+      "importedAt": "2026-09-27T00:00:00.000Z"
     },
     {
-      "id": "art-4",
-      "name": "04-blocked.svg",
-      "file": "04-blocked.svg",
+      "id": "04",
+      "name": "04-faq.svg",
+      "file": "04-faq.svg",
       "width": 760,
       "height": 430,
-      "importedAt": "2026-09-27T00:00:00.000Z",
-      "code": "S4"
+      "importedAt": "2026-09-27T00:00:00.000Z"
+    },
+    {
+      "id": "05",
+      "name": "05-running.svg",
+      "file": "05-running.svg",
+      "width": 760,
+      "height": 430,
+      "importedAt": "2026-09-27T00:00:00.000Z"
     }
   ],
   "pins": [
     {
-      "id": "login",
-      "screenId": "welcome",
-      "x": 0.5,
-      "y": 0.753,
-      "title": "Let me in",
-      "description": "Submit the credentials. When sign-in succeeds, show recent conversations. Invalid credentials stay here with an inline error."
+      "id": "open-example",
+      "screenId": "home",
+      "x": 0.737,
+      "y": 0.455,
+      "title": "Open the board",
+      "description": "The example frame on the landing page. It opens this board, read only: you can move the frames and walk the flow, nothing else.",
+      "kind": "interaction"
     },
     {
-      "id": "open-chat",
-      "screenId": "inbox",
-      "x": 0.185,
-      "y": 0.421,
-      "title": "Open a recent chat",
-      "description": "This is a panel of recent chats. Clicking a row opens the conversation for that person, unless the relationship is blocked."
+      "id": "copy-prompt",
+      "screenId": "home",
+      "x": 0.305,
+      "y": 0.815,
+      "title": "Copy the setup prompt",
+      "description": "Copies the one paragraph you paste into your AI to install and start Sketchcoded. What happens next depends on whether the machine is ready.",
+      "kind": "interaction"
     },
     {
-      "id": "chat-back",
-      "screenId": "conversation",
-      "x": 0.077,
-      "y": 0.196,
-      "title": "Back to your people",
-      "description": "Return to the conversation list."
+      "id": "read-guide",
+      "screenId": "home",
+      "x": 0.77,
+      "y": 0.115,
+      "title": "Read the guide",
+      "description": "Opens the guide, and comes back here.",
+      "kind": "interaction"
     },
     {
-      "id": "blocked-back",
-      "screenId": "blocked",
-      "x": 0.497,
-      "y": 0.791,
-      "title": "Back to your people",
-      "description": "Leave the unavailable conversation and return to the list."
+      "id": "github",
+      "screenId": "home",
+      "x": 0.899,
+      "y": 0.115,
+      "title": "GitHub",
+      "description": "Leaves this site for the source at https://github.com/OscarBarreraGithub/sketchcoded. A link out is a pin, never a frame.",
+      "kind": "link"
+    },
+    {
+      "id": "board-home",
+      "screenId": "board",
+      "x": 0.079,
+      "y": 0.189,
+      "title": "Back to the site",
+      "description": "The brand in the corner returns to the page you came from.",
+      "kind": "interaction"
+    },
+    {
+      "id": "guide-example",
+      "screenId": "guide",
+      "x": 0.339,
+      "y": 0.389,
+      "title": "Open the board",
+      "description": "The guide points at the same example board.",
+      "kind": "interaction"
+    },
+    {
+      "id": "guide-faq",
+      "screenId": "guide",
+      "x": 0.155,
+      "y": 0.709,
+      "title": "Jump to the FAQ",
+      "description": "The contents list scrolls to the questions at the end of the guide.",
+      "kind": "interaction"
+    },
+    {
+      "id": "guide-home",
+      "screenId": "guide",
+      "x": 0.079,
+      "y": 0.189,
+      "title": "Back to the site",
+      "description": "The brand in the corner returns to the page you came from.",
+      "kind": "interaction"
+    },
+    {
+      "id": "faq-setup",
+      "screenId": "faq",
+      "x": 0.526,
+      "y": 0.8,
+      "title": "Set it up",
+      "description": "Takes the reader to the setup prompt and on to a running copy.",
+      "kind": "interaction"
+    },
+    {
+      "id": "faq-guide",
+      "screenId": "faq",
+      "x": 0.079,
+      "y": 0.242,
+      "title": "Back to the guide",
+      "description": "Returns to the guide above the questions.",
+      "kind": "interaction"
     }
   ],
   "transitions": [
     {
-      "id": "signed-in",
-      "pinId": "login",
-      "target": "inbox",
-      "summary": "Signed in",
-      "condition": "Credentials are valid and a session has been established.",
-      "logic": "Clear the signed-out history. Invalid credentials remain on the welcome screen with an inline error.",
+      "id": "to-board",
+      "pinId": "open-example",
+      "target": "board",
+      "summary": "Open the board",
+      "condition": "",
+      "logic": "",
       "context": "",
-      "fallback": false,
-      "navigation": "reset",
-      "color": "red"
-    },
-    {
-      "id": "chat-allowed",
-      "pinId": "open-chat",
-      "target": "conversation",
-      "summary": "You can message them",
-      "condition": "Neither participant has blocked the other and the conversation is available.",
-      "logic": "Load messages for the selected conversation. Show loading and retry states within this screen.",
-      "context": "conversationId, selectedUserId",
       "fallback": false,
       "navigation": "push",
       "color": "red"
     },
     {
-      "id": "chat-blocked",
-      "pinId": "open-chat",
-      "target": "blocked",
-      "summary": "This person is blocked",
-      "condition": "Either participant has blocked the other, or messaging is unavailable.",
-      "logic": "Show a neutral unavailable message; do not expose who blocked whom.",
-      "context": "selectedUserId",
+      "id": "setup-ready",
+      "pinId": "copy-prompt",
+      "target": "running",
+      "summary": "Node 22.12 or later",
+      "condition": "The computer has Node 22.12 or later, so the AI can clone the repository and start it.",
+      "logic": "The AI installs and runs it; the browser opens on the first board.",
+      "context": "",
+      "fallback": false,
+      "navigation": "push",
+      "color": "red"
+    },
+    {
+      "id": "setup-missing",
+      "pinId": "copy-prompt",
+      "target": "guide",
+      "summary": "Something is missing",
+      "condition": "Node is missing or too old, or the clone fails.",
+      "logic": "Send the reader to the guide, where the requirements and the file structure are written out.",
+      "context": "",
       "fallback": true,
       "navigation": "push",
       "color": "gold"
     },
     {
-      "id": "chat-return",
-      "pinId": "chat-back",
+      "id": "to-guide",
+      "pinId": "read-guide",
+      "target": "guide",
+      "summary": "Read the guide",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "push",
+      "color": "blue"
+    },
+    {
+      "id": "board-back",
+      "pinId": "board-home",
       "target": null,
-      "summary": "Back to your people",
+      "summary": "Back to the site",
       "condition": "",
       "logic": "",
       "context": "",
@@ -160,10 +243,58 @@
       "color": "olive"
     },
     {
-      "id": "blocked-return",
-      "pinId": "blocked-back",
+      "id": "guide-to-board",
+      "pinId": "guide-example",
+      "target": "board",
+      "summary": "Open the board",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "push",
+      "color": "red"
+    },
+    {
+      "id": "guide-to-faq",
+      "pinId": "guide-faq",
+      "target": "faq",
+      "summary": "Jump to the FAQ",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "push",
+      "color": "blue"
+    },
+    {
+      "id": "guide-back",
+      "pinId": "guide-home",
       "target": null,
-      "summary": "Back to your people",
+      "summary": "Back to the site",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "back",
+      "color": "olive"
+    },
+    {
+      "id": "faq-to-running",
+      "pinId": "faq-setup",
+      "target": "running",
+      "summary": "Set it up",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "push",
+      "color": "red"
+    },
+    {
+      "id": "faq-back",
+      "pinId": "faq-guide",
+      "target": null,
+      "summary": "Back to the guide",
       "condition": "",
       "logic": "",
       "context": "",
@@ -173,25 +304,30 @@
     }
   ],
   "layout": {
-    "welcome": {
-      "x": 30,
-      "y": 130,
-      "width": 250
+    "home": {
+      "x": 40,
+      "y": 250,
+      "width": 320
     },
-    "inbox": {
-      "x": 385,
-      "y": 85,
-      "width": 345
+    "board": {
+      "x": 480,
+      "y": 10,
+      "width": 340
     },
-    "conversation": {
-      "x": 885,
-      "y": 20,
-      "width": 330
+    "guide": {
+      "x": 430,
+      "y": 560,
+      "width": 310
     },
-    "blocked": {
-      "x": 875,
-      "y": 475,
+    "faq": {
+      "x": 900,
+      "y": 600,
       "width": 290
+    },
+    "running": {
+      "x": 930,
+      "y": 60,
+      "width": 310
     }
   },
   "colorLabels": {

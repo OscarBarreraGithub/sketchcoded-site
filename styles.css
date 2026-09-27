@@ -117,3 +117,15 @@ details.faq p { padding: 0 0 14px; }
 @media (prefers-reduced-motion: reduce) {
   .example figure { transition: none; }
 }
+
+/* The source link stands on its own under the setup prompt, centred, with the mark. */
+.github-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: fit-content;
+  margin: 16px auto 0;
+  min-height: 44px;
+  text-decoration: none;
+}
