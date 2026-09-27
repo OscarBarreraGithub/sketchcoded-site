@@ -7,7 +7,14 @@ The public landing page for [Sketchcoded](../sketchcoded), the local app that tu
 - `links.js`: every external address in one place. The setup prompt is generated from the GitHub address so they never drift.
 - `styles.css`: the app's palette and type (DM Sans, Newsreader, Caveat), bundled in `assets/fonts` so the page loads nothing from third parties.
 - `demo.html`, `demo.css`, `demo.js`: the example board, read only and public. The cork board with its frames, pins and coloured yarn: pan it, zoom it, drag a frame, and click any screen to walk its flow from there. Nothing is editable and nothing is saved, so a reload puts every frame back.
-- `tools/make-example.mjs`, `example/board.json`, `example/art/*.svg`: the example board is **this website**, drawn as a Sketchcoded board: Home, the example board itself, the guide, the FAQ, and the app running on your computer. The JSON and the drawings are **generated, not hand written**: run `node tools/make-example.mjs` and commit what it writes. It is not a build step; visitors get the committed files. Every pin is placed from the same numbers that draw its element, so a pin can never drift off the thing it points at. Change the site's pages or its flow, then regenerate.
+- `tools/make-example.mjs`, `example/board.json`, `example/art/*`: the example is **the real Sketchcoded board**, with its own hand drawings, pins and yarn, taken straight from the running app:
+
+  ```sh
+  node tools/make-example.mjs                 # the board named Sketchcoded on localhost:5173
+  node tools/make-example.mjs --board "Name"  # a different board
+  ```
+
+  It copies the drawings and writes the board as JSON. Run it when the board changes and commit what it writes; visitors get the committed files, so there is still no build step. Nothing is invented: the frames, the drawings, the pins and their words, the yarn and the colour names are the user's. Frames that have no drawing yet show what they are waiting for, because that is what a board looks like while it is being made.
 - `_headers`: cache and safety headers for Cloudflare Pages. `.assetsignore` keeps this repository's own files out of the deployment.
 - `assets/board.png`: the example image on the landing page.
 

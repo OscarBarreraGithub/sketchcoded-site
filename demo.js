@@ -60,6 +60,7 @@
 
   // ---------------------------------------------------------------- geometry
   const assetOf = (screen) => byId(board.assets, screen.assetId);
+  const ideasOf = (id) => (board.ideas ?? []).filter((i) => i.screenId === id && !i.pinId);
   const shotHeight = (screen) => {
     const a = assetOf(screen),
       width = layout[screen.id].width - 24;
@@ -107,16 +108,26 @@
 
       const paper = el('div', 'card-paper');
       paper.append(el('span', 'card-tack'));
-      const shotButton = el('button', 'card-shot');
+      const shotButton = el('button', `card-shot ${a ? '' : 'planned'}`);
       shotButton.type = 'button';
       shotButton.setAttribute('aria-label', `Walk the flow from ${screen.title}`);
-      const img = el('img');
-      img.src = `example/art/${a.file}`;
-      img.alt = screen.title;
-      img.draggable = false;
-      img.width = a.width;
-      img.height = a.height;
-      shotButton.append(img);
+      if (a) {
+        const img = el('img');
+        img.src = `example/art/${a.file}`;
+        img.alt = screen.title;
+        img.draggable = false;
+        img.width = a.width;
+        img.height = a.height;
+        shotButton.append(img);
+      } else {
+        const waiting = ideasOf(screen.id).length;
+        const note = el('span', 'card-waiting');
+        note.append(
+          el('em', null, 'WAITING FOR A DRAWING'),
+          el('b', null, waiting ? `${waiting} ${waiting === 1 ? 'idea' : 'ideas'} planned` : 'Nothing planned yet'),
+        );
+        shotButton.append(note);
+      }
       pinsOf(screen.id).forEach((pin, index) => {
         const dot = el('span', 'pin', String(index + 1));
         dot.style.cssText = `left:${pin.x * 100}%;top:${pin.y * 100}%`;
@@ -190,7 +201,7 @@
   const apply = () => {
     world.style.transform = `translate(${view.x}px, ${view.y}px) scale(${view.zoom})`;
     world.style.setProperty('--board-zoom', view.zoom);
-    world.classList.toggle('far', view.zoom < 0.42);
+    world.classList.toggle('far', view.zoom < 0.3);
     zoomLabel.textContent = `${Math.round(view.zoom * 100)}%`;
   };
 
@@ -201,7 +212,8 @@
     const xs = board.screens.map((s) => layout[s.id].x),
       ys = board.screens.map((s) => layout[s.id].y - 35);
     const right = Math.max(...board.screens.map((s) => layout[s.id].x + layout[s.id].width)),
-      bottom = Math.max(...board.screens.map((s) => layout[s.id].y + cardHeight(s) + 46));
+      // cardHeight already counts the foot; the tape above is why ys starts 35 higher.
+      bottom = Math.max(...board.screens.map((s) => layout[s.id].y + cardHeight(s)));
     const box = { x: Math.min(...xs), y: Math.min(...ys) };
     box.width = right - box.x;
     box.height = bottom - box.y;
@@ -209,11 +221,11 @@
       usableH = Math.max(120, rect.height - pad.top - pad.bottom);
     // Never so far out that the board stops being readable: on a phone it overflows and pans
     // instead, which the hint says. The text on a frame is clamped for the same reason.
-    view.zoom = Math.max(0.42, Math.min(1.4, usableW / box.width, usableH / box.height));
+    view.zoom = Math.max(0.34, Math.min(1.4, usableW / box.width, usableH / box.height));
     // When the whole board does not fit (a phone), start where the app starts: the entry frame,
     // with the rest of the board a drag away.
     const entry = board.screens.find((s) => s.entry) ?? board.screens[0];
-    const tight = box.width * view.zoom > usableW || box.height * view.zoom > usableH;
+    const tight = box.width * view.zoom > usableW + 2 || box.height * view.zoom > usableH + 2;
     const centre = tight
       ? {
           x: layout[entry.id].x + layout[entry.id].width / 2,
@@ -347,6 +359,27 @@
   let stack = [];
   let steps = 0;
   const current = () => stack[stack.length - 1];
+  // A percentage height against an auto-height parent resolves to nothing, so the drawing is
+  // sized to the stage in both directions instead, the way the app sizes it.
+  let stageSize = { width: 0, height: 0 };
+  new ResizeObserver(() => {
+    stageSize = { width: playerStage.clientWidth, height: playerStage.clientHeight };
+    if (!player.hidden) sizeFrame();
+  }).observe(playerStage);
+  function sizeFrame() {
+    const screen = byId(board.screens, current()?.screenId);
+    const a = screen && assetOf(screen);
+    if (!a || !stageSize.width) {
+      frameBox.style.width = '';
+      return;
+    }
+    const pad = 20;
+    const width = Math.max(
+      160,
+      Math.floor(Math.min(stageSize.width, (stageSize.height - pad) * (a.width / a.height) + pad)),
+    );
+    frameBox.style.width = `${width}px`;
+  }
 
   function open(screenId) {
     stack = [{ screenId, kind: 'page' }];
@@ -364,13 +397,34 @@
   function show() {
     const screen = byId(board.screens, current().screenId);
     const a = assetOf(screen);
+    frameBox.classList.toggle('planned', !a);
     $('code').textContent = screen.code;
     $('title').textContent = screen.title;
     $('kind').hidden = current().kind !== 'modal';
     $('steps').textContent = `${steps} ${steps === 1 ? 'step' : 'steps'}`;
     $('rewind').disabled = stack.length < 2;
-    shot.src = `example/art/${a.file}`;
-    shot.alt = screen.title;
+    shot.hidden = !a;
+    if (a) {
+      shot.src = `example/art/${a.file}`;
+      shot.alt = screen.title;
+    }
+    frameBox.querySelectorAll('.player-waiting').forEach((node) => node.remove());
+    if (!a) {
+      const waiting = ideasOf(screen.id);
+      const panel = el('div', 'player-waiting');
+      panel.append(
+        el('strong', null, `${screen.title} has no drawing yet.`),
+        el('p', null, screen.purpose || ''),
+      );
+      if (waiting.length) {
+        panel.append(el('span', null, 'Planned for this screen:'));
+        const list = el('ul');
+        for (const idea of waiting.slice(0, 9)) list.append(el('li', null, idea.title));
+        if (waiting.length > 9) list.append(el('li', 'more', `and ${waiting.length - 9} more`));
+        panel.append(list);
+      }
+      frameBox.append(panel);
+    }
     frameBox.querySelectorAll('.player-pin').forEach((pin) => pin.remove());
     const pins = pinsOf(screen.id);
     pins.forEach((pin, i) => {
@@ -382,9 +436,12 @@
       dot.addEventListener('click', () => tryPin(pin));
       frameBox.append(dot);
     });
-    $('note').textContent = pins.length
-      ? 'Click a numbered pin to take a path.'
-      : 'Nothing leads on from here. Step back, or return to the board.';
+    sizeFrame();
+    $('note').textContent = !a
+      ? 'This frame is planned, not drawn yet. That is what a board looks like while it is being made.'
+      : pins.length
+        ? 'Click a numbered pin to take a path.'
+        : 'Nothing leads on from here. Step back, or return to the board.';
   }
 
   function tryPin(pin) {

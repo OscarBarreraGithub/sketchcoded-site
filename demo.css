@@ -140,7 +140,7 @@
   align-items: center;
   gap: 8px;
   font-family: var(--hand);
-  font-size: clamp(22px, calc(13px / var(--board-zoom, 1)), 40px);
+  font-size: clamp(22px, calc(13px / var(--board-zoom, 1)), 46px);
   font-weight: 600;
   line-height: 1.1;
   color: #686748;
@@ -177,7 +177,7 @@
   position: absolute;
   inset: auto 0 0 0;
   padding: 26px 10px 10px;
-  font: 600 clamp(13px, calc(13px / var(--board-zoom, 1)), 26px) var(--sans);
+  font: 600 clamp(13px, calc(13px / var(--board-zoom, 1)), 30px) var(--sans);
   color: #fffdf4;
   text-align: right;
   background: linear-gradient(to top, #24322a9e, transparent);
@@ -194,7 +194,7 @@
   gap: 8px;
   height: 46px;
   padding: 0 4px;
-  font-size: clamp(11px, calc(11px / var(--board-zoom, 1)), 19px);
+  font-size: clamp(12px, calc(12px / var(--board-zoom, 1)), 30px);
   letter-spacing: 1.4px;
   color: #9b9b87;
 }
@@ -231,9 +231,9 @@
   background: #f7f1dd;
   border: 1px solid #d9cba3;
   color: #6b5a40;
-  font: 600 clamp(12px, calc(12px / var(--board-zoom, 1)), 22px) var(--sans);
+  font: 600 max(12px, calc(12px / var(--board-zoom, 1))) var(--sans);
   white-space: nowrap;
-  max-width: min(calc(200px / var(--board-zoom, 1)), 420px);
+  max-width: calc(240px / var(--board-zoom, 1));
   overflow: hidden;
   text-overflow: ellipsis;
   box-shadow: 0 2px 4px #4a3c2430;
@@ -247,7 +247,7 @@
   background: #eef1e6;
   border: 1px dashed #b3bfa4;
   color: #5f6e55;
-  font: 600 clamp(12px, calc(12px / var(--board-zoom, 1)), 22px) var(--sans);
+  font: 600 max(12px, calc(12px / var(--board-zoom, 1))) var(--sans);
   white-space: nowrap;
   pointer-events: none;
 }
@@ -411,7 +411,6 @@
 .player-frame {
   position: relative;
   max-width: 100%;
-  max-height: 100%;
   background: #fffef5;
   padding: 10px;
   border-radius: 8px;
@@ -420,10 +419,11 @@
 }
 .player-frame img {
   display: block;
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
+  width: 100%;
   height: auto;
+}
+.player-frame img[hidden] {
+  display: none;
 }
 .player-pin {
   position: absolute;
@@ -598,4 +598,79 @@
   .player-pin {
     animation: none;
   }
+}
+
+/* A frame that is planned but not drawn yet: on the board, and while walking it. The app shows
+   the same thing, because a board in progress is most of what a board ever is. */
+.card-shot.planned {
+  aspect-ratio: 2 / 1;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  background: repeating-linear-gradient(0deg, transparent 0 23px, #efebdc 23px 24px);
+  border: 2px dashed #cfc8a9;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.card-waiting {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: center;
+  color: #6f7767;
+  min-width: 0;
+}
+.card-waiting em {
+  font-style: normal;
+  letter-spacing: 1.1px;
+  color: #a08c5a;
+  font-size: clamp(12px, calc(12px / var(--board-zoom, 1)), 26px);
+}
+.card-waiting b {
+  font: 400 clamp(15px, calc(15px / var(--board-zoom, 1)), 36px) var(--serif, Georgia, serif);
+  color: #4c5648;
+}
+.demo-world.far .card-waiting > * {
+  visibility: hidden;
+}
+.card-shot.planned::after {
+  padding-top: 14px;
+}
+.player-frame.planned {
+  width: min(680px, 100%);
+  padding: 22px;
+}
+.player-waiting {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  line-height: 1.55;
+  text-align: left;
+}
+.player-waiting strong {
+  font: 400 24px/1.2 var(--serif, Georgia, serif);
+}
+.player-waiting p {
+  font-size: 14px;
+  color: var(--muted);
+}
+.player-waiting span {
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  color: #a08c5a;
+}
+.player-waiting ul {
+  margin: 0;
+  padding-left: 20px;
+  font-family: var(--hand, cursive);
+  font-size: 20px;
+  line-height: 1.35;
+  color: #4c5648;
+}
+.player-waiting li.more {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--muted);
+  list-style: none;
+  margin-left: -20px;
 }

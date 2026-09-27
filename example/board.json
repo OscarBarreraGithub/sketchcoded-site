@@ -1,192 +1,473 @@
 {
-  "name": "sketchcoded.com",
+  "name": "Sketchcoded",
   "screens": [
     {
       "id": "home",
-      "code": "F1",
-      "assetId": "01",
+      "assetId": "af0d400e0db299747d77a762901eb77f2cda625368882b7a8c2c1584d6b3f483",
       "title": "Home",
-      "purpose": "Where you land: the name, what Sketchcoded is for, the example board, and the prompt you paste into your AI to set it up.",
+      "purpose": "The public front door: what Sketchcoded is, a playable demo, what you can do, and how to run it on your computer.",
       "entry": true,
-      "role": "screen"
+      "role": "screen",
+      "code": "F1"
+    },
+    {
+      "id": "boards",
+      "assetId": null,
+      "title": "Boards",
+      "purpose": "Open a saved board, start a blank one, start the chat example, or import an exported project.",
+      "entry": false,
+      "role": "modal",
+      "code": "F2"
     },
     {
       "id": "board",
-      "code": "F2",
-      "assetId": "02",
-      "title": "The example board",
-      "purpose": "This page. The site drawn as a Sketchcoded board: drag the frames, and click any screen to walk its flow from there.",
+      "assetId": "4e26f4cef70d81fd347dc581b7c5dc9c316e4bf58cc1ad400ae19b67f84ef599",
+      "title": "The board",
+      "purpose": "The working board: sketch library on the left, cork board with frames, pins and yarn, review and test controls above.",
+      "entry": true,
+      "role": "screen",
+      "code": "F3"
+    },
+    {
+      "id": "outline",
+      "assetId": null,
+      "title": "App outline",
+      "purpose": "The same app as a searchable directory: every screen once, with its pins and paths.",
       "entry": false,
-      "role": "screen"
+      "role": "screen",
+      "code": "F4"
+    },
+    {
+      "id": "planning",
+      "assetId": null,
+      "title": "Planning",
+      "purpose": "Every functionality idea, which screen it belongs on, and whether it has become a pin yet.",
+      "entry": false,
+      "role": "screen",
+      "code": "F5"
+    },
+    {
+      "id": "screen-editor",
+      "assetId": "f77b4d3b673b975cce4a8dc6a63b122a46fc82ac273ec2f894d580ac205718dd",
+      "title": "Screen editor",
+      "purpose": "One frame up close: web and mobile drawings side by side, pins, layouts, and the ideas planned for it.",
+      "entry": false,
+      "role": "modal",
+      "code": "F6"
+    },
+    {
+      "id": "connection-editor",
+      "assetId": null,
+      "title": "Connection editor",
+      "purpose": "One yarn: source pin, destination, navigation, short summary, condition, details, and data needed.",
+      "entry": false,
+      "role": "modal",
+      "code": "F7"
+    },
+    {
+      "id": "review",
+      "assetId": null,
+      "title": "Review flow",
+      "purpose": "Findings about missing paths, unreachable screens and ways back, with reasoned exceptions that travel with the export.",
+      "entry": false,
+      "role": "screen",
+      "code": "F8"
+    },
+    {
+      "id": "test-flow",
+      "assetId": null,
+      "title": "Test flow",
+      "purpose": "Play through the sketches: pick a start, click pins, choose scenarios, switch web and mobile, rewind the test.",
+      "entry": false,
+      "role": "modal",
+      "code": "F9"
+    },
+    {
+      "id": "help",
+      "assetId": null,
+      "title": "How it works",
+      "purpose": "Six steps from a sketch to a story, plus keyboard shortcuts.",
+      "entry": false,
+      "role": "modal",
+      "code": "F10"
+    },
+    {
+      "id": "demo-readonly",
+      "assetId": null,
+      "title": "Example demo (read-only)",
+      "purpose": "A read-only view of the example board, reached from the landing page. Empty for now: drop a sketch from the library into this frame later.",
+      "entry": false,
+      "role": "screen",
+      "code": "F11"
     },
     {
       "id": "guide",
-      "code": "F3",
-      "assetId": "03",
-      "title": "The guide",
-      "purpose": "How a board becomes a plan, what the automatic checks look for, and what the AI is handed at the end.",
+      "assetId": null,
+      "title": "Guide",
+      "purpose": "Read more. Explains the autochecks (no overlapping or small text, browser zoom issues), setting up from the .md file structure, and points to GitHub too.",
       "entry": false,
-      "role": "screen"
-    },
-    {
-      "id": "faq",
-      "code": "F4",
-      "assetId": "04",
-      "title": "FAQ",
-      "purpose": "The short answers: no account, no key, nothing uploaded, and what an AI actually receives.",
-      "entry": false,
-      "role": "screen"
-    },
-    {
-      "id": "running",
-      "code": "F5",
-      "assetId": "05",
-      "title": "Sketchcoded on your computer",
-      "purpose": "The end of the journey on this site. The app is running locally and your own board is open; everything after this happens on your computer.",
-      "entry": false,
-      "role": "terminal"
+      "role": "screen",
+      "leftToAi": true,
+      "code": "F12"
     }
   ],
   "assets": [
     {
-      "id": "01",
-      "name": "01-home.svg",
-      "file": "01-home.svg",
-      "width": 760,
-      "height": 550,
-      "importedAt": "2026-09-27T00:00:00.000Z"
+      "id": "af0d400e0db299747d77a762901eb77f2cda625368882b7a8c2c1584d6b3f483",
+      "name": "sketchcoded-landing.png",
+      "file": "af0d400e0db299747d77a762901eb77f2cda625368882b7a8c2c1584d6b3f483.webp",
+      "width": 1650,
+      "height": 1258,
+      "importedAt": "2026-09-25T06:51:45.664Z",
+      "code": "S1"
     },
     {
-      "id": "02",
-      "name": "02-board.svg",
-      "file": "02-board.svg",
-      "width": 760,
-      "height": 550,
-      "importedAt": "2026-09-27T00:00:00.000Z"
+      "id": "4e26f4cef70d81fd347dc581b7c5dc9c316e4bf58cc1ad400ae19b67f84ef599",
+      "name": "sketchcoded-board.png",
+      "file": "4e26f4cef70d81fd347dc581b7c5dc9c316e4bf58cc1ad400ae19b67f84ef599.webp",
+      "width": 1650,
+      "height": 1258,
+      "importedAt": "2026-09-25T06:51:45.728Z",
+      "code": "S2"
     },
     {
-      "id": "03",
-      "name": "03-guide.svg",
-      "file": "03-guide.svg",
-      "width": 760,
-      "height": 550,
-      "importedAt": "2026-09-27T00:00:00.000Z"
-    },
-    {
-      "id": "04",
-      "name": "04-faq.svg",
-      "file": "04-faq.svg",
-      "width": 760,
-      "height": 430,
-      "importedAt": "2026-09-27T00:00:00.000Z"
-    },
-    {
-      "id": "05",
-      "name": "05-running.svg",
-      "file": "05-running.svg",
-      "width": 760,
-      "height": 430,
-      "importedAt": "2026-09-27T00:00:00.000Z"
+      "id": "f77b4d3b673b975cce4a8dc6a63b122a46fc82ac273ec2f894d580ac205718dd",
+      "name": "sketchcoded-screen-editor.png",
+      "file": "f77b4d3b673b975cce4a8dc6a63b122a46fc82ac273ec2f894d580ac205718dd.webp",
+      "width": 1650,
+      "height": 1258,
+      "importedAt": "2026-09-25T06:51:45.781Z",
+      "code": "S3"
     }
   ],
   "pins": [
     {
-      "id": "open-example",
+      "kind": "interaction",
+      "id": "pin-landing-title",
       "screenId": "home",
-      "x": 0.737,
-      "y": 0.455,
-      "title": "Open the board",
-      "description": "The example frame on the landing page. It opens this board, read only: you can move the frames and walk the flow, nothing else.",
-      "kind": "interaction"
+      "x": 0.29,
+      "y": 0.24,
+      "color": "olive",
+      "title": "Title and tagline",
+      "description": "SKETCH CODE. Prompts make apps. Sketching makes your vision. (Alternate: Telling an AI what you want gets you an app. Showing it gets you your vision.)"
     },
     {
-      "id": "copy-prompt",
+      "kind": "interaction",
+      "id": "pin-landing-example",
       "screenId": "home",
-      "x": 0.305,
-      "y": 0.815,
-      "title": "Copy the setup prompt",
-      "description": "Copies the one paragraph you paste into your AI to install and start Sketchcoded. What happens next depends on whether the machine is ready.",
-      "kind": "interaction"
+      "x": 0.713739013671875,
+      "y": 0.5069008582041757,
+      "color": "red",
+      "title": "Example: this website",
+      "description": "Sends to a read-only version of the demo. Make it obvious this should be clicked. For now the destination is an empty frame to drop a sketch into later."
     },
     {
-      "id": "read-guide",
+      "kind": "interaction",
+      "id": "pin-landing-setup",
       "screenId": "home",
-      "x": 0.77,
-      "y": 0.115,
-      "title": "Read the guide",
-      "description": "Opens the guide, and comes back here.",
-      "kind": "interaction"
+      "x": 0.2,
+      "y": 0.66,
+      "color": "olive",
+      "title": "Set up: tell your AI",
+      "description": "Tell your AI: “I want to set up github.com/…/sketchcode. Make sure to…”. On mobile this block sits below the example frame."
     },
     {
-      "id": "github",
+      "kind": "interaction",
+      "id": "pin-landing-copy",
       "screenId": "home",
-      "x": 0.899,
-      "y": 0.115,
+      "x": 0.32,
+      "y": 0.65,
+      "color": "olive",
+      "title": "Copy prompt",
+      "description": "One click copies the setup prompt."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-landing-local",
+      "screenId": "home",
+      "x": 0.2,
+      "y": 0.77,
+      "color": "olive",
+      "title": "Runs local, sketches never leave",
+      "description": "Rephrase: runs on your computer; your sketches never leave it. No account, no API key."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-landing-guide",
+      "screenId": "home",
+      "x": 0.7,
+      "y": 0.76,
+      "color": "red",
+      "title": "Read more: Guide",
+      "description": "Rephrase. Opens the guide: autochecks, .md setup, GitHub."
+    },
+    {
+      "kind": "link",
+      "id": "pin-landing-github",
+      "screenId": "home",
+      "x": 0.48,
+      "y": 0.86,
+      "color": "blue",
       "title": "GitHub",
-      "description": "Leaves this site for the source at https://github.com/OscarBarreraGithub/sketchcoded. A link out is a pin, never a frame.",
-      "kind": "link"
+      "description": "Opens the repository in a new tab: https://github.com/OscarBarreraGithub/sketchcoded (address to confirm once the repo is public)."
     },
     {
-      "id": "board-home",
+      "kind": "link",
+      "id": "pin-landing-science",
+      "screenId": "home",
+      "x": 0.86,
+      "y": 0.86,
+      "color": "blue",
+      "title": "See more projects: science with agents",
+      "description": "Opens the science-with-agents project page: https://sketchcoded.com/projects/science-with-agents (placeholder until that page exists)."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-board-sections",
       "screenId": "board",
-      "x": 0.079,
-      "y": 0.189,
-      "title": "Back to the site",
-      "description": "The brand in the corner returns to the page you came from.",
-      "kind": "interaction"
+      "x": 0.12,
+      "y": 0.14,
+      "color": "olive",
+      "title": "Used and New library sections",
+      "description": "USED (click to expand) and NEW, with a scroll bar. Dropping an image on the board moves it to USED automatically."
     },
     {
-      "id": "guide-example",
-      "screenId": "guide",
-      "x": 0.339,
-      "y": 0.389,
-      "title": "Open the board",
-      "description": "The guide points at the same example board.",
-      "kind": "interaction"
+      "kind": "interaction",
+      "id": "pin-idea-18",
+      "screenId": "board",
+      "x": 0.11,
+      "y": 0.3,
+      "color": "olive",
+      "title": "Drag a sketch onto the board",
+      "description": "It gets a tape title and a spot on the cork. Dropping moves the image to USED automatically."
     },
     {
-      "id": "guide-faq",
-      "screenId": "guide",
-      "x": 0.155,
-      "y": 0.709,
-      "title": "Jump to the FAQ",
-      "description": "The contents list scrolls to the questions at the end of the guide.",
-      "kind": "interaction"
+      "kind": "interaction",
+      "id": "pin-idea-17",
+      "screenId": "board",
+      "x": 0.08,
+      "y": 0.45,
+      "color": "olive",
+      "title": "Import files or drop images",
+      "description": "Choose files or drop them on the library. PNG, JPEG, WebP, GIF, TIFF and SVG from this computer. Also allow drag to upload."
     },
     {
-      "id": "guide-home",
-      "screenId": "guide",
-      "x": 0.079,
-      "y": 0.189,
-      "title": "Back to the site",
-      "description": "The brand in the corner returns to the page you came from.",
-      "kind": "interaction"
+      "kind": "interaction",
+      "id": "pin-board-ideas-panel",
+      "screenId": "board",
+      "x": 0.13,
+      "y": 0.53,
+      "color": "olive",
+      "title": "Ideas panel",
+      "description": "Organized ideas beside the library: expand, scroll, and make clear what is still left to do."
     },
     {
-      "id": "faq-setup",
-      "screenId": "faq",
-      "x": 0.526,
-      "y": 0.8,
-      "title": "Set it up",
-      "description": "Takes the reader to the setup prompt and on to a running copy.",
-      "kind": "interaction"
+      "kind": "interaction",
+      "id": "pin-board-name",
+      "screenId": "board",
+      "x": 0.31,
+      "y": 0.12,
+      "color": "olive",
+      "title": "Project name",
+      "description": "The board name in the header."
     },
     {
-      "id": "faq-guide",
-      "screenId": "faq",
-      "x": 0.079,
-      "y": 0.242,
-      "title": "Back to the guide",
-      "description": "Returns to the guide above the questions.",
-      "kind": "interaction"
+      "kind": "interaction",
+      "id": "pin-idea-22",
+      "screenId": "board",
+      "x": 0.26,
+      "y": 0.18,
+      "color": "olive",
+      "title": "Pan and zoom",
+      "description": "Scroll always zooms around the pointer; plus and minus buttons just in case. Shift + scroll pans; F fits."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-idea-31",
+      "screenId": "board",
+      "x": 0.49,
+      "y": 0.19,
+      "color": "red",
+      "title": "Switch to App outline",
+      "description": "Board, Outline and Plan tabs. Make it obvious which one is selected."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-idea-32",
+      "screenId": "board",
+      "x": 0.56,
+      "y": 0.19,
+      "color": "red",
+      "title": "Switch to Planning",
+      "description": "Open the functionality backlog."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-idea-25",
+      "screenId": "board",
+      "x": 0.77,
+      "y": 0.12,
+      "color": "olive",
+      "title": "Export project",
+      "description": "A .sketchcoded.zip with project.json, schema.json, flow.md, review.json, the images and a READ-ME."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-idea-30",
+      "screenId": "board",
+      "x": 0.85,
+      "y": 0.13,
+      "color": "red",
+      "title": "Test flow",
+      "description": "Play the sketches."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-board-help",
+      "screenId": "board",
+      "x": 0.92,
+      "y": 0.13,
+      "color": "red",
+      "title": "Help button",
+      "description": "The ? button opens How it works."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-idea-27",
+      "screenId": "board",
+      "x": 0.49,
+      "y": 0.64,
+      "color": "red",
+      "title": "Open a screen",
+      "description": "Click a card or its paper title."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-idea-28",
+      "screenId": "board",
+      "x": 0.58,
+      "y": 0.47,
+      "color": "red",
+      "title": "Edit a yarn",
+      "description": "Click a yarn or its label."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-idea-20",
+      "screenId": "board",
+      "x": 0.61,
+      "y": 0.72,
+      "color": "olive",
+      "title": "Pins and yarn",
+      "description": "Numbered pins on each sketch; color-coded yarn between them; labels show the branch summary."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-board-home-marker",
+      "screenId": "board",
+      "x": 0.79,
+      "y": 0.37,
+      "color": "olive",
+      "title": "Home marker",
+      "description": "A little home icon on the frame where the landing page starts."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-board-resize",
+      "screenId": "board",
+      "x": 0.42,
+      "y": 0.73,
+      "color": "olive",
+      "title": "Click to resize",
+      "description": "Drag a frame corner to resize it."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-board-space",
+      "screenId": "board",
+      "x": 0.86,
+      "y": 0.58,
+      "color": "olive",
+      "title": "No overlap, lots of space",
+      "description": "Frames and labels never overlap; the cork leaves room to breathe."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-idea-46",
+      "screenId": "screen-editor",
+      "x": 0.75,
+      "y": 0.19,
+      "color": "olive",
+      "title": "Add a pin",
+      "description": "Click the web drawing; name it and describe the intention."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-editor-pins-list",
+      "screenId": "screen-editor",
+      "x": 0.67,
+      "y": 0.33,
+      "color": "olive",
+      "title": "Pins list",
+      "description": "The pins on this screen as a list. Make it easy to move and delete them."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-editor-highlight",
+      "screenId": "screen-editor",
+      "x": 0.31,
+      "y": 0.31,
+      "color": "olive",
+      "title": "Highlight the selected pin",
+      "description": "When a pin is selected in the list, highlight it on the image."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-editor-colors",
+      "screenId": "screen-editor",
+      "x": 0.62,
+      "y": 0.5,
+      "color": "olive",
+      "title": "Color coding",
+      "description": "Color swatches with a label you specify."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-editor-fields",
+      "screenId": "screen-editor",
+      "x": 0.64,
+      "y": 0.63,
+      "color": "olive",
+      "title": "Title and description",
+      "description": "The pin’s title and description fields."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-idea-45",
+      "screenId": "screen-editor",
+      "x": 0.41,
+      "y": 0.85,
+      "color": "gold",
+      "title": "Web / mobile toggle",
+      "description": "The drawing shows a toggle that swaps the image between web and mobile. The current build shows both side by side. Decide which."
+    },
+    {
+      "kind": "interaction",
+      "id": "pin-idea-53",
+      "screenId": "screen-editor",
+      "x": 0.88,
+      "y": 0.89,
+      "color": "olive",
+      "title": "Remove a pin or the screen",
+      "description": "Both are undoable; yarn goes with them."
     }
   ],
   "transitions": [
     {
-      "id": "to-board",
-      "pinId": "open-example",
-      "target": "board",
-      "summary": "Open the board",
+      "id": "yarn-landing-example",
+      "pinId": "pin-landing-example",
+      "target": "demo-readonly",
+      "summary": "Example: this website",
       "condition": "",
       "logic": "",
       "context": "",
@@ -195,145 +476,934 @@
       "color": "red"
     },
     {
-      "id": "setup-ready",
-      "pinId": "copy-prompt",
-      "target": "running",
-      "summary": "Node 22.12 or later",
-      "condition": "The computer has Node 22.12 or later, so the AI can clone the repository and start it.",
-      "logic": "The AI installs and runs it; the browser opens on the first board.",
+      "id": "yarn-landing-guide",
+      "pinId": "pin-landing-guide",
+      "target": "guide",
+      "summary": "Read more: Guide",
+      "condition": "",
+      "logic": "",
       "context": "",
       "fallback": false,
       "navigation": "push",
       "color": "red"
     },
     {
-      "id": "setup-missing",
-      "pinId": "copy-prompt",
-      "target": "guide",
-      "summary": "Something is missing",
-      "condition": "Node is missing or too old, or the clone fails.",
-      "logic": "Send the reader to the guide, where the requirements and the file structure are written out.",
-      "context": "",
-      "fallback": true,
-      "navigation": "push",
-      "color": "gold"
-    },
-    {
-      "id": "to-guide",
-      "pinId": "read-guide",
-      "target": "guide",
-      "summary": "Read the guide",
+      "id": "yarn-idea-31",
+      "pinId": "pin-idea-31",
+      "target": "outline",
+      "summary": "Switch to App outline",
       "condition": "",
       "logic": "",
       "context": "",
       "fallback": false,
       "navigation": "push",
+      "color": "red"
+    },
+    {
+      "id": "yarn-idea-32",
+      "pinId": "pin-idea-32",
+      "target": "planning",
+      "summary": "Switch to Planning",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "push",
+      "color": "red"
+    },
+    {
+      "id": "yarn-idea-30",
+      "pinId": "pin-idea-30",
+      "target": "test-flow",
+      "summary": "Test flow",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "modal",
       "color": "blue"
     },
     {
-      "id": "board-back",
-      "pinId": "board-home",
-      "target": null,
-      "summary": "Back to the site",
+      "id": "yarn-board-help",
+      "pinId": "pin-board-help",
+      "target": "help",
+      "summary": "Help button",
       "condition": "",
       "logic": "",
       "context": "",
       "fallback": false,
-      "navigation": "back",
-      "color": "olive"
-    },
-    {
-      "id": "guide-to-board",
-      "pinId": "guide-example",
-      "target": "board",
-      "summary": "Open the board",
-      "condition": "",
-      "logic": "",
-      "context": "",
-      "fallback": false,
-      "navigation": "push",
-      "color": "red"
-    },
-    {
-      "id": "guide-to-faq",
-      "pinId": "guide-faq",
-      "target": "faq",
-      "summary": "Jump to the FAQ",
-      "condition": "",
-      "logic": "",
-      "context": "",
-      "fallback": false,
-      "navigation": "push",
+      "navigation": "modal",
       "color": "blue"
     },
     {
-      "id": "guide-back",
-      "pinId": "guide-home",
-      "target": null,
-      "summary": "Back to the site",
+      "id": "yarn-idea-27",
+      "pinId": "pin-idea-27",
+      "target": "screen-editor",
+      "summary": "Open a screen",
       "condition": "",
       "logic": "",
       "context": "",
       "fallback": false,
-      "navigation": "back",
-      "color": "olive"
+      "navigation": "modal",
+      "color": "blue"
     },
     {
-      "id": "faq-to-running",
-      "pinId": "faq-setup",
-      "target": "running",
-      "summary": "Set it up",
+      "id": "yarn-idea-28",
+      "pinId": "pin-idea-28",
+      "target": "connection-editor",
+      "summary": "Edit a yarn",
       "condition": "",
       "logic": "",
       "context": "",
       "fallback": false,
-      "navigation": "push",
-      "color": "red"
+      "navigation": "modal",
+      "color": "blue"
+    }
+  ],
+  "ideas": [
+    {
+      "id": "idea-10",
+      "code": "I1",
+      "title": "Your boards",
+      "detail": "Saved boards with screen counts and last edit; the current one is marked.",
+      "screenId": "boards",
+      "pinId": null
     },
     {
-      "id": "faq-back",
-      "pinId": "faq-guide",
-      "target": null,
-      "summary": "Back to the guide",
-      "condition": "",
-      "logic": "",
-      "context": "",
-      "fallback": false,
-      "navigation": "back",
-      "color": "olive"
+      "id": "idea-11",
+      "code": "I2",
+      "title": "New blank board",
+      "detail": "Name it and start from your own sketches.",
+      "screenId": "boards",
+      "pinId": null
+    },
+    {
+      "id": "idea-12",
+      "code": "I3",
+      "title": "The chat example",
+      "detail": "A ready-made Little chat board with branches, an intentional one-way login and Back actions.",
+      "screenId": "boards",
+      "pinId": null
+    },
+    {
+      "id": "idea-13",
+      "code": "I4",
+      "title": "Import a project",
+      "detail": "Upload a .sketchcoded.zip; it becomes a separate board and never overwrites one.",
+      "screenId": "boards",
+      "pinId": null
+    },
+    {
+      "id": "idea-14",
+      "code": "I5",
+      "title": "Rename a board",
+      "detail": "The pencil beside the board title.",
+      "screenId": "boards",
+      "pinId": null
+    },
+    {
+      "id": "idea-15",
+      "code": "I6",
+      "title": "Sketch library",
+      "detail": "Thumbnails of every image with Used counts, a search box, a used/unused filter, and a way to locate placements.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-16",
+      "code": "I7",
+      "title": "Connect a folder",
+      "detail": "Enter an absolute path on this computer; new and changed images appear every 20 seconds; refresh checks now.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-17",
+      "code": "I8",
+      "title": "Import files or drop images",
+      "detail": "Choose files or drop them on the library. PNG, JPEG, WebP, GIF, TIFF and SVG from this computer. Also allow drag to upload.",
+      "screenId": "board",
+      "pinId": "pin-idea-17"
+    },
+    {
+      "id": "idea-18",
+      "code": "I9",
+      "title": "Drag a sketch onto the board",
+      "detail": "It gets a tape title and a spot on the cork. Dropping moves the image to USED automatically.",
+      "screenId": "board",
+      "pinId": "pin-idea-18"
+    },
+    {
+      "id": "idea-19",
+      "code": "I10",
+      "title": "Planned frames",
+      "detail": "Frames from the planning stage wait as empty dashed paper listing their ideas; drop a sketch to fill one.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-20",
+      "code": "I11",
+      "title": "Pins and yarn",
+      "detail": "Numbered pins on each sketch; color-coded yarn between them; labels show the branch summary.",
+      "screenId": "board",
+      "pinId": "pin-idea-20"
+    },
+    {
+      "id": "idea-21",
+      "code": "I12",
+      "title": "Planned threads",
+      "detail": "Dashed threads show ideas that lead somewhere but are not pins yet.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-22",
+      "code": "I13",
+      "title": "Pan and zoom",
+      "detail": "Scroll always zooms around the pointer; plus and minus buttons just in case. Shift + scroll pans; F fits.",
+      "screenId": "board",
+      "pinId": "pin-idea-22"
+    },
+    {
+      "id": "idea-23",
+      "code": "I14",
+      "title": "Undo and redo",
+      "detail": "Toolbar buttons and Cmd/Ctrl + Z; deletions remove pins and yarn together and come back together.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-24",
+      "code": "I15",
+      "title": "Save status",
+      "detail": "Saved, saving, unsaved or needs attention beside the board name; a leave warning while unsaved.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-25",
+      "code": "I16",
+      "title": "Export project",
+      "detail": "A .sketchcoded.zip with project.json, schema.json, flow.md, review.json, the images and a READ-ME.",
+      "screenId": "board",
+      "pinId": "pin-idea-25"
+    },
+    {
+      "id": "idea-26",
+      "code": "I17",
+      "title": "Mobile thumbnails on cards",
+      "detail": "A card with a mobile drawing shows a small phone thumbnail in its corner.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-27",
+      "code": "I18",
+      "title": "Open a screen",
+      "detail": "Click a card or its paper title.",
+      "screenId": "board",
+      "pinId": "pin-idea-27"
+    },
+    {
+      "id": "idea-28",
+      "code": "I19",
+      "title": "Edit a yarn",
+      "detail": "Click a yarn or its label.",
+      "screenId": "board",
+      "pinId": "pin-idea-28"
+    },
+    {
+      "id": "idea-29",
+      "code": "I20",
+      "title": "Review flow",
+      "detail": "Open the review panel beside the board.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-30",
+      "code": "I21",
+      "title": "Test flow",
+      "detail": "Play the sketches.",
+      "screenId": "board",
+      "pinId": "pin-idea-30"
+    },
+    {
+      "id": "idea-31",
+      "code": "I22",
+      "title": "Switch to App outline",
+      "detail": "Board, Outline and Plan tabs. Make it obvious which one is selected.",
+      "screenId": "board",
+      "pinId": "pin-idea-31"
+    },
+    {
+      "id": "idea-32",
+      "code": "I23",
+      "title": "Switch to Planning",
+      "detail": "Open the functionality backlog.",
+      "screenId": "board",
+      "pinId": "pin-idea-32"
+    },
+    {
+      "id": "idea-33",
+      "code": "I24",
+      "title": "Each screen once",
+      "detail": "Entry screens, app screens, detail sketches; destinations link back to the same entry so loops stay simple.",
+      "screenId": "outline",
+      "pinId": null
+    },
+    {
+      "id": "idea-34",
+      "code": "I25",
+      "title": "Search screens, pins and paths",
+      "detail": "One box finds a title, a pin, a condition or a destination.",
+      "screenId": "outline",
+      "pinId": null
+    },
+    {
+      "id": "idea-35",
+      "code": "I26",
+      "title": "Edit screen",
+      "detail": "Open the frame from its entry.",
+      "screenId": "outline",
+      "pinId": null
+    },
+    {
+      "id": "idea-36",
+      "code": "I27",
+      "title": "Show on board",
+      "detail": "Center the frame on the board.",
+      "screenId": "outline",
+      "pinId": null
+    },
+    {
+      "id": "idea-37",
+      "code": "I28",
+      "title": "Ideas waiting per screen",
+      "detail": "Each screen lists the ideas assigned but not yet pinned.",
+      "screenId": "outline",
+      "pinId": null
+    },
+    {
+      "id": "idea-38",
+      "code": "I29",
+      "title": "Add an idea any time",
+      "detail": "Title, details, which screen it belongs on, where it leads.",
+      "screenId": "planning",
+      "pinId": null
+    },
+    {
+      "id": "idea-39",
+      "code": "I30",
+      "title": "Pool and folders",
+      "detail": "Unassigned ideas wait in a pool; each screen has a folder.",
+      "screenId": "planning",
+      "pinId": null
+    },
+    {
+      "id": "idea-40",
+      "code": "I31",
+      "title": "Place on the drawing",
+      "detail": "Turns an assigned idea into a pin with its text already written.",
+      "screenId": "planning",
+      "pinId": null
+    },
+    {
+      "id": "idea-41",
+      "code": "I32",
+      "title": "Placed ideas grey out",
+      "detail": "Pinned ideas stay visible with their pin number so nothing lands on two pages.",
+      "screenId": "planning",
+      "pinId": null
+    },
+    {
+      "id": "idea-42",
+      "code": "I33",
+      "title": "Move an idea",
+      "detail": "Change its screen; a placed idea gives up its pin so it can be placed again.",
+      "screenId": "planning",
+      "pinId": null
+    },
+    {
+      "id": "idea-43",
+      "code": "I34",
+      "title": "Plan a frame before drawing",
+      "detail": "A titled frame appears on the board with its ideas listed.",
+      "screenId": "planning",
+      "pinId": null
+    },
+    {
+      "id": "idea-44",
+      "code": "I35",
+      "title": "Copy as text",
+      "detail": "A markdown outline for talking about the plan in chat; the same outline ships in flow.md.",
+      "screenId": "planning",
+      "pinId": null
+    },
+    {
+      "id": "idea-45",
+      "code": "I36",
+      "title": "Web / mobile toggle",
+      "detail": "The drawing shows a toggle that swaps the image between web and mobile. The current build shows both side by side. Decide which.",
+      "screenId": "screen-editor",
+      "pinId": "pin-idea-45"
+    },
+    {
+      "id": "idea-46",
+      "code": "I37",
+      "title": "Add a pin",
+      "detail": "Click the web drawing; name it and describe the intention.",
+      "screenId": "screen-editor",
+      "pinId": "pin-idea-46"
+    },
+    {
+      "id": "idea-47",
+      "code": "I38",
+      "title": "Place a pin on mobile",
+      "detail": "Pins not yet on the mobile drawing wait in a strip; click one, then click the mobile drawing.",
+      "screenId": "screen-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-48",
+      "code": "I39",
+      "title": "Detail reference",
+      "detail": "A pin can open a closer look without changing the app screen.",
+      "screenId": "screen-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-49",
+      "code": "I40",
+      "title": "Screen details",
+      "detail": "Title, purpose, type (regular, login, dialog, ending, detail), entry flag, size on the board.",
+      "screenId": "screen-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-50",
+      "code": "I41",
+      "title": "Planned ideas for this screen",
+      "detail": "Place each waiting idea, or add a quick one.",
+      "screenId": "screen-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-51",
+      "code": "I42",
+      "title": "Connect to a screen",
+      "detail": "Close and choose the destination card on the board.",
+      "screenId": "screen-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-52",
+      "code": "I43",
+      "title": "Back or Dismiss action",
+      "detail": "History actions use the real previous screen or dialog caller.",
+      "screenId": "screen-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-53",
+      "code": "I44",
+      "title": "Remove a pin or the screen",
+      "detail": "Both are undoable; yarn goes with them.",
+      "screenId": "screen-editor",
+      "pinId": "pin-idea-53"
+    },
+    {
+      "id": "idea-54",
+      "code": "I45",
+      "title": "Short version",
+      "detail": "The required label on the yarn and the option in the scenario chooser.",
+      "screenId": "connection-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-55",
+      "code": "I46",
+      "title": "Navigation",
+      "detail": "Open, replace, start fresh, open as dialog, go back, dismiss.",
+      "screenId": "connection-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-56",
+      "code": "I47",
+      "title": "When does this happen",
+      "detail": "A plain-language condition. It is never executed.",
+      "screenId": "connection-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-57",
+      "code": "I48",
+      "title": "Details and data",
+      "detail": "Behavior, exceptions and states; what data or information is needed.",
+      "screenId": "connection-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-58",
+      "code": "I49",
+      "title": "Fallback and yarn color",
+      "detail": "Mark the default branch; pick red, olive, blue or gold.",
+      "screenId": "connection-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-59",
+      "code": "I50",
+      "title": "Remove yarn",
+      "detail": "Undoable from the board.",
+      "screenId": "connection-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-60",
+      "code": "I51",
+      "title": "To review and Accepted",
+      "detail": "Findings sorted by severity: repair needed, check this path, use your judgment.",
+      "screenId": "review",
+      "pinId": null
+    },
+    {
+      "id": "idea-61",
+      "code": "I52",
+      "title": "Show me where",
+      "detail": "Jump to the screen, pin or yarn behind a finding.",
+      "screenId": "review",
+      "pinId": null
+    },
+    {
+      "id": "idea-62",
+      "code": "I53",
+      "title": "Accept with a reason",
+      "detail": "Intentional exceptions keep their reason and reopen when the evidence changes.",
+      "screenId": "review",
+      "pinId": null
+    },
+    {
+      "id": "idea-63",
+      "code": "I54",
+      "title": "Structural errors cannot be waived",
+      "detail": "Broken references must be repaired.",
+      "screenId": "review",
+      "pinId": null
+    },
+    {
+      "id": "idea-64",
+      "code": "I55",
+      "title": "Choose a start",
+      "detail": "Entry screens, or any screen as a labeled test entry.",
+      "screenId": "test-flow",
+      "pinId": null
+    },
+    {
+      "id": "idea-65",
+      "code": "I56",
+      "title": "Click pins to follow paths",
+      "detail": "One yarn follows directly; several show a scenario chooser with conditions.",
+      "screenId": "test-flow",
+      "pinId": null
+    },
+    {
+      "id": "idea-66",
+      "code": "I57",
+      "title": "Web or mobile",
+      "detail": "Switch layouts; pins not yet on mobile are listed under the drawing.",
+      "screenId": "test-flow",
+      "pinId": null
+    },
+    {
+      "id": "idea-67",
+      "code": "I58",
+      "title": "Rewind test",
+      "detail": "A testing control, separate from app Back, which must be drawn.",
+      "screenId": "test-flow",
+      "pinId": null
+    },
+    {
+      "id": "idea-68",
+      "code": "I59",
+      "title": "Closer looks",
+      "detail": "Detail references open an enlarged sketch without changing app history.",
+      "screenId": "test-flow",
+      "pinId": null
+    },
+    {
+      "id": "idea-69",
+      "code": "I60",
+      "title": "Restart and hide pins",
+      "detail": "Start over from the chosen screen; hide pins to see the sketch clean.",
+      "screenId": "test-flow",
+      "pinId": null
+    },
+    {
+      "id": "idea-70",
+      "code": "I61",
+      "title": "Six steps",
+      "detail": "Plan, bring sketches, make a little space, pin an intention, follow the yarn, check and play.",
+      "screenId": "help",
+      "pinId": null
+    },
+    {
+      "id": "idea-71",
+      "code": "I62",
+      "title": "Shortcuts",
+      "detail": "Space + drag, scroll to zoom, Shift + scroll, F to fit, Cmd/Ctrl + Z.",
+      "screenId": "help",
+      "pinId": null
+    },
+    {
+      "id": "landing-title",
+      "code": "I63",
+      "title": "Title and tagline",
+      "detail": "SKETCH CODE. Prompts make apps. Sketching makes your vision. (Alternate: Telling an AI what you want gets you an app. Showing it gets you your vision.)",
+      "screenId": "home",
+      "pinId": "pin-landing-title"
+    },
+    {
+      "id": "landing-example",
+      "code": "I64",
+      "title": "Example: this website",
+      "detail": "Sends to a read-only version of the demo. Make it obvious this should be clicked. For now the destination is an empty frame to drop a sketch into later.",
+      "screenId": "home",
+      "pinId": "pin-landing-example"
+    },
+    {
+      "id": "landing-setup",
+      "code": "I65",
+      "title": "Set up: tell your AI",
+      "detail": "Tell your AI: “I want to set up github.com/…/sketchcode. Make sure to…”. On mobile this block sits below the example frame.",
+      "screenId": "home",
+      "pinId": "pin-landing-setup"
+    },
+    {
+      "id": "landing-copy",
+      "code": "I66",
+      "title": "Copy prompt",
+      "detail": "One click copies the setup prompt.",
+      "screenId": "home",
+      "pinId": "pin-landing-copy"
+    },
+    {
+      "id": "landing-local",
+      "code": "I67",
+      "title": "Runs local, sketches never leave",
+      "detail": "Rephrase: runs on your computer; your sketches never leave it. No account, no API key.",
+      "screenId": "home",
+      "pinId": "pin-landing-local"
+    },
+    {
+      "id": "landing-guide",
+      "code": "I68",
+      "title": "Read more: Guide",
+      "detail": "Rephrase. Opens the guide: autochecks, .md setup, GitHub.",
+      "screenId": "home",
+      "pinId": "pin-landing-guide"
+    },
+    {
+      "id": "landing-github",
+      "code": "I69",
+      "title": "GitHub",
+      "detail": "Opens the repository in a new tab: https://github.com/OscarBarreraGithub/sketchcoded (address to confirm once the repo is public).",
+      "screenId": "home",
+      "pinId": "pin-landing-github"
+    },
+    {
+      "id": "landing-science",
+      "code": "I70",
+      "title": "See more projects: science with agents",
+      "detail": "Opens the science-with-agents project page: https://sketchcoded.com/projects/science-with-agents (placeholder until that page exists).",
+      "screenId": "home",
+      "pinId": "pin-landing-science"
+    },
+    {
+      "id": "landing-mobile",
+      "code": "I71",
+      "title": "Mobile layout",
+      "detail": "On mobile, put the set up block below the example frame.",
+      "screenId": "home",
+      "pinId": null
+    },
+    {
+      "id": "board-sections",
+      "code": "I72",
+      "title": "Used and New library sections",
+      "detail": "USED (click to expand) and NEW, with a scroll bar. Dropping an image on the board moves it to USED automatically.",
+      "screenId": "board",
+      "pinId": "pin-board-sections"
+    },
+    {
+      "id": "board-ideas-panel",
+      "code": "I73",
+      "title": "Ideas panel",
+      "detail": "Organized ideas beside the library: expand, scroll, and make clear what is still left to do.",
+      "screenId": "board",
+      "pinId": "pin-board-ideas-panel"
+    },
+    {
+      "id": "board-name",
+      "code": "I74",
+      "title": "Project name",
+      "detail": "The board name in the header.",
+      "screenId": "board",
+      "pinId": "pin-board-name"
+    },
+    {
+      "id": "board-help",
+      "code": "I75",
+      "title": "Help button",
+      "detail": "The ? button opens How it works.",
+      "screenId": "board",
+      "pinId": "pin-board-help"
+    },
+    {
+      "id": "board-home-marker",
+      "code": "I76",
+      "title": "Home marker",
+      "detail": "A little home icon on the frame where the landing page starts.",
+      "screenId": "board",
+      "pinId": "pin-board-home-marker"
+    },
+    {
+      "id": "board-resize",
+      "code": "I77",
+      "title": "Click to resize",
+      "detail": "Drag a frame corner to resize it.",
+      "screenId": "board",
+      "pinId": "pin-board-resize"
+    },
+    {
+      "id": "board-space",
+      "code": "I78",
+      "title": "No overlap, lots of space",
+      "detail": "Frames and labels never overlap; the cork leaves room to breathe.",
+      "screenId": "board",
+      "pinId": "pin-board-space"
+    },
+    {
+      "id": "editor-pins-list",
+      "code": "I79",
+      "title": "Pins list",
+      "detail": "The pins on this screen as a list. Make it easy to move and delete them.",
+      "screenId": "screen-editor",
+      "pinId": "pin-editor-pins-list"
+    },
+    {
+      "id": "editor-highlight",
+      "code": "I80",
+      "title": "Highlight the selected pin",
+      "detail": "When a pin is selected in the list, highlight it on the image.",
+      "screenId": "screen-editor",
+      "pinId": "pin-editor-highlight"
+    },
+    {
+      "id": "editor-colors",
+      "code": "I81",
+      "title": "Color coding",
+      "detail": "Color swatches with a label you specify.",
+      "screenId": "screen-editor",
+      "pinId": "pin-editor-colors"
+    },
+    {
+      "id": "editor-fields",
+      "code": "I82",
+      "title": "Title and description",
+      "detail": "The pin’s title and description fields.",
+      "screenId": "screen-editor",
+      "pinId": "pin-editor-fields"
+    },
+    {
+      "id": "editor-leave-to-ai",
+      "code": "I83",
+      "title": "Leave it up to the AI",
+      "detail": "A post-it you can put on a frame (toggle in the screen details): the builder generates a standard, conventional page for it from the title, purpose, ideas and yarn. No drawing needed; the review stops asking for one; the export says so. Example: the Guide.",
+      "screenId": "screen-editor",
+      "pinId": null
+    },
+    {
+      "id": "board-tell-the-agent",
+      "code": "I84",
+      "title": "Tell the agent, in every view",
+      "detail": "One button per view (board, screen editor, connection editor, plan, ideas panel, outline, review, test flow) copies a prompt naming exactly what you are looking at, with the brief the running app serves for it (/api/projects/:id/brief), the skills (/api/skills) and the rules (/api/checklist.md). The agent reads the live board and writes back through the local API.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "boards-landing",
+      "code": "I85",
+      "title": "Landing page: your boards and a way to start one",
+      "detail": "The app opens on a landing page in the design of the site: the name and tagline, Start a board (a name and New blank board, or New board with your agent), and Your boards with screen counts and the last opened one marked. The brand at the top left brings you back. Built 2026-09-26.",
+      "screenId": "boards",
+      "pinId": null
+    },
+    {
+      "id": "boards-tutorial",
+      "code": "I86",
+      "title": "Interactive tutorial (to do, later)",
+      "detail": "Five or six panels that teach the app, opened from the landing page: the board, pins and yarn, the plan, Review flow, Test flow, and Tell the agent. Not built yet; the user asked to keep it as a to-do.",
+      "screenId": "boards",
+      "pinId": null
+    },
+    {
+      "id": "idea-8f108f61-18eb-42ba-8d38-ab76e3f45833",
+      "code": "I87",
+      "title": "Three build levels for a new board",
+      "detail": "A three-position switch in the handoff dialog (New board with your agent, and Plan it with your agent on an empty board): Just the list (ideas in the pool, a to-do list of what to draw and connect; no frames, no strings), Frames and strings (planned frames with the yarn already tied through provisional pins; the default, so later changes are tweaks), Built out (frames and strings with every frame left to the AI; take the post-it off the one or two pages you draw yourself). Choosing a level rewrites and re-copies the prompt.",
+      "screenId": "boards",
+      "pinId": null
+    },
+    {
+      "id": "idea-04aab304-b30e-4fac-8431-73aa20be4e06",
+      "code": "I88",
+      "title": "The prompt is three lines",
+      "detail": "Subject, the address of the brief the app serves for exactly this task, and “Anything I add below this line is part of the task.” The brief is the instruction file: task, skills, rules and the slice of the board. Only the address changes between views.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-d18e44df-9c1f-4bdc-8a46-6dc0a5910bbc",
+      "code": "I89",
+      "title": "Strings before drawings",
+      "detail": "A planned frame can carry provisional pins (placeholder spots down its right side) with real yarn, written by the agent or added in the editor (Add a pin, Place on an idea). When a drawing lands, the editor shows Place on the drawing for each waiting pin; click it, click the drawing, the yarn follows. Review flow warns (pin-not-placed) until every waiting pin is placed.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-b2fbaa64-de77-4acb-a485-342c895ed533",
+      "code": "I90",
+      "title": "Planned cards keep a fixed box",
+      "detail": "A planned frame is a 2:1 box in board units, the same the layout math assumes. Zoomed out under 40% it shows only its tape and code; tape titles trim to the tape. Thirty planned frames fit the window as a readable map.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-358c68ed-d7bb-4fd7-9e11-0e2a8784d6be",
+      "code": "I91",
+      "title": "Place a pin before the drawing",
+      "detail": "On a frame without a drawing, Add a pin and Place (on an idea) create a provisional pin at a slot instead of asking for a click on the drawing. The stage says how many pins wait with their yarn.",
+      "screenId": "screen-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-6fd449fa-5afe-4ecc-881e-f83eb3b5186d",
+      "code": "I92",
+      "title": "Place on the drawing strip",
+      "detail": "When a frame that has provisional pins gets its drawing, a strip above the caption lists them; click one, then click where it goes. Dragging a provisional pin places it too.",
+      "screenId": "screen-editor",
+      "pinId": null
+    },
+    {
+      "id": "idea-a0bc5ad3-de38-4a42-b478-b3c41e62df95",
+      "code": "I93",
+      "title": "Pin not placed yet",
+      "detail": "A warning for a provisional pin on a frame that now has a drawing: open the frame and click where the pin goes; its yarn follows.",
+      "screenId": "review",
+      "pinId": null
+    },
+    {
+      "id": "idea-26822fc4-8818-4cff-b8b4-7b2f3d7dbcb5",
+      "code": "I94",
+      "title": "One place to bring sketches in",
+      "detail": "The library leads with the drop box: drop sketches, click to browse files, Add a folder (every image in it, once), or Connect a folder to watch it. No separate folder card.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-9c4ecb4c-6957-48ca-9613-1638af1f5989",
+      "code": "I95",
+      "title": "A crowded board rests quietly",
+      "detail": "Above eight threads the yarn draws back and every label waits as a small mark. Clicking a frame brings its own threads and labels forward, fades the rest, and steps the frames it is tied to a little further apart. The step is only on screen. Clicking the cork lets go; the tape, the arrow and a double-click open a frame.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "idea-e84218a6-33a7-495c-8e1c-cac60cf7dbd8",
+      "code": "I96",
+      "title": "Left to the AI is built out",
+      "detail": "A frame wearing the post-it with no drawing gets a real page: top bar, heading and lede, a main action, cards from the ideas, fields for a sign-in, a dialog for a modal, a quiet ending for a terminal screen. Test flow walks it as a site; only the redirects work. flow.md carries the same page.",
+      "screenId": "test-flow",
+      "pinId": null
+    },
+    {
+      "id": "idea-1faf5f33-b68e-4ff3-b615-c08d6fb17f9d",
+      "code": "I97",
+      "title": "The one-way review waits for the drawing",
+      "detail": "A frame with no drawing is backlog, so its ways back are not settled. A frame left to the AI is still checked, because its page is the specification.",
+      "screenId": "review",
+      "pinId": null
     }
   ],
   "layout": {
     "home": {
-      "x": 40,
-      "y": 250,
-      "width": 320
+      "x": 19.49100783600278,
+      "y": 176.2176222626509,
+      "width": 400
     },
-    "board": {
-      "x": 480,
-      "y": 10,
-      "width": 340
+    "demo-readonly": {
+      "x": 566.3273385573352,
+      "y": 64.5575538142216,
+      "width": 400
     },
     "guide": {
-      "x": 430,
-      "y": 560,
-      "width": 310
+      "x": 1265.8417220550914,
+      "y": 9.866908043562347,
+      "width": 400
     },
-    "faq": {
-      "x": 900,
-      "y": 600,
-      "width": 290
+    "boards": {
+      "x": 14.933454021781177,
+      "y": 716.96942267777,
+      "width": 400
     },
-    "running": {
-      "x": 930,
-      "y": 60,
-      "width": 310
+    "board": {
+      "x": 580,
+      "y": 660,
+      "width": 400
+    },
+    "outline": {
+      "x": 1304.580929475975,
+      "y": 352.36511754004175,
+      "width": 400
+    },
+    "planning": {
+      "x": 1828.6294911261994,
+      "y": 577.9640313440111,
+      "width": 400
+    },
+    "screen-editor": {
+      "x": -36.79070793258471,
+      "y": 1209.0921032132208,
+      "width": 400
+    },
+    "connection-editor": {
+      "x": 574.9610667007657,
+      "y": 1371.280628480961,
+      "width": 400
+    },
+    "review": {
+      "x": 2123.872071567249,
+      "y": 127.32258431558262,
+      "width": 400
+    },
+    "test-flow": {
+      "x": 2036.2934914523864,
+      "y": 1062.1989894174856,
+      "width": 400
+    },
+    "help": {
+      "x": 1146.310742374349,
+      "y": 1309.124604388469,
+      "width": 400
     }
   },
   "colorLabels": {
-    "red": "Main path",
-    "gold": "Branch",
-    "blue": "Detour",
-    "olive": "Way back"
+    "red": "navigation",
+    "olive": "content or behavior note",
+    "blue": "link out",
+    "gold": "needs a decision"
   }
 }
