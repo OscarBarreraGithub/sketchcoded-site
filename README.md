@@ -50,7 +50,7 @@ Any static host can serve the public HTML, CSS, JavaScript, `assets/` and `examp
 node tools/stage-site.mjs
 ```
 
-Upload the contents of `.site-dist/`, preserving relative paths. This is a file-copy step, not a frontend build. Use the staged directory rather than the repository root: Pages does not honor the old `.assetsignore` file. Cloudflare Pages is one option:
+Upload the contents of `.site-dist/`, preserving relative paths. This is a file-copy step, not a frontend build. Use the explicit public file list instead of relying on host-specific exclusion rules. Cloudflare Pages is one option:
 
 1. Install or run Wrangler, authenticate to the intended account with `wrangler login`, and verify it with `wrangler whoami`.
 2. Create or select your own Pages project. For a new project, run `wrangler pages project create YOUR_PROJECT_NAME` and choose its production branch.
@@ -69,3 +69,5 @@ The 2026-09-28 review checked the homepage, guide and demo at actual Chromium ta
 The portability follow-up passed the exporter regression (custom board ID and port, duplicate names, invalid asset paths and failed downloads), plus 16 homepage/guide checks across both laptop sizes and all four zoom levels. Setup commands and links follow a substituted fork configuration. Code wraps within the guide, and the scroll hint has a reserved rail so it cannot cover text. No browser runtime errors were reported.
 
 The publishing regression verifies that staging excludes repository notes, tool scripts, local configuration and stale deployment files.
+
+GitHub Actions runs these tools on Windows, macOS and Linux with Node 22.12 and 24. Text files use LF line endings across platforms.
