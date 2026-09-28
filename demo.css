@@ -356,7 +356,7 @@
   flex-direction: column;
   background: #2b2a24f2;
   padding: max(12px, env(safe-area-inset-top)) 12px
-    max(12px, env(safe-area-inset-bottom));
+    calc(max(12px, env(safe-area-inset-bottom)) + 66px);
   gap: 10px;
 }
 .player[hidden] {
@@ -409,6 +409,9 @@
   background: var(--green);
   color: #fbfdf8;
   border-color: var(--green);
+}
+.player-close:hover {
+  background: #2b4033;
 }
 .player-stage {
   flex: 1 1 auto;
@@ -823,7 +826,7 @@
 }
 @media (max-height: 500px) {
   .player {
-    padding: 6px;
+    padding: 6px 6px 74px;
     gap: 6px;
   }
   .player-bar {

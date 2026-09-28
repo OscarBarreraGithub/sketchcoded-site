@@ -3,6 +3,7 @@ import { mkdir, mkdtemp, writeFile, rename, rm } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { parseArgs } from "node:util";
+import { curateExample } from "./curate-example.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -10,6 +11,7 @@ export async function makeExample({
   base = "http://127.0.0.1:5173",
   board = "Sketchcoded",
   boardId,
+  includePlanned = false,
   out = path.join(root, "example"),
 } = {}) {
   const url = new URL(base);
@@ -36,12 +38,13 @@ export async function makeExample({
       );
     id = matches[0].id;
   }
-  const project = await (
+  const snapshot = await (
     await get(`/api/projects/${encodeURIComponent(id)}/example`)
   ).json();
   for (const key of ["assets", "screens", "pins", "transitions", "ideas"])
-    if (!Array.isArray(project[key]))
+    if (!Array.isArray(snapshot[key]))
       throw new Error(`Invalid example snapshot: ${key} is missing.`);
+  const project = includePlanned ? snapshot : curateExample(snapshot);
 
   // Download into a sibling staging directory. Failed requests never erase the published copy.
   const stage = await mkdtemp(path.join(path.dirname(out), ".example-"));
@@ -102,6 +105,7 @@ if (
         base: { type: "string" },
         board: { type: "string" },
         "board-id": { type: "string" },
+        "include-planned": { type: "boolean" },
         help: { type: "boolean", short: "h" },
       },
     });
@@ -112,7 +116,8 @@ node tools/make-example.mjs --base http://127.0.0.1:5180 --board "My board"
 node tools/make-example.mjs --base http://127.0.0.1:5180 --board-id "board-id"
 
 Defaults: app http://127.0.0.1:5173, board named Sketchcoded.
-Use the running app's address and your own board name or ID. No hosting account is needed.`);
+Use the running app's address and your own board name or ID. No hosting account is needed.
+Isolated, undeveloped planning frames are omitted. Use --include-planned for the full snapshot.`);
     } else {
       if (values.board && values["board-id"])
         throw new Error("Choose --board or --board-id, not both.");
@@ -123,6 +128,7 @@ Use the running app's address and your own board name or ID. No hosting account 
         base: values.base,
         board: values.board,
         boardId: values["board-id"],
+        includePlanned: values["include-planned"],
       });
       const drawn = board.screens.filter((screen) => screen.assetId).length;
       console.log(

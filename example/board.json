@@ -11,15 +11,6 @@
       "code": "P1"
     },
     {
-      "id": "boards",
-      "assetId": null,
-      "title": "Boards",
-      "purpose": "Open a saved board, start a blank one, start the chat example, or import an exported project.",
-      "entry": false,
-      "role": "modal",
-      "code": "P2"
-    },
-    {
       "id": "board",
       "assetId": "4e26f4cef70d81fd347dc581b7c5dc9c316e4bf58cc1ad400ae19b67f84ef599",
       "title": "The board",
@@ -35,6 +26,7 @@
       "purpose": "The same app as a searchable directory: every screen once, with its pins and paths.",
       "entry": false,
       "role": "screen",
+      "leftToAi": true,
       "code": "P4"
     },
     {
@@ -44,6 +36,7 @@
       "purpose": "Every functionality idea, which screen it belongs on, and whether it has become a pin yet.",
       "entry": false,
       "role": "screen",
+      "leftToAi": true,
       "code": "P5"
     },
     {
@@ -62,16 +55,8 @@
       "purpose": "One yarn: source pin, destination, navigation, short summary, condition, details, and data needed.",
       "entry": false,
       "role": "modal",
+      "leftToAi": true,
       "code": "P7"
-    },
-    {
-      "id": "review",
-      "assetId": null,
-      "title": "Review flow",
-      "purpose": "Findings about missing paths, unreachable screens and ways back, with reasoned exceptions that travel with the export.",
-      "entry": false,
-      "role": "screen",
-      "code": "P8"
     },
     {
       "id": "test-flow",
@@ -80,6 +65,7 @@
       "purpose": "Play through the sketches: pick a start, click pins, choose scenarios, switch web and mobile, rewind the test.",
       "entry": false,
       "role": "modal",
+      "leftToAi": true,
       "code": "P9"
     },
     {
@@ -89,15 +75,17 @@
       "purpose": "Six steps from a sketch to a story, plus keyboard shortcuts.",
       "entry": false,
       "role": "modal",
+      "leftToAi": true,
       "code": "P10"
     },
     {
       "id": "demo-readonly",
       "assetId": null,
       "title": "Example demo (read-only)",
-      "purpose": "A read-only view of the example board, reached from the landing page. Empty for now: drop a sketch from the library into this frame later.",
+      "purpose": "Explore a read-only example of Sketchcoded: original hand drawings, connected pages and conventional layouts for pages left to the AI. Move frames temporarily and walk their authored paths; reload to reset the board.",
       "entry": false,
       "role": "screen",
+      "leftToAi": true,
       "code": "P11"
     },
     {
@@ -562,46 +550,6 @@
   ],
   "ideas": [
     {
-      "id": "idea-10",
-      "code": "I1",
-      "title": "Your boards",
-      "detail": "Saved boards with screen counts and last edit; the current one is marked.",
-      "screenId": "boards",
-      "pinId": null
-    },
-    {
-      "id": "idea-11",
-      "code": "I2",
-      "title": "New blank board",
-      "detail": "Name it and start from your own sketches.",
-      "screenId": "boards",
-      "pinId": null
-    },
-    {
-      "id": "idea-12",
-      "code": "I3",
-      "title": "The chat example",
-      "detail": "A ready-made Little chat board with branches, an intentional one-way login and Back actions.",
-      "screenId": "boards",
-      "pinId": null
-    },
-    {
-      "id": "idea-13",
-      "code": "I4",
-      "title": "Import a project",
-      "detail": "Upload a .sketchcoded.zip; it becomes a separate board and never overwrites one.",
-      "screenId": "boards",
-      "pinId": null
-    },
-    {
-      "id": "idea-14",
-      "code": "I5",
-      "title": "Rename a board",
-      "detail": "The pencil beside the board title.",
-      "screenId": "boards",
-      "pinId": null
-    },
-    {
       "id": "idea-15",
       "code": "I6",
       "title": "Sketch library",
@@ -962,38 +910,6 @@
       "pinId": null
     },
     {
-      "id": "idea-60",
-      "code": "I51",
-      "title": "To review and Accepted",
-      "detail": "Findings sorted by severity: repair needed, check this path, use your judgment.",
-      "screenId": "review",
-      "pinId": null
-    },
-    {
-      "id": "idea-61",
-      "code": "I52",
-      "title": "Show me where",
-      "detail": "Jump to the screen, pin or yarn behind a finding.",
-      "screenId": "review",
-      "pinId": null
-    },
-    {
-      "id": "idea-62",
-      "code": "I53",
-      "title": "Accept with a reason",
-      "detail": "Intentional exceptions keep their reason and reopen when the evidence changes.",
-      "screenId": "review",
-      "pinId": null
-    },
-    {
-      "id": "idea-63",
-      "code": "I54",
-      "title": "Structural errors cannot be waived",
-      "detail": "Broken references must be repaired.",
-      "screenId": "review",
-      "pinId": null
-    },
-    {
       "id": "idea-64",
       "code": "I55",
       "title": "Choose a start",
@@ -1234,30 +1150,6 @@
       "pinId": null
     },
     {
-      "id": "boards-landing",
-      "code": "I85",
-      "title": "Landing page: your boards and a way to start one",
-      "detail": "The app opens on a landing page in the design of the site: the name and tagline, Start a board (a name and New blank board, or New board with your agent), and Your boards with screen counts and the last opened one marked. The brand at the top left brings you back. Built 2026-09-26.",
-      "screenId": "boards",
-      "pinId": null
-    },
-    {
-      "id": "boards-tutorial",
-      "code": "I86",
-      "title": "Interactive six-panel tutorial",
-      "detail": "Six interactive panels opened from the app landing page: planning, provisional pins, branches, review decisions, Test flow and Tell the agent. Practice controls do not change a board.",
-      "screenId": "boards",
-      "pinId": null
-    },
-    {
-      "id": "idea-8f108f61-18eb-42ba-8d38-ab76e3f45833",
-      "code": "I87",
-      "title": "Three build levels for a new board",
-      "detail": "A three-position switch in the handoff dialog (New board with your agent, and Plan it with your agent on an empty board): Just the list (ideas in the pool, a to-do list of what to draw and connect; no frames, no strings), Frames and strings (planned frames with the yarn already tied through provisional pins; the default, so later changes are tweaks), Built out (frames and strings with every frame left to the AI; take the post-it off the one or two pages you draw yourself). Choosing a level rewrites and re-copies the prompt.",
-      "screenId": "boards",
-      "pinId": null
-    },
-    {
       "id": "idea-04aab304-b30e-4fac-8431-73aa20be4e06",
       "code": "I88",
       "title": "The prompt is three lines",
@@ -1298,14 +1190,6 @@
       "pinId": null
     },
     {
-      "id": "idea-a0bc5ad3-de38-4a42-b478-b3c41e62df95",
-      "code": "I93",
-      "title": "Pin not placed yet",
-      "detail": "A warning for a provisional pin on a frame that now has a drawing: open the frame and click where the pin goes; its yarn follows.",
-      "screenId": "review",
-      "pinId": null
-    },
-    {
       "id": "idea-26822fc4-8818-4cff-b8b4-7b2f3d7dbcb5",
       "code": "I94",
       "title": "One place to bring sketches in",
@@ -1327,14 +1211,6 @@
       "title": "Left to the AI is built out",
       "detail": "A frame wearing the post-it with no drawing gets a real page: top bar, heading and lede, a main action, cards from the ideas, fields for a sign-in, a dialog for a modal, a quiet ending for a terminal screen. Test flow walks it as a site; only the redirects work. flow.md carries the same page.",
       "screenId": "test-flow",
-      "pinId": null
-    },
-    {
-      "id": "idea-1faf5f33-b68e-4ff3-b615-c08d6fb17f9d",
-      "code": "I97",
-      "title": "The one-way review waits for the drawing",
-      "detail": "A frame with no drawing is backlog, so its ways back are not settled. A frame left to the AI is still checked, because its page is the specification.",
-      "screenId": "review",
       "pinId": null
     },
     {
@@ -1368,6 +1244,14 @@
       "detail": "Explain the two places agents apply the full checklist: affected board views and pages left to the AI, and the finished site constructed from a board. Show how the agent reports browser evidence and unresolved failures. Review flow is structural.",
       "screenId": "guide",
       "pinId": null
+    },
+    {
+      "id": "focused-public-example",
+      "code": "I102",
+      "title": "Focused example board",
+      "detail": "Show the original drawings and connected pages. Undrawn pages are left to the AI. Omit isolated, undeveloped planning frames from the public example while retaining them in the full local plan. Moving frames in the example is temporary; reload restores their positions.",
+      "screenId": "demo-readonly",
+      "pinId": null
     }
   ],
   "layout": {
@@ -1384,11 +1268,6 @@
     "guide": {
       "x": 1265.8417220550914,
       "y": 9.866908043562347,
-      "width": 400
-    },
-    "boards": {
-      "x": 14.933454021781177,
-      "y": 716.96942267777,
       "width": 400
     },
     "board": {
@@ -1416,11 +1295,6 @@
       "y": 1371.280628480961,
       "width": 400
     },
-    "review": {
-      "x": 2123.872071567249,
-      "y": 127.32258431558262,
-      "width": 400
-    },
     "test-flow": {
       "x": 2036.2934914523864,
       "y": 1062.1989894174856,
@@ -1439,6 +1313,268 @@
     "gold": "needs a decision"
   },
   "standardPages": {
+    "outline": {
+      "shape": "page",
+      "product": "Sketchcoded",
+      "title": "App outline",
+      "lede": "The same app as a searchable directory: every screen once, with its pins and paths.",
+      "nav": [],
+      "primary": null,
+      "blocks": [
+        {
+          "block": "card",
+          "id": "idea-33",
+          "title": "Each screen once",
+          "body": "Entry screens, app screens, detail sketches; destinations link back to the same entry so loops stay simple.",
+          "action": null
+        },
+        {
+          "block": "field",
+          "id": "idea-34",
+          "label": "Search screens, pins and paths",
+          "hint": "One box finds a title, a pin, a condition or a destination.",
+          "type": "text"
+        },
+        {
+          "block": "card",
+          "id": "idea-35",
+          "title": "Edit screen",
+          "body": "Open the frame from its entry.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-36",
+          "title": "Show on board",
+          "body": "Center the frame on the board.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-37",
+          "title": "Ideas waiting per screen",
+          "body": "Each screen lists the ideas assigned but not yet pinned.",
+          "action": null
+        }
+      ],
+      "footer": []
+    },
+    "planning": {
+      "shape": "page",
+      "product": "Sketchcoded",
+      "title": "Planning",
+      "lede": "Every functionality idea, which screen it belongs on, and whether it has become a pin yet.",
+      "nav": [],
+      "primary": null,
+      "blocks": [
+        {
+          "block": "card",
+          "id": "idea-38",
+          "title": "Add an idea any time",
+          "body": "Title, details, which screen it belongs on, where it leads.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-39",
+          "title": "Pool and folders",
+          "body": "Unassigned ideas wait in a pool; each screen has a folder.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-40",
+          "title": "Place on the drawing",
+          "body": "Turns an assigned idea into a pin with its text already written.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-41",
+          "title": "Placed ideas grey out",
+          "body": "Pinned ideas stay visible with their pin number so nothing lands on two pages.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-42",
+          "title": "Move an idea",
+          "body": "Change its screen; a placed idea gives up its pin so it can be placed again.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-43",
+          "title": "Plan a frame before drawing",
+          "body": "A titled frame appears on the board with its ideas listed.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-44",
+          "title": "Copy as text",
+          "body": "A markdown outline for talking about the plan in chat; the same outline ships in flow.md.",
+          "action": null
+        }
+      ],
+      "footer": []
+    },
+    "connection-editor": {
+      "shape": "dialog",
+      "product": "Sketchcoded",
+      "title": "Connection editor",
+      "lede": "One yarn: source pin, destination, navigation, short summary, condition, details, and data needed.",
+      "nav": [],
+      "primary": null,
+      "blocks": [
+        {
+          "block": "card",
+          "id": "idea-54",
+          "title": "Short version",
+          "body": "The required label on the yarn and the option in the scenario chooser.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-55",
+          "title": "Navigation",
+          "body": "Open, replace, start fresh, open as dialog, go back, dismiss.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-56",
+          "title": "When does this happen",
+          "body": "A plain-language condition. It is never executed.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-57",
+          "title": "Details and data",
+          "body": "Behavior, exceptions and states; what data or information is needed.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-58",
+          "title": "Fallback and yarn color",
+          "body": "Mark the default branch; pick red, olive, blue or gold.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-59",
+          "title": "Remove yarn",
+          "body": "Undoable from the board.",
+          "action": null
+        }
+      ],
+      "footer": []
+    },
+    "test-flow": {
+      "shape": "dialog",
+      "product": "Sketchcoded",
+      "title": "Test flow",
+      "lede": "Play through the sketches: pick a start, click pins, choose scenarios, switch web and mobile, rewind the test.",
+      "nav": [],
+      "primary": null,
+      "blocks": [
+        {
+          "block": "card",
+          "id": "idea-64",
+          "title": "Choose a start",
+          "body": "Entry screens, or any screen as a labeled test entry.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-65",
+          "title": "Click pins to follow paths",
+          "body": "One yarn follows directly; several show a scenario chooser with conditions.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-66",
+          "title": "Web or mobile",
+          "body": "Switch layouts; pins not yet on mobile are listed under the drawing.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-67",
+          "title": "Rewind test",
+          "body": "A testing control, separate from app Back, which must be drawn.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-68",
+          "title": "Closer looks",
+          "body": "Detail references open an enlarged sketch without changing app history.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-69",
+          "title": "Restart and hide pins",
+          "body": "Start over from the chosen screen; hide pins to see the sketch clean.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-e84218a6-33a7-495c-8e1c-cac60cf7dbd8",
+          "title": "Left to the AI is built out",
+          "body": "A frame wearing the post-it with no drawing gets a real page: top bar, heading and lede, a main action, cards from the ideas, fields for a sign-in, a dialog for a modal, a quiet ending for a terminal screen. Test flow walks it as a site; only the redirects work. flow.md carries the same page.",
+          "action": null
+        }
+      ],
+      "footer": []
+    },
+    "help": {
+      "shape": "dialog",
+      "product": "Sketchcoded",
+      "title": "How it works",
+      "lede": "Six steps from a sketch to a story, plus keyboard shortcuts.",
+      "nav": [],
+      "primary": null,
+      "blocks": [
+        {
+          "block": "card",
+          "id": "idea-70",
+          "title": "Six steps",
+          "body": "Plan, bring sketches, make a little space, pin an intention, follow the yarn, check and play.",
+          "action": null
+        },
+        {
+          "block": "card",
+          "id": "idea-71",
+          "title": "Shortcuts",
+          "body": "Space + drag, scroll to zoom, Shift + scroll, F to fit, Cmd/Ctrl + Z.",
+          "action": null
+        }
+      ],
+      "footer": []
+    },
+    "demo-readonly": {
+      "shape": "page",
+      "product": "Sketchcoded",
+      "title": "Example demo (read-only)",
+      "lede": "Explore a read-only example of Sketchcoded: original hand drawings, connected pages and conventional layouts for pages left to the AI. Move frames temporarily and walk their authored paths; reload to reset the board.",
+      "nav": [],
+      "primary": null,
+      "blocks": [
+        {
+          "block": "card",
+          "id": "focused-public-example",
+          "title": "Focused example board",
+          "body": "Show the original drawings and connected pages. Undrawn pages are left to the AI. Omit isolated, undeveloped planning frames from the public example while retaining them in the full local plan. Moving frames in the example is temporary; reload restores their positions.",
+          "action": null
+        }
+      ],
+      "footer": []
+    },
     "guide": {
       "shape": "page",
       "product": "Sketchcoded",

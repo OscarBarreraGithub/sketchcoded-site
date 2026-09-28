@@ -17,12 +17,16 @@ const file = `${"a".repeat(64)}.webp`;
 const board = {
   id: "custom-id",
   name: "A new user's board",
-  assets: [{ file }],
-  screens: [],
+  assets: [{ id: "drawing", file }],
+  screens: [
+    { id: "home", entry: true, assetId: "drawing" },
+    { id: "backlog", assetId: null },
+  ],
   pins: [],
   transitions: [],
   ideas: [],
   standardPages: {},
+  layout: {},
 };
 
 test("custom addresses and board IDs work; failures preserve the existing example", async () => {
@@ -38,7 +42,10 @@ test("custom addresses and board IDs work; failures preserve the existing exampl
       res.end(
         JSON.stringify(
           invalidFile
-            ? { ...board, assets: [{ file: "../../outside.webp" }] }
+            ? {
+                ...board,
+                assets: [{ id: "drawing", file: "../../outside.webp" }],
+              }
             : board,
         ),
       );
@@ -81,10 +88,11 @@ test("custom addresses and board IDs work; failures preserve the existing exampl
     );
     invalidFile = false;
     const result = await makeExample({ base, boardId: board.id, out });
-    assert.deepEqual(result, board);
+    const curated = { ...board, screens: [board.screens[0]] };
+    assert.deepEqual(result, curated);
     assert.deepEqual(
       JSON.parse(await readFile(path.join(out, "board.json"), "utf8")),
-      board,
+      curated,
     );
     assert.equal(
       await readFile(path.join(out, "art", file), "utf8"),
@@ -92,6 +100,17 @@ test("custom addresses and board IDs work; failures preserve the existing exampl
     );
     assert.deepEqual((await readdir(root)).sort(), ["example"]);
     assert.deepEqual((await readdir(out)).sort(), ["art", "board.json"]);
+    const complete = await makeExample({
+      base,
+      boardId: board.id,
+      out,
+      includePlanned: true,
+    });
+    assert.deepEqual(complete, board);
+    assert.deepEqual(
+      JSON.parse(await readFile(path.join(out, "board.json"), "utf8")),
+      board,
+    );
   } finally {
     server.closeAllConnections();
     await new Promise((resolve) => server.close(resolve));

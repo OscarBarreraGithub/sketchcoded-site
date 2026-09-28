@@ -7,7 +7,7 @@ The public landing page, guide and read-only example for Sketchcoded. Static HTM
 - `index.html`, `guide.html` and `styles.css`: the landing page and guide.
 - `links.js`: the public repository, projects page and demo addresses. Both the setup prompt and manual clone commands are generated from this configuration. A fork can replace these links without changing application code.
 - `demo.html`, `demo.css` and `demo.js`: a read-only board and flow walker. Temporary frame movement resets on reload.
-- `example/board.json` and `example/art/`: a committed snapshot of an authored board. The bundled example works without the local app or the original author's data.
+- `example/board.json` and `example/art/`: a curated snapshot of an authored board. The bundled example works without the local app or the original author's data.
 - `assets/`: local images, icons and fonts. Fonts are not loaded from third parties.
 - `_headers`: Cloudflare Pages cache and safety headers. Adapt these if another host uses a different format.
 - `tools/stage-site.mjs`: copies only public website files into `.site-dist/` for deployment. Repository notes, maintenance tools and local configuration stay out of the published site.
@@ -38,7 +38,7 @@ node tools/make-example.mjs --base http://127.0.0.1:5180 --board-id "board-id-fr
 
 The defaults are `http://127.0.0.1:5173` and the board named `Sketchcoded`, for the official example. Use the actual address printed by your app and your board name or ID. Duplicate names require `--board-id`. A fresh app installation does not contain the official source board; the committed public snapshot remains available without it.
 
-The tool reads `/api/projects/:id/example`, copies the stored drawings and writes the same standard-page descriptions used by Test flow. It preserves the old example if a request fails. Review the generated files before committing and deploying them: source-folder paths are stripped by the app, but board descriptions and drawings are public content. No drawings or routes are invented by the exporter.
+The tool reads `/api/projects/:id/example`, copies the referenced drawings and writes the same standard-page descriptions used by Test flow. It omits isolated, undeveloped planning frames by default: frames with no drawing, delegated page, entry role, pin or authored connection. Their ideas and unused assets are omitted too. The full local board remains intact. Use `--include-planned` to publish the complete snapshot. It preserves the old example if a request fails. Review the generated files before committing and deploying them: source-folder paths are stripped by the app, but board descriptions and drawings are public content. No drawings or routes are invented by the exporter.
 
 Run exporter and publishing regressions with `node --test`.
 
@@ -71,3 +71,5 @@ The portability follow-up passed the exporter regression (custom board ID and po
 The publishing regression verifies that staging excludes repository notes, tool scripts, local configuration and stale deployment files.
 
 GitHub Actions runs these tools on Windows, macOS and Linux with Node 22.12 and 24. Text files use LF line endings across platforms.
+
+The focused official example contains three original drawings and seven pages left to the AI. Boards and Review flow remain in the local planning backlog; they are omitted from the public example while isolated and undeveloped.
