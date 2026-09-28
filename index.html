@@ -10,102 +10,151 @@
       content="Draw your app on paper, pin the screens to a board, tie them together with yarn, and hand an AI a plan it can build from. Runs on your computer."
     />
     <meta property="og:title" content="Sketchcoded" />
-    <meta property="og:description" content="Prompts make apps. Sketching makes your vision." />
+    <meta
+      property="og:description"
+      content="Prompts make apps. Sketching makes your vision."
+    />
     <meta property="og:image" content="assets/board.png" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <header class="wrap site-header">
-      <a class="brand" href="./"><img src="assets/favicon.svg" alt="" />sketchcoded<span>.</span></a>
-      <nav class="site-nav" aria-label="Site">
-        <a data-link="demo" href="demo.html">Example</a>
-        <a href="guide.html">Guide</a>
-        <a href="guide.html#faq">FAQ</a>
-        <a data-link="github" href="#">GitHub</a>
-      </nav>
-    </header>
+  <body class="site-document">
+    <div class="site-scroll" tabindex="0" aria-label="Page content">
+      <header class="wrap site-header">
+        <a class="brand" href="./"
+          ><img src="assets/favicon.svg" alt="" />sketchcoded<span>.</span></a
+        >
+        <nav class="site-nav" aria-label="Site">
+          <a data-link="demo" href="demo.html">Example</a>
+          <a href="guide.html">Guide</a>
+          <a href="guide.html#faq">FAQ</a>
+          <a data-link="github" href="#">GitHub</a>
+        </nav>
+      </header>
 
-    <main class="wrap">
-      <section class="hero">
-        <div>
-          <h1>Sketchcoded</h1>
-          <p class="tagline">Prompts make apps.<b>Sketching makes <u>your</u> vision.</b></p>
-          <p class="lede">
-            Draw the screens of the app you're imagining. Pin them to a board, tie them together
-            with yarn, and write what each part should do in plain words. Play it, check it, and
-            hand an AI a plan it can build from.
-          </p>
-        </div>
-        <a class="example" data-link="demo" href="demo.html" aria-label="Open the example: this website, planned on its own board, which you can move around and walk through">
-          <figure>
-            <img src="assets/board.png" alt="A cork board with the pages of this website pinned to it, tied together with coloured yarn." width="1440" height="1000" />
-            <figcaption>
-              <span>Example: this website, planned on its own board</span>
-              <span class="cta">Open the board →</span>
-            </figcaption>
-          </figure>
-        </a>
-      </section>
-
-      <section class="setup" id="setup">
-        <div>
-          <h2>Set up in one paste.</h2>
-          <div class="prompt-box">
-            <div class="label">Tell your AI</div>
-            <p data-prompt>Loading the setup prompt…</p>
-            <div class="prompt-actions">
-              <button class="button primary" type="button" data-copy-prompt>Copy prompt</button>
-            </div>
-            <p class="requirements">Needs Node.js 22.12 or later and a desktop browser. macOS, Windows or Linux.</p>
-          </div>
-          <a class="button github-button" data-link="github" href="#">
-            <svg viewBox="0 0 16 16" width="17" height="17" aria-hidden="true" fill="currentColor">
-              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
-            </svg>
-            Source on GitHub
-          </a>
-        </div>
-        <div class="local">
+      <main class="wrap">
+        <section class="hero">
           <div>
-            <strong>Runs on your computer.</strong>
-            <p>
-              Your sketches never leave it. There is no account, no API key and no upload. The
-              folder you point Sketchcoded at stays read only.
+            <h1>Sketchcoded</h1>
+            <p class="tagline">
+              Prompts make apps.<b>Sketching makes <u>your</u> vision.</b>
+            </p>
+            <p class="lede">
+              Draw the screens of the app you're imagining. Pin them to a board,
+              tie them together with yarn, and write what each part should do in
+              plain words. Play it, check it, and hand an AI a plan it can build
+              from.
             </p>
           </div>
-        </div>
-      </section>
+          <a
+            class="example"
+            data-link="demo"
+            href="demo.html"
+            aria-label="Open the example: this website, planned on its own board, which you can move around and walk through"
+          >
+            <figure>
+              <img
+                src="assets/board.png"
+                alt="A cork board with the pages of this website pinned to it, tied together with coloured yarn."
+                width="1440"
+                height="1000"
+              />
+              <figcaption>
+                <span>Example: this website, planned on its own board</span>
+                <span class="cta">Open the board →</span>
+              </figcaption>
+            </figure>
+          </a>
+        </section>
 
-      <section class="more" id="more">
-        <div class="card">
-          <h3>Read the guide</h3>
-          <p>
-            How a board becomes a plan, what the automatic checks look for, and how to set up from
-            the repository's Markdown files.
-          </p>
-          <a class="button" href="guide.html">Guide</a>
-        </div>
-        <div class="card">
-          <h3>Look at the code</h3>
-          <p>A local web app: React and TypeScript in front, a small Node server behind, your files on disk.</p>
-          <a class="button" data-link="github" href="#">GitHub</a>
-        </div>
-        <div class="card">
-          <h3>See more projects</h3>
-          <p>Sketchcoded is one of a family of tools for doing careful work with agents.</p>
-          <a class="button" data-link="projects" href="#">Science with agents →</a>
-        </div>
-      </section>
-    </main>
+        <section class="setup" id="setup">
+          <div>
+            <h2>Set up in one paste.</h2>
+            <div class="prompt-box">
+              <div class="label">Tell your AI</div>
+              <p data-prompt>Loading the setup prompt…</p>
+              <div class="prompt-actions">
+                <button class="button primary" type="button" data-copy-prompt>
+                  Copy prompt
+                </button>
+              </div>
+              <p class="requirements">
+                Needs Node.js 22.12 or later and a desktop browser. macOS,
+                Windows or Linux.
+              </p>
+            </div>
+            <a class="button github-button" data-link="github" href="#">
+              <svg
+                viewBox="0 0 16 16"
+                width="17"
+                height="17"
+                aria-hidden="true"
+                fill="currentColor"
+              >
+                <path
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+                />
+              </svg>
+              Source on GitHub
+            </a>
+          </div>
+          <div class="local">
+            <div>
+              <strong>Runs on your computer.</strong>
+              <p>
+                Your sketches never leave it. There is no account, no API key
+                and no upload. The folder you point Sketchcoded at stays read
+                only.
+              </p>
+            </div>
+          </div>
+        </section>
 
-    <footer class="wrap site-footer">
-      <span>Sketchcoded. Ideas, connected.</span>
-      <span>
-        <a href="guide.html">Guide</a> · <a href="guide.html#faq">FAQ</a> ·
-        <a data-link="github" href="#">Source</a>
-      </span>
-    </footer>
+        <section class="more" id="more">
+          <div class="card">
+            <h3>Read the guide</h3>
+            <p>
+              How a board becomes a plan, what the automatic checks look for,
+              and how to set up from the repository's Markdown files.
+            </p>
+            <a class="button" href="guide.html">Guide</a>
+          </div>
+          <div class="card">
+            <h3>Look at the code</h3>
+            <p>
+              A local web app: React and TypeScript in front, a small Node
+              server behind, your files on disk.
+            </p>
+            <a class="button" data-link="github" href="#">GitHub</a>
+          </div>
+          <div class="card">
+            <h3>See more projects</h3>
+            <p>
+              Sketchcoded is one of a family of tools for doing careful work
+              with agents.
+            </p>
+            <a class="button" data-link="projects" href="#"
+              >Science with agents →</a
+            >
+          </div>
+        </section>
+      </main>
+
+      <footer class="wrap site-footer">
+        <span>Sketchcoded. Ideas, connected.</span>
+        <span>
+          <a href="guide.html">Guide</a> · <a href="guide.html#faq">FAQ</a> ·
+          <a data-link="github" href="#">Source</a>
+        </span>
+      </footer>
+    </div>
+    <button
+      class="site-scroll-hint"
+      type="button"
+      aria-label="Scroll for more content"
+    >
+      More below ↓
+    </button>
     <script src="links.js"></script>
   </body>
 </html>

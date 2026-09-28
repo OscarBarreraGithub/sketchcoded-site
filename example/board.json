@@ -50,7 +50,7 @@
       "id": "screen-editor",
       "assetId": "f77b4d3b673b975cce4a8dc6a63b122a46fc82ac273ec2f894d580ac205718dd",
       "title": "Screen editor",
-      "purpose": "One frame up close: web and mobile drawings side by side, pins, layouts, and the ideas planned for it.",
+      "purpose": "One frame up close: switch between web and mobile drawings, describe pins, place them on each layout and manage the ideas planned for it.",
       "entry": false,
       "role": "modal",
       "code": "P6"
@@ -104,52 +104,23 @@
       "id": "guide",
       "assetId": null,
       "title": "Guide",
-      "purpose": "Read more. Explains the autochecks (no overlapping or small text, browser zoom issues), setting up from the .md file structure, and points to GitHub too.",
+      "purpose": "Read more: setup, everyday controls, agent handoff and recovery. Review flow checks the graph. Agents inspect the rendered board and pages left to the AI, and check the finished site when building it, against the full checklist including text overlap and browser zoom.",
       "entry": false,
       "role": "screen",
       "leftToAi": true,
       "code": "P12"
     }
   ],
-  "assets": [
-    {
-      "id": "af0d400e0db299747d77a762901eb77f2cda625368882b7a8c2c1584d6b3f483",
-      "name": "sketchcoded-landing.png",
-      "file": "af0d400e0db299747d77a762901eb77f2cda625368882b7a8c2c1584d6b3f483.webp",
-      "width": 1650,
-      "height": 1258,
-      "importedAt": "2026-09-25T06:51:45.664Z",
-      "code": "S1"
-    },
-    {
-      "id": "4e26f4cef70d81fd347dc581b7c5dc9c316e4bf58cc1ad400ae19b67f84ef599",
-      "name": "sketchcoded-board.png",
-      "file": "4e26f4cef70d81fd347dc581b7c5dc9c316e4bf58cc1ad400ae19b67f84ef599.webp",
-      "width": 1650,
-      "height": 1258,
-      "importedAt": "2026-09-25T06:51:45.728Z",
-      "code": "S2"
-    },
-    {
-      "id": "f77b4d3b673b975cce4a8dc6a63b122a46fc82ac273ec2f894d580ac205718dd",
-      "name": "sketchcoded-screen-editor.png",
-      "file": "f77b4d3b673b975cce4a8dc6a63b122a46fc82ac273ec2f894d580ac205718dd.webp",
-      "width": 1650,
-      "height": 1258,
-      "importedAt": "2026-09-25T06:51:45.781Z",
-      "code": "S3"
-    }
-  ],
   "pins": [
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-landing-title",
       "screenId": "home",
       "x": 0.29,
       "y": 0.24,
       "color": "olive",
       "title": "Title and tagline",
-      "description": "SKETCH CODE. Prompts make apps. Sketching makes your vision. (Alternate: Telling an AI what you want gets you an app. Showing it gets you your vision.)"
+      "description": "Sketchcoded. Ideas, connected."
     },
     {
       "kind": "interaction",
@@ -162,17 +133,17 @@
       "description": "Sends to a read-only version of the demo. Make it obvious this should be clicked. For now the destination is an empty frame to drop a sketch into later."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-landing-setup",
       "screenId": "home",
       "x": 0.2,
       "y": 0.66,
       "color": "olive",
       "title": "Set up: tell your AI",
-      "description": "Tell your AI: “I want to set up github.com/…/sketchcode. Make sure to…”. On mobile this block sits below the example frame."
+      "description": "A setup prompt for https://github.com/OscarBarreraGithub/sketchcoded, with requirements and the local address. On mobile this block sits below the example frame."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-landing-copy",
       "screenId": "home",
       "x": 0.32,
@@ -182,7 +153,7 @@
       "description": "One click copies the setup prompt."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-landing-local",
       "screenId": "home",
       "x": 0.2,
@@ -199,7 +170,7 @@
       "y": 0.76,
       "color": "red",
       "title": "Read more: Guide",
-      "description": "Rephrase. Opens the guide: autochecks, .md setup, GitHub."
+      "description": "Opens the guide: setup, controls, agent handoff, recovery, structural Review flow and the full checklist agents verify when working on the board or building its site."
     },
     {
       "kind": "link",
@@ -209,7 +180,7 @@
       "y": 0.86,
       "color": "blue",
       "title": "GitHub",
-      "description": "Opens the repository in a new tab: https://github.com/OscarBarreraGithub/sketchcoded (address to confirm once the repo is public)."
+      "description": "Opens the repository in a new tab: https://github.com/OscarBarreraGithub/sketchcoded"
     },
     {
       "kind": "link",
@@ -219,10 +190,10 @@
       "y": 0.86,
       "color": "blue",
       "title": "See more projects: science with agents",
-      "description": "Opens the science-with-agents project page: https://sketchcoded.com/projects/science-with-agents (placeholder until that page exists)."
+      "description": "Opens Science with Agents in a new tab: https://sciencewithagents.com"
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-board-sections",
       "screenId": "board",
       "x": 0.12,
@@ -232,7 +203,7 @@
       "description": "USED (click to expand) and NEW, with a scroll bar. Dropping an image on the board moves it to USED automatically."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-idea-18",
       "screenId": "board",
       "x": 0.11,
@@ -242,7 +213,7 @@
       "description": "It gets a tape title and a spot on the cork. Dropping moves the image to USED automatically."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-idea-17",
       "screenId": "board",
       "x": 0.08,
@@ -252,7 +223,7 @@
       "description": "Choose files or drop them on the library. PNG, JPEG, WebP, GIF, TIFF and SVG from this computer. Also allow drag to upload."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-board-ideas-panel",
       "screenId": "board",
       "x": 0.13,
@@ -262,7 +233,7 @@
       "description": "Organized ideas beside the library: expand, scroll, and make clear what is still left to do."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-board-name",
       "screenId": "board",
       "x": 0.31,
@@ -272,7 +243,7 @@
       "description": "The board name in the header."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-idea-22",
       "screenId": "board",
       "x": 0.26,
@@ -302,7 +273,7 @@
       "description": "Open the functionality backlog."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-idea-25",
       "screenId": "board",
       "x": 0.77,
@@ -339,7 +310,7 @@
       "y": 0.64,
       "color": "red",
       "title": "Open a screen",
-      "description": "Click a card or its paper title."
+      "description": "Click a card to pick out its threads. Open it with its tape title, arrow or a double-click."
     },
     {
       "kind": "interaction",
@@ -352,7 +323,7 @@
       "description": "Click a yarn or its label."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-idea-20",
       "screenId": "board",
       "x": 0.61,
@@ -362,7 +333,7 @@
       "description": "Numbered pins on each sketch; color-coded yarn between them; labels show the branch summary."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-board-home-marker",
       "screenId": "board",
       "x": 0.79,
@@ -372,7 +343,7 @@
       "description": "A little home icon on the frame where the landing page starts."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-board-resize",
       "screenId": "board",
       "x": 0.42,
@@ -382,7 +353,7 @@
       "description": "Drag a frame corner to resize it."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-board-space",
       "screenId": "board",
       "x": 0.86,
@@ -392,7 +363,7 @@
       "description": "Frames and labels never overlap; the cork leaves room to breathe."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-idea-46",
       "screenId": "screen-editor",
       "x": 0.75,
@@ -402,7 +373,7 @@
       "description": "Click the web drawing; name it and describe the intention."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-editor-pins-list",
       "screenId": "screen-editor",
       "x": 0.67,
@@ -412,7 +383,7 @@
       "description": "The pins on this screen as a list. Make it easy to move and delete them."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-editor-highlight",
       "screenId": "screen-editor",
       "x": 0.31,
@@ -422,7 +393,7 @@
       "description": "When a pin is selected in the list, highlight it on the image."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-editor-colors",
       "screenId": "screen-editor",
       "x": 0.62,
@@ -432,7 +403,7 @@
       "description": "Color swatches with a label you specify."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-editor-fields",
       "screenId": "screen-editor",
       "x": 0.64,
@@ -442,17 +413,17 @@
       "description": "The pin’s title and description fields."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-idea-45",
       "screenId": "screen-editor",
       "x": 0.41,
       "y": 0.85,
       "color": "gold",
       "title": "Web / mobile toggle",
-      "description": "The drawing shows a toggle that swaps the image between web and mobile. The current build shows both side by side. Decide which."
+      "description": "The Web / Mobile toggle swaps between drawings of the same screen; the pins keep a position on each."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-idea-53",
       "screenId": "screen-editor",
       "x": 0.88,
@@ -560,6 +531,35 @@
       "color": "blue"
     }
   ],
+  "assets": [
+    {
+      "id": "af0d400e0db299747d77a762901eb77f2cda625368882b7a8c2c1584d6b3f483",
+      "name": "sketchcoded-landing.png",
+      "file": "af0d400e0db299747d77a762901eb77f2cda625368882b7a8c2c1584d6b3f483.webp",
+      "width": 1650,
+      "height": 1258,
+      "importedAt": "2026-09-25T06:51:45.664Z",
+      "code": "S1"
+    },
+    {
+      "id": "4e26f4cef70d81fd347dc581b7c5dc9c316e4bf58cc1ad400ae19b67f84ef599",
+      "name": "sketchcoded-board.png",
+      "file": "4e26f4cef70d81fd347dc581b7c5dc9c316e4bf58cc1ad400ae19b67f84ef599.webp",
+      "width": 1650,
+      "height": 1258,
+      "importedAt": "2026-09-25T06:51:45.728Z",
+      "code": "S2"
+    },
+    {
+      "id": "f77b4d3b673b975cce4a8dc6a63b122a46fc82ac273ec2f894d580ac205718dd",
+      "name": "sketchcoded-screen-editor.png",
+      "file": "f77b4d3b673b975cce4a8dc6a63b122a46fc82ac273ec2f894d580ac205718dd.webp",
+      "width": 1650,
+      "height": 1258,
+      "importedAt": "2026-09-25T06:51:45.781Z",
+      "code": "S3"
+    }
+  ],
   "ideas": [
     {
       "id": "idea-10",
@@ -605,7 +605,7 @@
       "id": "idea-15",
       "code": "I6",
       "title": "Sketch library",
-      "detail": "Thumbnails of every image with Used counts, a search box, a used/unused filter, and a way to locate placements.",
+      "detail": "Thumbnails in New and Used sections, with Used counts, search and a way to locate placements.",
       "screenId": "board",
       "pinId": null
     },
@@ -652,8 +652,8 @@
     {
       "id": "idea-21",
       "code": "I12",
-      "title": "Planned threads",
-      "detail": "Dashed threads show ideas that lead somewhere but are not pins yet.",
+      "title": "Planned connections in Plan and outline",
+      "detail": "Planned connections are listed in Plan and the text outline. The board draws only real yarn; ideas can wait until they are made into pins.",
       "screenId": "board",
       "pinId": null
     },
@@ -677,7 +677,7 @@
       "id": "idea-24",
       "code": "I15",
       "title": "Save status",
-      "detail": "Saved, saving, unsaved or needs attention beside the board name; a leave warning while unsaved.",
+      "detail": "Saved, saving, unsaved or needs attention beside the board name. Returning to Your boards saves pending edits first; failed saves keep recovery controls open. An arriving agent refresh never overwrites an edit made during the request.",
       "screenId": "board",
       "pinId": null
     },
@@ -701,7 +701,7 @@
       "id": "idea-27",
       "code": "I18",
       "title": "Open a screen",
-      "detail": "Click a card or its paper title.",
+      "detail": "Click a card to pick out its threads. Open it with its tape title, arrow or a double-click.",
       "screenId": "board",
       "pinId": "pin-idea-27"
     },
@@ -845,7 +845,7 @@
       "id": "idea-45",
       "code": "I36",
       "title": "Web / mobile toggle",
-      "detail": "The drawing shows a toggle that swaps the image between web and mobile. The current build shows both side by side. Decide which.",
+      "detail": "The Web / Mobile toggle swaps between drawings of the same screen; the pins keep a position on each.",
       "screenId": "screen-editor",
       "pinId": "pin-idea-45"
     },
@@ -1061,7 +1061,7 @@
       "id": "landing-title",
       "code": "I63",
       "title": "Title and tagline",
-      "detail": "SKETCH CODE. Prompts make apps. Sketching makes your vision. (Alternate: Telling an AI what you want gets you an app. Showing it gets you your vision.)",
+      "detail": "Sketchcoded. Ideas, connected.",
       "screenId": "home",
       "pinId": "pin-landing-title"
     },
@@ -1077,7 +1077,7 @@
       "id": "landing-setup",
       "code": "I65",
       "title": "Set up: tell your AI",
-      "detail": "Tell your AI: “I want to set up github.com/…/sketchcode. Make sure to…”. On mobile this block sits below the example frame.",
+      "detail": "A setup prompt for https://github.com/OscarBarreraGithub/sketchcoded, with requirements and the local address. On mobile this block sits below the example frame.",
       "screenId": "home",
       "pinId": "pin-landing-setup"
     },
@@ -1101,7 +1101,7 @@
       "id": "landing-guide",
       "code": "I68",
       "title": "Read more: Guide",
-      "detail": "Rephrase. Opens the guide: autochecks, .md setup, GitHub.",
+      "detail": "Opens the guide: setup, controls, agent handoff, recovery, structural Review flow and the full checklist agents verify when working on the board or building its site.",
       "screenId": "home",
       "pinId": "pin-landing-guide"
     },
@@ -1109,7 +1109,7 @@
       "id": "landing-github",
       "code": "I69",
       "title": "GitHub",
-      "detail": "Opens the repository in a new tab: https://github.com/OscarBarreraGithub/sketchcoded (address to confirm once the repo is public).",
+      "detail": "Opens the repository in a new tab: https://github.com/OscarBarreraGithub/sketchcoded",
       "screenId": "home",
       "pinId": "pin-landing-github"
     },
@@ -1117,7 +1117,7 @@
       "id": "landing-science",
       "code": "I70",
       "title": "See more projects: science with agents",
-      "detail": "Opens the science-with-agents project page: https://sketchcoded.com/projects/science-with-agents (placeholder until that page exists).",
+      "detail": "Opens Science with Agents in a new tab: https://sciencewithagents.com",
       "screenId": "home",
       "pinId": "pin-landing-science"
     },
@@ -1229,7 +1229,7 @@
       "id": "board-tell-the-agent",
       "code": "I84",
       "title": "Tell the agent, in every view",
-      "detail": "One button per view (board, screen editor, connection editor, plan, ideas panel, outline, review, test flow) copies a prompt naming exactly what you are looking at, with the brief the running app serves for it (/api/projects/:id/brief), the skills (/api/skills) and the rules (/api/checklist.md). The agent reads the live board and writes back through the local API.",
+      "detail": "One button per view (board, screen editor, connection editor, plan, ideas panel, outline, review, test flow) copies a prompt naming exactly what you are looking at, with the brief the running app serves for it (/api/projects/:id/brief), the skills (/api/skills) and the rules (/api/checklist.md). The agent reads the live board and writes back through the local API. Every brief requires verify-the-result: inspect the affected rendered board and delegated pages, then the finished site when building it, against the full general checklist. Report checks and remaining failures.",
       "screenId": "board",
       "pinId": null
     },
@@ -1244,8 +1244,8 @@
     {
       "id": "boards-tutorial",
       "code": "I86",
-      "title": "Interactive tutorial (to do, later)",
-      "detail": "Five or six panels that teach the app, opened from the landing page: the board, pins and yarn, the plan, Review flow, Test flow, and Tell the agent. Not built yet; the user asked to keep it as a to-do.",
+      "title": "Interactive six-panel tutorial",
+      "detail": "Six interactive panels opened from the app landing page: planning, provisional pins, branches, review decisions, Test flow and Tell the agent. Practice controls do not change a board.",
       "screenId": "boards",
       "pinId": null
     },
@@ -1336,6 +1336,38 @@
       "detail": "A frame with no drawing is backlog, so its ways back are not settled. A frame left to the AI is still checked, because its page is the specification.",
       "screenId": "review",
       "pinId": null
+    },
+    {
+      "id": "board-thread-categories",
+      "code": "I98",
+      "title": "Threads by category",
+      "detail": "Filter one category without losing the shape of the board. Main path, Branch, Detour and Way back have named colors, with violet and teal spare. Name or add categories in the same menu.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "board-stable-codes",
+      "code": "I99",
+      "title": "Stable P, S and I codes",
+      "detail": "Frames, sketches and ideas keep short codes. A pin is P3 pin 2. Codes are never reused after deleting their highest numbered item.",
+      "screenId": "board",
+      "pinId": null
+    },
+    {
+      "id": "editor-local-content",
+      "code": "I100",
+      "title": "Content and local-action pins",
+      "detail": "Describe a heading, a copy button or other behavior that stays on the same screen. Content / local action needs no yarn and is not a way onward; the words remain in the specification.",
+      "screenId": "screen-editor",
+      "pinId": null
+    },
+    {
+      "id": "guide-agent-verification",
+      "code": "I101",
+      "title": "Agents verify what they build",
+      "detail": "Explain the two places agents apply the full checklist: affected board views and pages left to the AI, and the finished site constructed from a board. Show how the agent reports browser evidence and unresolved failures. Review flow is structural.",
+      "screenId": "guide",
+      "pinId": null
     }
   ],
   "layout": {
@@ -1405,5 +1437,25 @@
     "olive": "content or behavior note",
     "blue": "link out",
     "gold": "needs a decision"
+  },
+  "standardPages": {
+    "guide": {
+      "shape": "page",
+      "product": "Sketchcoded",
+      "title": "Guide",
+      "lede": "Read more: setup, everyday controls, agent handoff and recovery. Review flow checks the graph. Agents inspect the rendered board and pages left to the AI, and check the finished site when building it, against the full checklist including text overlap and browser zoom.",
+      "nav": [],
+      "primary": null,
+      "blocks": [
+        {
+          "block": "card",
+          "id": "guide-agent-verification",
+          "title": "Agents verify what they build",
+          "body": "Explain the two places agents apply the full checklist: affected board views and pages left to the AI, and the finished site constructed from a board. Show how the agent reports browser evidence and unresolved failures. Review flow is structural.",
+          "action": null
+        }
+      ],
+      "footer": []
+    }
   }
 }

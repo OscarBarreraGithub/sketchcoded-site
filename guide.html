@@ -6,295 +6,430 @@
     <title>Sketchcoded guide</title>
     <meta
       name="description"
-      content="How Sketchcoded works, what its automatic checks look for, how to set it up, and answers to common questions."
+      content="How Sketchcoded works, how agents verify the result, how to set it up, and answers to common questions."
     />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <header class="wrap site-header">
-      <a class="brand" href="./"
-        ><img src="assets/favicon.svg" alt="" />sketchcoded<span>.</span></a
-      >
-      <nav class="site-nav" aria-label="Site">
-        <a href="./#setup">Set up</a>
-        <a href="#faq">FAQ</a>
-        <a data-link="github" href="#">GitHub</a>
-      </nav>
-    </header>
-    <main class="wrap guide">
-      <nav class="guide-nav" aria-label="On this page">
-        <a href="#what">What it is</a>
-        <a href="#example">The example</a>
-        <a href="#setup">Set up</a>
-        <a href="#checks">The automatic checks</a>
-        <a href="#build-rules">Build rules</a>
-        <a href="#export">What the AI gets</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-      <article>
-        <h1>Guide</h1>
-        <p class="lede">
-          Everything the landing page leaves out, in the order you'll need it.
-        </p>
+  <body class="site-document">
+    <div class="site-scroll" tabindex="0" aria-label="Page content">
+      <header class="wrap site-header">
+        <a class="brand" href="./"
+          ><img src="assets/favicon.svg" alt="" />sketchcoded<span>.</span></a
+        >
+        <nav class="site-nav" aria-label="Site">
+          <a href="./#setup">Set up</a>
+          <a href="#faq">FAQ</a>
+          <a data-link="github" href="#">GitHub</a>
+        </nav>
+      </header>
+      <main class="wrap guide">
+        <nav class="guide-nav" aria-label="On this page">
+          <a href="#what">What it is</a>
+          <a href="#example">The example</a>
+          <a href="#setup">Set up</a>
+          <a href="#work">Everyday controls</a>
+          <a href="#agent">Work with your agent</a>
+          <a href="#checks">Structural checks</a>
+          <a href="#build-rules">Build rules</a>
+          <a href="#export">What the AI gets</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <article>
+          <h1>Guide</h1>
+          <p class="lede">
+            Everything the landing page leaves out, in the order you'll need it.
+          </p>
 
-        <section id="what">
-          <h2>What it is</h2>
-          <p>
-            Sketchcoded is a bulletin board for the app you're about to build.
-            You bring drawings of screens as image files. You pin them to a cork
-            board, drop numbered pins on the parts that do something, and tie
-            yarn from a pin to the screen it leads to. Every pin and every yarn
-            carries plain-language notes: what happens, when, and what data is
-            involved.
-          </p>
-          <p>
-            Before you draw, you can write down every idea in the plan, assign
-            each to a screen, and let the app turn them into pins once the
-            drawing exists. Screens can hold a web drawing and a mobile drawing
-            of the same view. When the board is ready, you play it like a paper
-            prototype, run the checks, and export a bundle an AI agent can build
-            from.
-          </p>
-        </section>
+          <section id="what">
+            <h2>What it is</h2>
+            <p>
+              Sketchcoded is a bulletin board for the app you're about to build.
+              You bring drawings of screens as image files. You pin them to a
+              cork board, drop numbered pins on the parts that do something, and
+              tie yarn from a pin to the screen it leads to. Every pin and every
+              yarn carries plain-language notes: what happens, when, and what
+              data is involved.
+            </p>
+            <p>
+              Before you draw, you can write down every idea in the plan, assign
+              each to a screen, and let the app turn them into pins once the
+              drawing exists. Screens can hold a web drawing and a mobile
+              drawing of the same view. When the board is ready, you play it
+              like a paper prototype, run the checks, and export a bundle an AI
+              agent can build from.
+            </p>
+          </section>
 
-        <section id="example">
-          <h2>The example: this website</h2>
-          <p>
-            The board on the landing page is this very website, planned in
-            Sketchcoded: a Home frame with the landing page, the workstation,
-            the screen editor, and planned frames waiting for drawings. A
-            read-only version you can click through online is coming. Until
-            then, the example ships inside the app: your first launch opens the
-            <em>Little chat</em> board, and you can import the Sketchcoded board
-            from the repository's <code>examples</code> once it is published.
-          </p>
-        </section>
+          <section id="example">
+            <h2>The example: this website</h2>
+            <p>
+              <a href="demo">Open the read-only example</a>: the real
+              Sketchcoded board with the author's hand drawings, pins, yarn and
+              planned frames. Click Home and walk it. Pages left to the AI
+              render from their plan; other undrawn pages say what is still
+              waiting. The public copy is refreshed from the local board when
+              the site is published.
+            </p>
+            <p>
+              Your first local launch opens Your boards, with Little chat
+              available as a separate practice board. Try the six-step tutorial
+              there to practice without changing a board.
+            </p>
+          </section>
 
-        <section id="setup">
-          <h2>Set up</h2>
-          <p>
-            Paste this into your AI assistant, or run the commands yourself.
-          </p>
-          <pre data-prompt>Loading…</pre>
-          <p>
-            <button class="button primary" type="button" data-copy-prompt>
-              Copy prompt
-            </button>
-          </p>
-          <h3>By hand</h3>
-          <pre>
-git clone &lt;the repository&gt; sketchcoded
+          <section id="setup">
+            <h2>Set up</h2>
+            <p>
+              Paste this into your AI assistant, or run the commands yourself.
+            </p>
+            <pre data-prompt>Loading…</pre>
+            <p>
+              <button class="button primary" type="button" data-copy-prompt>
+                Copy prompt
+              </button>
+            </p>
+            <h3>By hand</h3>
+            <pre>
+git clone https://github.com/OscarBarreraGithub/sketchcoded.git sketchcoded
 cd sketchcoded
 npm install
 npm run dev</pre>
-          <p>
-            Open <code>http://127.0.0.1:5173</code>. Stop the server with Ctrl+C
-            when you're done.
-          </p>
-          <h3>Set up from the Markdown files</h3>
-          <p>
-            The repository is written to be read by an agent.
-            <code>AGENTS.md</code> holds the working rules,
-            <code>README.md</code> the user guide, and <code>docs/</code> the
-            original brief, the graph contract, the decisions made along the way
-            and the functionality list. An agent that reads those files knows
-            how to run, test and extend the app without asking.
-          </p>
-        </section>
+            <p>
+              Requires Node.js 22.12 or later and npm. Open
+              <code>http://127.0.0.1:5173</code>. Stop the server with Ctrl+C
+              when you're done.
+            </p>
+            <h3>Set up from the Markdown files</h3>
+            <p>
+              The repository is written to be read by an agent.
+              <code>AGENTS.md</code> holds the working rules,
+              <code>README.md</code> the user guide, and <code>docs/</code> the
+              original brief, the graph contract, the decisions made along the
+              way and the functionality list. An agent that reads those files
+              knows how to run, test and extend the app without asking.
+            </p>
+          </section>
 
-        <section id="checks">
-          <h2>The automatic checks</h2>
-          <p>
-            Review flow reads the board as a graph and reports three kinds of
-            finding.
-          </p>
-          <h3>Repair needed</h3>
-          <ul>
-            <li>
-              Broken references: a yarn to a missing screen, a pin with no
-              screen, a missing image.
-            </li>
-            <li>
-              Yarn attached to a detail reference or a link pin, which never
-              navigate.
-            </li>
-            <li>A Back or Dismiss action with a fixed destination.</li>
-          </ul>
-          <h3>Check this path</h3>
-          <ul>
-            <li>
-              No starting screen, an untitled screen, a pin without a name or
-              intent.
-            </li>
-            <li>
-              A pin with no yarn, a screen nobody can reach, a screen with no
-              way onward.
-            </li>
-            <li>
-              Two branches with the same label, or more than one fallback.
-            </li>
-            <li>
-              A planned frame still waiting for its drawing; a pin missing from
-              the mobile layout; a link pin without an address.
-            </li>
-          </ul>
-          <h3>Use your judgment</h3>
-          <ul>
-            <li>
-              Branches described in words that may overlap or leave a case out.
-            </li>
-            <li>
-              A one-way path with no structural way back, such as after logging
-              in.
-            </li>
-            <li>
-              A Back action on a screen you can arrive at without history.
-            </li>
-          </ul>
-          <p>
-            You accept an intentional exception with a reason. The reason
-            travels with the export and reopens if the relevant evidence
-            changes. Nothing in words is executed or proved.
-          </p>
-        </section>
+          <section id="work">
+            <h2>Everyday controls</h2>
+            <p>
+              Start with Plan. Put ideas in the pool or assign them to planned
+              frames. “Placed” means an idea has become a pin, not that the
+              feature has been implemented. Planned connections appear in Plan
+              and the text outline; the board draws real yarn only.
+            </p>
+            <p>
+              Import images, add a folder once, or connect a folder to watch it.
+              New and Used sections keep track of your sketches. Drop a sketch
+              on the board or onto a planned frame. Existing snapshots stay
+              intact when source files change.
+            </p>
+            <p>
+              Drag blank cork to pan, scroll to zoom around the pointer, Shift +
+              scroll to pan, and press F to fit. The zoom slider accepts arrow
+              keys. Browser zoom remains available. Drag a frame to move it or
+              its corner to resize it. A click picks out its connections; its
+              tape title, arrow or a double-click opens the editor.
+            </p>
+            <p>
+              Frames have P codes, sketches S codes and ideas I codes. “P3 pin
+              2” names a pin precisely. Codes stay with their items and are not
+              reused after deletion.
+            </p>
+            <p>
+              Add a pin and describe one intention. Choose Navigation for a
+              route, Content / local action for a heading or behavior that stays
+              here, Link out for an external URL in the description, or Detail
+              reference for a closer illustration. Content and link pins have no
+              yarn. A detail reference never changes app history.
+            </p>
+            <p>
+              Provisional pins let an agent tie real yarn before a drawing
+              exists. When you add the drawing, place each waiting pin. In the
+              editor, Web / Mobile switches between two drawings of the same
+              screen; each pin can have a position on both.
+            </p>
+            <p>
+              Threads filters one category: Main path in red, Branch in gold,
+              Detour in blue, Way back in olive, plus two colors you can name.
+              On a crowded board, select a frame to bring its paths and labels
+              forward. Click the cork to release it.
+            </p>
+            <p>
+              Test flow follows the authored paths. You choose written
+              conditions; they are not evaluated. Back uses app history, Dismiss
+              returns to a dialog's caller, and Start fresh clears app history.
+              Rewind test is a separate testing aid that can undo any test step.
+              Content pins explain their local behavior; external links show
+              their destination.
+            </p>
+            <p>
+              A frame marked Leave it up to the AI gets a conventional page from
+              its title, purpose, ideas and paths, with working redirects. Forms
+              are a prototype and have no backend. A drawing always takes
+              priority. App outline is the searchable alternative to the board;
+              Plan holds the complete backlog.
+            </p>
+          </section>
+          <section id="agent">
+            <h2>Work with your agent</h2>
+            <p>
+              Use Tell the agent in the view you are working on. Paste its
+              three-line prompt into your agent, then add your request
+              underneath. The task brief points to the live board, the relevant
+              instructions and your general checklist. Keep the local app
+              running while the agent reads and writes.
+            </p>
+            <p>
+              For a new board, choose Just the list, Frames and strings, or
+              Built out. The middle choice makes planned frames and provisional
+              pins with their yarn; Built out also leaves each page to the AI so
+              you can walk it immediately and draw the pages you care about.
+            </p>
+            <p>
+              The agent checks affected board views and pages left to the AI
+              against the full checklist. When it constructs the site from the
+              board, it checks the finished implementation too. It must inspect
+              the rendered result and report its checks, including overlap and
+              real browser zoom. The graph checker cannot do that job.
+            </p>
+            <p>
+              Before the final write, the agent asks you to pause editing until
+              the board refreshes. A clean board refreshes automatically;
+              unsaved edits are kept for recovery. Export current work before
+              taking the newer copy if a conflict appears. Reload after the
+              write if the board has not refreshed.
+            </p>
+          </section>
 
-        <section id="build-rules">
-          <h2>Build rules</h2>
-          <p>
-            These rules apply to Sketchcoded itself and to anything built from a
-            Sketchcoded board. They live in the repository's
-            <code>AGENTS.md</code> so an agent follows them without being told.
-          </p>
-          <ul>
-            <li>
-              Nothing grows or shrinks because of what was clicked. Dialogs and
-              panels keep a fixed size; their content scrolls.
-            </li>
-            <li>
-              Nothing overlaps. Labels, pins and frames keep clear of each
-              other.
-            </li>
-            <li>
-              Text stays readable and controls reachable at browser zoom from
-              125% to 250%. Click targets are at least 44px; fields at least
-              48px.
-            </li>
-            <li>
-              Links out are pins with the address in their notes, never separate
-              screens.
-            </li>
-            <li>
-              The page never scrolls; panels do. The board never pans out of
-              sight of its content. Every view works at every zoom.
-            </li>
-            <li>
-              A frame wearing the “Leave it up to the AI” post-it needs no
-              drawing: the builder makes a standard, conventional page from its
-              title, purpose, ideas and yarn. Everything else is built as drawn.
-            </li>
-          </ul>
-        </section>
+          <section id="checks">
+            <h2>Structural checks</h2>
+            <p>
+              Review flow reads the board as a graph and reports three kinds of
+              finding.
+            </p>
+            <h3>Repair needed</h3>
+            <ul>
+              <li>
+                Broken references: a yarn to a missing screen, a pin with no
+                screen, a missing image.
+              </li>
+              <li>
+                Yarn attached to a detail reference, a link pin or a
+                content/local-action pin.
+              </li>
+              <li>A Back or Dismiss action with a fixed destination.</li>
+            </ul>
+            <h3>Check this path</h3>
+            <ul>
+              <li>
+                No starting screen, an untitled screen, a pin without a name or
+                intent.
+              </li>
+              <li>
+                A navigation pin with no yarn, a screen nobody can reach, a
+                screen with no way onward.
+              </li>
+              <li>
+                Two branches with the same label, or more than one fallback.
+              </li>
+              <li>
+                A planned frame still waiting for its drawing unless left to the
+                AI; a pin missing from the mobile layout; a link pin without an
+                address.
+              </li>
+            </ul>
+            <h3>Use your judgment</h3>
+            <ul>
+              <li>
+                Branches described in words that may overlap or leave a case
+                out.
+              </li>
+              <li>
+                A one-way path with no structural way back, such as after
+                logging in.
+              </li>
+              <li>
+                A Back action on a screen you can arrive at without history.
+              </li>
+            </ul>
+            <p>
+              You accept an intentional exception with a reason. The reason
+              travels with the export and reopens if the relevant evidence
+              changes. Nothing in words is executed or proved.
+            </p>
+          </section>
 
-        <section id="export">
-          <h2>What the AI gets</h2>
-          <p>Export produces a ZIP with:</p>
-          <ul>
-            <li>
-              <code>project.json</code>: the canonical graph, layout, library,
-              planning backlog and review decisions.
-            </li>
-            <li><code>schema.json</code>: the JSON Schema for that file.</li>
-            <li>
-              <code>flow.md</code>: the same specification organized by screen,
-              pin, branch and finding, plus the planning outline. Frames left to
-              the AI are marked there.
-            </li>
-            <li>
-              <code>BUILD-CHECKLIST.md</code>: your general build rules, the ones
-              that hold for every app you make; the agent reads them first.
-            </li>
-            <li>
-              <code>skills/</code>: the agent's instructions, one file each:
-              read a board, build rules, describe pins, connect screens, plan
-              the backlog, resolve findings, walk the flow, talk to Sketchcoded.
-            </li>
-            <li>
-              <code>review.json</code>: current findings and accepted exceptions
-              with reasons.
-            </li>
-            <li><code>assets/</code>: the drawings.</li>
-          </ul>
-          <p>
-            You rarely need the export while you work. Every view has a
-            <strong>Tell the agent</strong> button: it copies a three-line
-            prompt naming exactly what you are looking at and the address of a
-            task brief the running app serves for it; the brief carries the
-            task, the skills to read and your rules. Whatever you type under the
-            prompt is part of the task. The agent reads the live board on your
-            computer and writes back through the same local API. A new board is
-            written at the level you choose: just the to-do list, frames with
-            the strings already tied, or built out, where every frame is left
-            to the AI and Test flow walks the whole site: real pages you
-            scroll, buttons that follow your yarn, forms and dialogs, with
-            nothing behind them. You take the post-it off the one or two pages
-            you want to draw yourself.
-          </p>
-        </section>
+          <section id="build-rules">
+            <h2>Build rules</h2>
+            <p>
+              The full general checklist lives in
+              <code>docs/BUILD_CHECKLIST.md</code>, is served at
+              <code>/api/checklist.md</code> and ships as
+              <code>BUILD-CHECKLIST.md</code> in every export. Each task brief
+              requires the agent to follow <code>verify-the-result</code>. These
+              requirements apply both to board authoring, including pages left
+              to the AI, and to the finished site. The agent reports what passed
+              and what remains unverified.
+            </p>
+            <ul>
+              <li>
+                Nothing grows or shrinks because of what was clicked. Dialogs
+                and panels keep a fixed size; their content scrolls.
+              </li>
+              <li>
+                Nothing overlaps. Labels, pins and frames keep clear of each
+                other.
+              </li>
+              <li>
+                Text stays readable and controls reachable at real browser zoom
+                of 125%, 150%, 200% and 250%, at both 1440×900 and 1280×720.
+                Every affected view is checked. Click targets are at least 44px;
+                fields at least 48px.
+              </li>
+              <li>
+                Every scrolling region has a visible scrollbar and a More below
+                hint until the end. Text is at least 12px; long notes stay
+                readable.
+              </li>
+              <li>
+                The page never scrolls; panels do. The board never pans out of
+                sight of its content. Every view works at every zoom.
+              </li>
+              <li>
+                A frame wearing the “Leave it up to the AI” post-it needs no
+                drawing: the builder makes a standard, conventional page from
+                its title, purpose, ideas and yarn. Everything else is built as
+                drawn.
+              </li>
+            </ul>
+          </section>
 
-        <section id="faq">
-          <h2>FAQ</h2>
-          <details class="faq">
-            <summary>Does it need an API key?</summary>
+          <section id="export">
+            <h2>What the AI gets</h2>
+            <p>Export produces a ZIP with:</p>
+            <ul>
+              <li>
+                <code>project.json</code>: the canonical graph, layout, library,
+                planning backlog and review decisions.
+              </li>
+              <li><code>schema.json</code>: the JSON Schema for that file.</li>
+              <li>
+                <code>flow.md</code>: the same specification organized by
+                screen, pin, branch and finding, plus the planning outline.
+                Frames left to the AI are marked there.
+              </li>
+              <li>
+                <code>BUILD-CHECKLIST.md</code>: your general build rules, the
+                ones that hold for every app you make; the agent reads them
+                first.
+              </li>
+              <li>
+                <code>skills/</code>: the agent's instructions, one file each:
+                read a board, build rules, describe pins, connect screens, plan
+                the backlog, resolve findings, walk the flow, talk to
+                Sketchcoded, start a board and verify the result.
+              </li>
+              <li>
+                <code>review.json</code>: current findings and accepted
+                exceptions with reasons.
+              </li>
+              <li><code>assets/</code>: the drawings.</li>
+            </ul>
             <p>
-              No. Nothing calls a model. Tell the agent hands one task at a time
-              to whichever agent you use, and the export is the full handoff.
+              You rarely need the export while you work. Every view has a
+              <strong>Tell the agent</strong> button: it copies a three-line
+              prompt naming exactly what you are looking at and the address of a
+              task brief the running app serves for it; the brief carries the
+              task, the skills to read and your rules. Whatever you type under
+              the prompt is part of the task. The agent reads the live board on
+              your computer and writes back through the same local API. A new
+              board is written at the level you choose: just the to-do list,
+              frames with the strings already tied, or built out, where every
+              frame is left to the AI and Test flow walks the whole site: real
+              pages you scroll, buttons that follow your yarn, forms and
+              dialogs, with nothing behind them. You take the post-it off the
+              one or two pages you want to draw yourself.
             </p>
-          </details>
-          <details class="faq">
-            <summary>Where are my files?</summary>
-            <p>
-              In a <code>.drawcode</code> folder next to the app: one JSON file
-              per board and a copy of each image. The folder you connect is read
-              only.
-            </p>
-          </details>
-          <details class="faq">
-            <summary>Can I use photos of paper?</summary>
-            <p>
-              Yes, as image files on your computer: PNG, JPEG, WebP, GIF, TIFF
-              or SVG. There is no phone capture.
-            </p>
-          </details>
-          <details class="faq">
-            <summary>Is there a mobile app?</summary>
-            <p>
-              No. Sketchcoded runs in a desktop browser. You can design mobile
-              layouts for your own app: each screen can hold a web drawing and a
-              mobile drawing.
-            </p>
-          </details>
-          <details class="faq">
-            <summary>How does the AI part work?</summary>
-            <p>
-              You export the board and give the bundle to an agent. The bundle
-              is written for that reader: a canonical graph, a readable
-              specification, the images, and the decisions you made in review.
-            </p>
-          </details>
-          <details class="faq">
-            <summary>Is it open source?</summary>
-            <p>The source is on <a data-link="github" href="#">GitHub</a>.</p>
-          </details>
-        </section>
-      </article>
-    </main>
-    <footer class="wrap site-footer">
-      <span>Sketchcoded. Ideas, connected.</span>
-      <span
-        ><a href="./">Home</a> · <a data-link="github" href="#">Source</a></span
-      >
-    </footer>
+          </section>
+
+          <section id="faq">
+            <h2>FAQ</h2>
+            <details class="faq">
+              <summary>How do I recover unsaved work?</summary>
+              <p>
+                Keep the tab open if saving fails. Restart the local server if
+                needed, then retry. For a conflict, Export current work before
+                taking the newer copy; importing that ZIP creates a separate
+                board. Saved files also have a previous-version .json.bak
+                backup. Stop the server before manually restoring it, and
+                preserve both copies.
+              </p>
+            </details>
+            <details class="faq">
+              <summary>Does it need an API key?</summary>
+              <p>
+                No. Nothing calls a model. Tell the agent hands one task at a
+                time to whichever agent you use, and the export is the full
+                handoff.
+              </p>
+            </details>
+            <details class="faq">
+              <summary>Where are my files?</summary>
+              <p>
+                In a <code>.drawcode</code> folder next to the app: one JSON
+                file per board and a copy of each image. The folder you connect
+                is read only.
+              </p>
+            </details>
+            <details class="faq">
+              <summary>Can I use photos of paper?</summary>
+              <p>
+                Yes, as image files on your computer: PNG, JPEG, WebP, GIF,
+                AVIF, TIFF or SVG. There is no phone capture.
+              </p>
+            </details>
+            <details class="faq">
+              <summary>Is there a mobile app?</summary>
+              <p>
+                No. Sketchcoded runs in a desktop browser. You can design mobile
+                layouts for your own app: each screen can hold a web drawing and
+                a mobile drawing.
+              </p>
+            </details>
+            <details class="faq">
+              <summary>How does the AI part work?</summary>
+              <p>
+                Use Tell the agent for changes to the live board. Export a ZIP
+                when you want a portable specification for building the app or
+                keeping a backup. Sketchcoded itself does not call a model or
+                build the production app: your outside agent follows the board,
+                its instructions and the checklist.
+              </p>
+            </details>
+            <details class="faq">
+              <summary>Is it open source?</summary>
+              <p>The source is on <a data-link="github" href="#">GitHub</a>.</p>
+            </details>
+          </section>
+        </article>
+      </main>
+      <footer class="wrap site-footer">
+        <span>Sketchcoded. Ideas, connected.</span>
+        <span
+          ><a href="./">Home</a> ·
+          <a data-link="github" href="#">Source</a></span
+        >
+      </footer>
+    </div>
+    <button
+      class="site-scroll-hint"
+      type="button"
+      aria-label="Scroll for more content"
+    >
+      More below ↓
+    </button>
     <script src="links.js"></script>
   </body>
 </html>
