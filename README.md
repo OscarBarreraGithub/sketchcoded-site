@@ -10,7 +10,7 @@ The public landing page, guide and read-only example for Sketchcoded. Static HTM
 - `example/board.json` and `example/art/`: a committed snapshot of an authored board. The bundled example works without the local app or the original author's data.
 - `assets/`: local images, icons and fonts. Fonts are not loaded from third parties.
 - `_headers`: Cloudflare Pages cache and safety headers. Adapt these if another host uses a different format.
-- `.assetsignore`: files excluded by the Cloudflare deployment command.
+- `tools/stage-site.mjs`: copies only public website files into `.site-dist/` for deployment. Repository notes, maintenance tools and local configuration stay out of the published site.
 
 The official example contains the author's original drawings of Sketchcoded. Do not replace them with agent-invented artwork. For a fork, choose a board and drawings you are authorized to publish.
 
@@ -40,18 +40,24 @@ The defaults are `http://127.0.0.1:5173` and the board named `Sketchcoded`, for 
 
 The tool reads `/api/projects/:id/example`, copies the stored drawings and writes the same standard-page descriptions used by Test flow. It preserves the old example if a request fails. Review the generated files before committing and deploying them: source-folder paths are stripped by the app, but board descriptions and drawings are public content. No drawings or routes are invented by the exporter.
 
-Run exporter regressions with `node --test tools/make-example.test.mjs`.
+Run exporter and publishing regressions with `node --test`.
 
 ## Deploy with your own account
 
-Any static host can serve the public HTML, CSS, JavaScript, `assets/` and `example/` files. Preserve the assets' relative paths. Cloudflare Pages is one option:
+Any static host can serve the public HTML, CSS, JavaScript, `assets/` and `example/` files. Stage those files with Node 22.12 or later:
+
+```sh
+node tools/stage-site.mjs
+```
+
+Upload the contents of `.site-dist/`, preserving relative paths. This is a file-copy step, not a frontend build. Use the staged directory rather than the repository root: Pages does not honor the old `.assetsignore` file. Cloudflare Pages is one option:
 
 1. Install or run Wrangler, authenticate to the intended account with `wrangler login`, and verify it with `wrangler whoami`.
 2. Create or select your own Pages project. For a new project, run `wrangler pages project create YOUR_PROJECT_NAME` and choose its production branch.
 3. From this repository, publish with your chosen project and branch:
 
    ```sh
-   wrangler pages deploy . --project-name YOUR_PROJECT_NAME --branch main
+   wrangler pages deploy .site-dist --project-name YOUR_PROJECT_NAME --branch main
    ```
 
 Choose the project explicitly; no account credentials or hosting project are bundled. The official site at sketchcoded.com belongs to its maintainers; a fork uses its own project and domain. Connecting a custom domain is a separate hosting task. Preserve any existing email DNS records, including MX and SPF, and keep tokens and local Wrangler state out of Git.
@@ -61,3 +67,5 @@ Choose the project explicitly; no account credentials or hosting project are bun
 The 2026-09-28 review checked the homepage, guide and demo at actual Chromium tab zoom of 125%, 150%, 200% and 250%, at 1440×900 and 1280×720. The site uses fixed shells with scrolling panels. The app repository's `docs/REVIEW_2026-09-28.md` records navigation and layout evidence. Recheck affected pages after visual changes.
 
 The portability follow-up passed the exporter regression (custom board ID and port, duplicate names, invalid asset paths and failed downloads), plus 16 homepage/guide checks across both laptop sizes and all four zoom levels. Setup commands and links follow a substituted fork configuration. Code wraps within the guide, and the scroll hint has a reserved rail so it cannot cover text. No browser runtime errors were reported.
+
+The publishing regression verifies that staging excludes repository notes, tool scripts, local configuration and stale deployment files.

@@ -3,3 +3,7 @@ Thumbs.db
 .wrangler/
 
 .example-*/
+
+.site-dist/
+node_modules/
+.env*
