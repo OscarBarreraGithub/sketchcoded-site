@@ -90,15 +90,29 @@
               </button>
             </p>
             <h3>By hand</h3>
-            <pre>
-git clone https://github.com/OscarBarreraGithub/sketchcoded.git sketchcoded
-cd sketchcoded
-npm install
-npm run dev</pre>
+            <pre data-setup-commands>Loading setup commands…</pre>
             <p>
-              Requires Node.js 22.12 or later and npm. Open
-              <code>http://127.0.0.1:5173</code>. Stop the server with Ctrl+C
+              Requires Node.js 22.12 or later and npm. These commands work on
+              macOS, Windows and Linux. Open the address printed by the server
+              (normally <code>http://127.0.0.1:5173</code>). Stop it with Ctrl+C
               when you're done.
+            </p>
+            <h3>Choose a port or storage folder</h3>
+            <p>
+              Use <code>npm run dev -- --port 0</code> to choose an available
+              port, or supply a number such as <code>5180</code>. Add
+              <code>--data-dir "./my boards"</code> to choose a storage folder.
+              Without that option, projects stay in <code>.drawcode/</code>
+              inside the checkout. Run one server per data folder. No account,
+              API key or particular computer username is required.
+            </p>
+            <h3>Move to another computer</h3>
+            <p>
+              Export a project ZIP and import it in the new installation. It
+              carries the drawings, plan, checklist and agent instructions.
+              Local source-folder paths are excluded; reconnect folders on the
+              new computer if you want to refresh their images. The repository
+              README also explains how to transfer the complete data folder.
             </p>
             <h3>Set up from the Markdown files</h3>
             <p>

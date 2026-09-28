@@ -1,48 +1,63 @@
 # Sketchcoded site
 
-The public landing page for [Sketchcoded](../sketchcoded), the local app that turns sketches into a connected, playable app plan. Static HTML and CSS, no build step.
+The public landing page, guide and read-only example for Sketchcoded. Static HTML, CSS and JavaScript; no build step, account or backend is needed to view it.
 
-- `index.html`: the landing page as drawn on 2026-09-25: name and tagline, the example frame, the setup prompt with a copy button, the runs-local line, guide, GitHub and projects links. On narrow screens the setup block sits below the example frame.
-- `guide.html`: what it is, the example, set up, everyday controls, live agent work, structural checks, agent-led build verification, what the AI gets, and an FAQ.
-- `links.js`: every external address in one place. The setup prompt is generated from the GitHub address so they never drift.
-- `styles.css`: the app's palette and type (DM Sans, Newsreader, Caveat), bundled in `assets/fonts` so the page loads nothing from third parties.
-- `demo.html`, `demo.css`, `demo.js`: the example board, read only and public. The cork board with its frames, pins and coloured yarn: pan it, zoom it, drag a frame, and click any screen to walk its flow from there. Nothing is editable and nothing is saved, so a reload puts every frame back.
-- `tools/make-example.mjs`, `example/board.json`, `example/art/*`: the example is **the real Sketchcoded board**, with its own hand drawings, pins and yarn, taken straight from the running app:
+## Files and configuration
 
-  ```sh
-  node tools/make-example.mjs                 # the board named Sketchcoded on localhost:5173
-  node tools/make-example.mjs --board "Name"  # a different board
-  ```
+- `index.html`, `guide.html` and `styles.css`: the landing page and guide.
+- `links.js`: the public repository, projects page and demo addresses. Both the setup prompt and manual clone commands are generated from this configuration. A fork can replace these links without changing application code.
+- `demo.html`, `demo.css` and `demo.js`: a read-only board and flow walker. Temporary frame movement resets on reload.
+- `example/board.json` and `example/art/`: a committed snapshot of an authored board. The bundled example works without the local app or the original author's data.
+- `assets/`: local images, icons and fonts. Fonts are not loaded from third parties.
+- `_headers`: Cloudflare Pages cache and safety headers. Adapt these if another host uses a different format.
+- `.assetsignore`: files excluded by the Cloudflare deployment command.
 
-  It reads the app’s `/api/projects/:id/example` snapshot, copies the drawings and writes the board as JSON, including the same standard-page descriptions Test flow renders. Run it when the board changes and commit what it writes; visitors get the committed files, so there is still no build step. Nothing is invented: the frames, the drawings, the pins and their words, the yarn and the colour names are the user's. Frames left to the AI render a conventional page; other frames without a drawing show what they are waiting for, because that is what a board looks like while it is being made.
+The official example contains the author's original drawings of Sketchcoded. Do not replace them with agent-invented artwork. For a fork, choose a board and drawings you are authorized to publish.
 
-- `_headers`: cache and safety headers for Cloudflare Pages. `.assetsignore` keeps this repository's own files out of the deployment.
-- `assets/board.png`: the example image on the landing page.
+## Work locally
 
-## Work on it
-
-Open `index.html` in a browser, or serve the folder:
+Clone this repository into any directory; it does not need to be beside the app repository. Serve the directory with a static HTTP server. For example, with Python 3 installed:
 
 ```sh
-python3 -m http.server 8080
+python3 -m http.server 8080 --bind 127.0.0.1
 ```
 
-Keep the copy consistent with the app repository's `README.md` and `docs/FUNCTIONALITY.md`. When the GitHub repository or the projects page moves, change `links.js` only.
+On Windows, the equivalent command is `py -3 -m http.server 8080 --bind 127.0.0.1`. Open http://127.0.0.1:8080. Serving over HTTP is needed for the demo to fetch its board JSON. Stop the server with Ctrl+C when finished.
 
-## Deploy
+Keep public copy consistent with the app's README and `docs/FUNCTIONALITY.md`. The app's general build checklist also applies to this site. Keep documentation as edited requirements and instructions, without raw conversation transcripts or personal environment details.
 
-The site is a Cloudflare Pages project called `sketchcoded`, served at
-[sketchcoded.com](https://sketchcoded.com) and www, with `sketchcoded.pages.dev` as its own
-address. The domain is registered at Namecheap and uses Cloudflare's nameservers
-(`ophelia.ns.cloudflare.com`, `razvan.ns.cloudflare.com`); Namecheap's email forwarding records
-(five MX and the SPF TXT) were carried over and still work.
+## Update the example
+
+Optional: run the local Sketchcoded app with the intended board, then use Node 22.12 or later:
 
 ```sh
-wrangler pages deploy . --project-name sketchcoded --branch main
+node tools/make-example.mjs --help
+node tools/make-example.mjs --base http://127.0.0.1:5180 --board "My board"
+node tools/make-example.mjs --base http://127.0.0.1:5180 --board-id "board-id-from-the-app"
 ```
 
-Any other static host works too: copy the folder as it is.
+The defaults are `http://127.0.0.1:5173` and the board named `Sketchcoded`, for the official example. Use the actual address printed by your app and your board name or ID. Duplicate names require `--board-id`. A fresh app installation does not contain the official source board; the committed public snapshot remains available without it.
+
+The tool reads `/api/projects/:id/example`, copies the stored drawings and writes the same standard-page descriptions used by Test flow. It preserves the old example if a request fails. Review the generated files before committing and deploying them: source-folder paths are stripped by the app, but board descriptions and drawings are public content. No drawings or routes are invented by the exporter.
+
+Run exporter regressions with `node --test tools/make-example.test.mjs`.
+
+## Deploy with your own account
+
+Any static host can serve the public HTML, CSS, JavaScript, `assets/` and `example/` files. Preserve the assets' relative paths. Cloudflare Pages is one option:
+
+1. Install or run Wrangler, authenticate to the intended account with `wrangler login`, and verify it with `wrangler whoami`.
+2. Create or select your own Pages project. For a new project, run `wrangler pages project create YOUR_PROJECT_NAME` and choose its production branch.
+3. From this repository, publish with your chosen project and branch:
+
+   ```sh
+   wrangler pages deploy . --project-name YOUR_PROJECT_NAME --branch main
+   ```
+
+Choose the project explicitly; no account credentials or hosting project are bundled. The official site at sketchcoded.com belongs to its maintainers; a fork uses its own project and domain. Connecting a custom domain is a separate hosting task. Preserve any existing email DNS records, including MX and SPF, and keep tokens and local Wrangler state out of Git.
 
 ## Verification
 
-The 2026-09-28 review follow-up checks the homepage, guide and public walk at actual Chromium tab zoom of 125%, 150%, 200% and 250% at 1440×900 and 1280×720. The site uses fixed shells with explicit scrolling panels. External links, content pins, generated pages, authored history and independent test rewind are covered in the app’s review record. See the app repository’s `docs/REVIEW_2026-09-28.md` for results.
+The 2026-09-28 review checked the homepage, guide and demo at actual Chromium tab zoom of 125%, 150%, 200% and 250%, at 1440×900 and 1280×720. The site uses fixed shells with scrolling panels. The app repository's `docs/REVIEW_2026-09-28.md` records navigation and layout evidence. Recheck affected pages after visual changes.
+
+The portability follow-up passed the exporter regression (custom board ID and port, duplicate names, invalid asset paths and failed downloads), plus 16 homepage/guide checks across both laptop sizes and all four zoom levels. Setup commands and links follow a substituted fork configuration. Code wraps within the guide, and the scroll hint has a reserved rail so it cannot cover text. No browser runtime errors were reported.

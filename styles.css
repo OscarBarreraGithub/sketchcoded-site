@@ -494,7 +494,8 @@ details.faq p {
   overflow: hidden;
 }
 .site-scroll {
-  height: 100%;
+  /* Keep a fixed rail for the hint so it never covers reading content. */
+  height: calc(100% - 56px);
   overflow-y: scroll;
   overflow-x: hidden;
   scrollbar-gutter: stable;
@@ -511,7 +512,7 @@ details.faq p {
 }
 .site-scroll-hint {
   position: fixed;
-  bottom: 12px;
+  bottom: 6px;
   right: 24px;
   z-index: 10;
   min-height: 44px;
@@ -536,6 +537,11 @@ details.faq p {
 }
 .guide article {
   min-width: 0;
+}
+.guide pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow: visible;
 }
 .guide p,
 .guide li {
