@@ -12,7 +12,6 @@ export async function stageSite(
   await mkdir(destination, { recursive: true });
   for (const name of [
     "index.html",
-    "guide.html",
     "404.html",
     "styles.css",
     "links.js",
@@ -20,6 +19,7 @@ export async function stageSite(
     "demo.css",
     "demo.js",
     "_headers",
+    "_redirects",
     "assets",
     "example",
   ])

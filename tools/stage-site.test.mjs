@@ -17,7 +17,6 @@ test("publishing contains only public files and removes stale staged content", a
   try {
     const files = [
       "index.html",
-      "guide.html",
       "404.html",
       "styles.css",
       "links.js",
@@ -25,6 +24,7 @@ test("publishing contains only public files and removes stale staged content", a
       "demo.css",
       "demo.js",
       "_headers",
+      "_redirects",
     ];
     for (const file of [...files, "README.md", ".env"])
       await writeFile(path.join(source, file), file);

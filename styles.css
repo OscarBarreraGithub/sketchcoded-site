@@ -92,29 +92,12 @@ a {
 }
 /* The space belongs after the logo only, so the red full stop stays on the name. */
 .brand img {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
+  width: 38px;
+  height: 38px;
+  margin-right: 8px;
 }
 .brand span {
   color: var(--red);
-}
-.site-nav {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-.site-nav a {
-  text-decoration: none;
-  padding: 12px 14px;
-  border-radius: 8px;
-  font-weight: 500;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-}
-.site-nav a:hover {
-  background: #ecefe4;
 }
 /* Hero */
 .hero {
@@ -147,6 +130,9 @@ a {
   color: var(--muted);
   margin-top: 18px;
   max-width: 46ch;
+}
+.lede + .lede {
+  margin-top: 12px;
 }
 /* Example frame */
 .example {
@@ -208,8 +194,7 @@ a {
   gap: 48px;
   align-items: start;
 }
-.setup h2,
-.more h2 {
+.setup h2 {
   font: 400 30px/1.15 var(--serif);
   margin-bottom: 14px;
 }
@@ -225,8 +210,7 @@ a {
   text-transform: uppercase;
   color: var(--muted);
 }
-.prompt-box p[data-prompt],
-.guide pre[data-prompt] {
+.prompt-box p[data-prompt] {
   font:
     16px/1.6 ui-monospace,
     SFMono-Regular,
@@ -292,32 +276,48 @@ a {
   color: var(--muted);
   font-size: 16px;
 }
-/* More */
-.more {
-  padding: 8px 0 64px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+/* Guidelines: our rules for web design, compact, at the bottom of the home page. */
+.guidelines {
+  padding: 8px 0 56px;
+  scroll-margin-top: 24px;
+  max-width: 820px;
 }
-.card {
-  background: #fffef8;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.guidelines h2 {
+  font: 400 30px/1.15 var(--serif);
+  margin-bottom: 8px;
 }
-.card h3 {
-  font: 600 18px var(--sans);
-}
-.card p {
+.guidelines-lead,
+.guidelines-more {
   color: var(--muted);
   font-size: 16px;
-  flex: 1;
+  max-width: 760px;
 }
-.card .button {
-  align-self: flex-start;
+.guidelines ul {
+  list-style: none;
+  padding: 0;
+  margin: 28px 0;
+  display: grid;
+  gap: 24px;
+}
+.guidelines li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #4a5346;
+}
+.guidelines li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.65em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+}
+.guidelines li b {
+  color: var(--ink);
 }
 .not-found {
   padding: 64px 0;
@@ -336,126 +336,6 @@ a {
   gap: 12px;
   margin-top: 28px;
 }
-.site-footer {
-  border-top: 1px solid var(--line);
-  padding: 24px 0 40px;
-  color: var(--muted);
-  font-size: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 24px;
-  justify-content: space-between;
-}
-.site-footer a {
-  text-decoration: none;
-}
-.site-footer a:hover {
-  text-decoration: underline;
-}
-/* Guide */
-.guide {
-  padding: 48px 0 64px;
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 48px;
-}
-.guide-nav {
-  position: sticky;
-  top: 24px;
-  align-self: start;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.guide-nav a {
-  text-decoration: none;
-  padding: 10px 12px;
-  border-radius: 8px;
-  color: var(--muted);
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-}
-.guide-nav a:hover {
-  background: #ecefe4;
-  color: var(--ink);
-}
-.guide article h1 {
-  font: 400 44px/1.1 var(--serif);
-  margin-bottom: 8px;
-}
-.guide article > p.lede {
-  margin-bottom: 32px;
-}
-.guide section {
-  padding: 24px 0;
-  border-top: 1px solid var(--line);
-  scroll-margin-top: 24px;
-}
-.guide h2 {
-  font: 400 28px/1.2 var(--serif);
-  margin-bottom: 12px;
-}
-.guide h3 {
-  font: 600 17px var(--sans);
-  margin: 18px 0 6px;
-}
-.guide p,
-.guide li {
-  color: #4a5346;
-}
-.guide p + p {
-  margin-top: 12px;
-}
-.guide ul,
-.guide ol {
-  padding-left: 22px;
-  display: grid;
-  gap: 6px;
-  margin: 8px 0;
-}
-.guide code {
-  font:
-    16px ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    monospace;
-  background: #f3f4ec;
-  padding: 2px 6px;
-  border-radius: 5px;
-}
-.guide pre {
-  background: #f3f4ec;
-  border-radius: 10px;
-  padding: 14px 16px;
-  overflow: auto;
-  font:
-    16px/1.6 ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    monospace;
-}
-.guide pre[data-prompt] {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-details.faq {
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 0 16px;
-  margin: 8px 0;
-  background: #fffef8;
-}
-details.faq summary {
-  cursor: pointer;
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-  font-weight: 600;
-}
-details.faq p {
-  padding: 0 0 14px;
-}
 /* Mobile: one column; the setup block sits below the example frame, as drawn. */
 @media (max-width: 860px) {
   .site-header {
@@ -463,9 +343,6 @@ details.faq p {
     align-items: flex-start;
     gap: 6px;
     padding-bottom: 14px;
-  }
-  .site-nav {
-    margin-left: -14px;
   }
   .hero,
   .setup {
@@ -479,37 +356,37 @@ details.faq p {
   .setup {
     padding-top: 0;
   }
-  .more {
-    grid-template-columns: 1fr;
-  }
-  .guide {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .guide-nav {
-    position: static;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .example figure {
     transition: none;
   }
 }
-
 /* The source link stands on its own under the setup prompt, centred, with the mark. */
+/* Beside the prompt: how ideas become the plan, running locally, then the source and the sister
+   projects. */
+.setup-note {
+  color: var(--muted);
+  margin-bottom: 20px;
+  max-width: 46ch;
+}
+.setup-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 20px;
+}
+.setup-links .button {
+  min-height: 44px;
+  text-decoration: none;
+}
 .github-button {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  width: fit-content;
-  margin: 16px auto 0;
-  min-height: 44px;
-  text-decoration: none;
 }
-
 /* A fixed window and an explicit scrolling reading panel. */
 .site-document {
   height: 100dvh;
@@ -549,28 +426,4 @@ details.faq p {
 }
 .site-scroll-hint[hidden] {
   display: none;
-}
-.guide-nav a,
-.site-nav a,
-.site-footer a {
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-}
-.guide article {
-  min-width: 0;
-}
-.guide pre {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  overflow: visible;
-}
-.guide p,
-.guide li {
-  overflow-wrap: anywhere;
-}
-@media (max-height: 500px) {
-  .guide-nav {
-    position: static;
-  }
 }

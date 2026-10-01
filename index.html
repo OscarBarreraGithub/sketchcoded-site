@@ -22,14 +22,8 @@
     <div class="site-scroll" tabindex="0" aria-label="Page content">
       <header class="wrap site-header">
         <a class="brand" href="./"
-          ><img src="assets/favicon.svg" alt="" />sketchcoded<span>.</span></a
+          ><img src="assets/logo.svg" alt="" />sketchcoded<span>.</span></a
         >
-        <nav class="site-nav" aria-label="Site">
-          <a data-link="demo" href="demo.html">Example</a>
-          <a href="guide.html">Guide</a>
-          <a href="guide.html#faq">FAQ</a>
-          <a data-link="github" href="#">GitHub</a>
-        </nav>
       </header>
 
       <main class="wrap">
@@ -41,9 +35,16 @@
             </p>
             <p class="lede">
               Draw the screens of the app you're imagining. Pin them to a board,
-              tie them together with yarn, and write what each part should do in
-              plain words. Play it, check it, and hand an AI a plan it can build
-              from.
+              tie their logic together with yarn, and write what each part
+              should do in plain words. Click through your sketches like a
+              prototype. A post-it on a frame leaves its design to your agent,
+              so you draw only the pages you care about.
+            </p>
+            <p class="lede">
+              Sketchcoded doesn't build your site. It's the plan your agent
+              builds from, updated live as you both work, so instead of trying
+              to explain that the top-right corner has too much padding, you
+              draw it.
             </p>
           </div>
           <a
@@ -60,7 +61,7 @@
                 height="1000"
               />
               <figcaption>
-                <span>Example: this website, planned on its own board</span>
+                <span>Example: this website!</span>
                 <span class="cta">Open the board →</span>
               </figcaption>
             </figure>
@@ -83,70 +84,90 @@
                 Windows or Linux.
               </p>
             </div>
-            <a class="button github-button" data-link="github" href="#">
-              <svg
-                viewBox="0 0 16 16"
-                width="17"
-                height="17"
-                aria-hidden="true"
-                fill="currentColor"
-              >
-                <path
-                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
-                />
-              </svg>
-              Source on GitHub
-            </a>
           </div>
-          <div class="local">
-            <div>
-              <strong>Runs on your computer.</strong>
-              <p>
-                Your sketches never leave it. There is no account, no API key
-                and no upload. The folder you point Sketchcoded at stays read
-                only.
-              </p>
+          <div class="setup-side">
+            <p class="setup-note">
+              Ramble about your ideas with your agent. It sorts each one into
+              the plan, on the screen it belongs to, and keeps your rules as a
+              checklist that every build is checked against.
+            </p>
+            <div class="local">
+              <div>
+                <strong>Runs on your computer.</strong>
+                <p>
+                  Your sketches never leave it. There is no account, no API key
+                  and no upload. The folder you point Sketchcoded at stays read
+                  only.
+                </p>
+              </div>
+            </div>
+            <div class="setup-links">
+              <a class="button github-button" data-link="github" href="#">
+                <svg
+                  viewBox="0 0 16 16"
+                  width="17"
+                  height="17"
+                  aria-hidden="true"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+                  />
+                </svg>
+                Source on GitHub
+              </a>
+              <a class="button" data-link="projects" href="#"
+                >See more projects →</a
+              >
             </div>
           </div>
         </section>
 
-        <section class="more" id="more">
-          <div class="card">
-            <h3>Read the guide</h3>
-            <p>
-              How a board becomes a plan, what the automatic checks look for,
-              and how to set up from the repository's Markdown files.
-            </p>
-            <a class="button" href="guide.html">Guide</a>
-          </div>
-          <div class="card">
-            <h3>Look at the code</h3>
-            <p>
-              A local web app: React and TypeScript in front, a small Node
-              server behind, your files on disk.
-            </p>
-            <a class="button" data-link="github" href="#">GitHub</a>
-          </div>
-          <div class="card">
-            <h3>See more projects</h3>
-            <p>
-              Sketchcoded is one of a family of tools for doing careful work
-              with agents.
-            </p>
-            <a class="button" data-link="projects" href="#"
-              >Science with agents →</a
-            >
-          </div>
+        <section class="guidelines" id="guidelines">
+          <h2>Design principles</h2>
+          <p class="guidelines-lead">
+            Here are a few design principles I use myself, and every site made
+            with Sketchcoded follows them by default:
+          </p>
+          <ul>
+            <li>
+              <b>No cute slogans.</b> LLMs love adding them; one kept trying to
+              put “Ideas, connected” all over this site.
+            </li>
+            <li>
+              <b>Every frame has a label,</b> so you can tell your agent exactly
+              what you're working on. And every view has a button that copies a
+              short prompt naming what you're looking at.
+            </li>
+            <li>
+              <b>No overlapping boxes.</b> For some reason, LLMs love building
+              sites out of piles of boxes. We explicitly don't.
+            </li>
+            <li>
+              <b>Works at every zoom,</b> and at normal zoom the text is
+              comfortable to read.
+            </li>
+            <li>
+              <b>The Back button never goes in circles.</b> If I go A → B → C →
+              B → C, the Back button on C takes me to B and then A, not around
+              through C again.
+            </li>
+            <li>
+              <b>No tiny text boxes.</b> I hate the tiny boxes on AI-made sites
+              where you can't scroll up to edit a few lines above. Text you
+              write gets a box that grows with it.
+            </li>
+            <li>
+              <b>Nothing moves because of a click.</b> Picking a tab or an
+              option never resizes the box around it or shifts the page.
+            </li>
+          </ul>
+          <p class="guidelines-more">
+            Read about the rest of the design choices on
+            <a data-link="github" href="#">GitHub</a>.
+          </p>
         </section>
       </main>
-
-      <footer class="wrap site-footer">
-        <span>Sketchcoded. Ideas, connected.</span>
-        <span>
-          <a href="guide.html">Guide</a> · <a href="guide.html#faq">FAQ</a> ·
-          <a data-link="github" href="#">Source</a>
-        </span>
-      </footer>
     </div>
     <button
       class="site-scroll-hint"

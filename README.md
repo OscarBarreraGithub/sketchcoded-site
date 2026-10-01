@@ -1,6 +1,6 @@
 # Sketchcoded site
 
-The landing page, guide and read-only example for [Sketchcoded](https://github.com/OscarBarreraGithub/sketchcoded), published at [sketchcoded.com](https://sketchcoded.com). Static HTML, CSS and JavaScript: no build step and no backend.
+The landing page, with our guidelines for web design at its foot, and the read-only example for [Sketchcoded](https://github.com/OscarBarreraGithub/sketchcoded), published at [sketchcoded.com](https://sketchcoded.com). Static HTML, CSS and JavaScript: no build step and no backend.
 
 ## Run it locally
 
@@ -14,11 +14,11 @@ Then open http://127.0.0.1:8080. On Windows, use `py -3` in place of `python3`.
 
 ## What is here
 
-- `index.html`, `guide.html`, `404.html` and `styles.css`: the pages.
+- `index.html`, `404.html` and `styles.css`: the pages. There is no separate guide; `_redirects` sends the old `/guide` address to the guidelines on the home page.
 - `demo.html`, `demo.css` and `demo.js`: the example, a board you can move around and test the flow on. Nothing is saved; a reload puts it back.
 - `example/`: the board the example shows, exported from the author's own Sketchcoded board with its original drawings. Never replace them with invented artwork; a fork should publish a board it owns.
 - `links.js`: the repository and project addresses, in one place.
-- `assets/`: images and fonts. `assets/favicon.svg` is a copy of the app's logo, and `assets/board.png` is a screenshot of the app; retake it when the app's look changes.
+- `assets/`: images and fonts. `assets/logo.svg` and `assets/favicon.svg` are copies of the app's logo and tab icon, and `assets/board.png` is a screenshot of the app; retake it when the app's look changes.
 
 ## Update the example
 
