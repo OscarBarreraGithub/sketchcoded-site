@@ -650,6 +650,41 @@
 .demo-world.far .card-waiting > * {
   visibility: hidden;
 }
+/* The app's “Leave it up to the AI” post-it, larger, with its strip of tape. It stays at every
+   zoom, since it says what the frame is. */
+.card-post-it {
+  position: relative;
+  max-width: 82%;
+  padding: 0.25em 0.45em 0.35em;
+  background: #fff1a3;
+  color: #5a4a12;
+  font: 600 clamp(24px, calc(22px / var(--board-zoom, 1)), 44px) / 1.05
+    var(--hand);
+  white-space: pre-line;
+  text-align: center;
+  transform: rotate(-3deg);
+  box-shadow: 1px 3px 6px #4f4f3340;
+}
+/* Zoomed far out its words would be too small to read, so it stays as a plain sticker. */
+.demo-world.far .card-post-it {
+  color: transparent;
+}
+/* Pins tied before the drawing wait down the right side, so the post-it keeps clear of them. */
+.card-shot.planned:has(.pin) .card-post-it {
+  max-width: 70%;
+  margin-right: 18%;
+}
+.card-post-it::before {
+  content: "";
+  position: absolute;
+  top: -0.2em;
+  left: 50%;
+  width: 1.6em;
+  height: 0.45em;
+  transform: translateX(-50%) rotate(2deg);
+  background: #ffffff99;
+  box-shadow: 0 1px 2px #4f4f3320;
+}
 .card-shot.planned::after {
   padding-top: 14px;
 }

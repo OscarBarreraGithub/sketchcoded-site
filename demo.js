@@ -153,25 +153,27 @@
         img.height = a.height;
         shotButton.append(img);
       } else {
-        const waiting = ideasOf(screen.id).length;
-        const note = el("span", "card-waiting");
-        note.append(
-          el(
-            "em",
-            null,
-            screen.leftToAi ? "LEFT TO THE AI" : "WAITING FOR A DRAWING",
-          ),
-          el(
-            "b",
-            null,
-            screen.leftToAi
-              ? "A standard page"
-              : waiting
+        // A page left to the AI wears the app's post-it, larger; another undrawn page says what
+        // waits for its drawing.
+        if (screen.leftToAi)
+          shotButton.append(
+            el("span", "card-post-it", "Leave it up\nto the AI"),
+          );
+        else {
+          const waiting = ideasOf(screen.id).length;
+          const note = el("span", "card-waiting");
+          note.append(
+            el("em", null, "WAITING FOR A DRAWING"),
+            el(
+              "b",
+              null,
+              waiting
                 ? `${waiting} ${waiting === 1 ? "idea" : "ideas"} planned`
                 : "Nothing planned yet",
-          ),
-        );
-        shotButton.append(note);
+            ),
+          );
+          shotButton.append(note);
+        }
       }
       pinsOf(screen.id).forEach((pin, index) => {
         // On a drawing, a provisional pin's spot is a placeholder until the user places it.
