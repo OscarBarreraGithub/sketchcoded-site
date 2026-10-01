@@ -37,7 +37,7 @@ node tools/stage-site.mjs
 npx wrangler pages deploy .site-dist --project-name YOUR_PROJECT --branch main
 ```
 
-Deploy `.site-dist/`, which holds only the public files, never the repository itself. Any static host works. Choose the hosting project explicitly, and keep credentials out of Git. When connecting a domain, keep its existing email records (MX and SPF).
+Deploy `.site-dist/`, which holds only the public files, never the repository itself. Staging also adds a fingerprint of each file to the addresses the pages use (`styles.css?v=…`), so visitors never get a new page with an old stylesheet or script. Any static host works. Choose the hosting project explicitly, and keep credentials out of Git. When connecting a domain, keep its existing email records (MX and SPF).
 
 ## Checks
 
