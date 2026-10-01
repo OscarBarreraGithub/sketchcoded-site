@@ -1,9 +1,16 @@
 /** Export an authored board from any local Sketchcoded instance into the public example. */
-import { mkdir, mkdtemp, writeFile, rename, rm } from "node:fs/promises";
+import {
+  mkdir,
+  mkdtemp,
+  readFile,
+  writeFile,
+  rename,
+  rm,
+} from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { parseArgs } from "node:util";
-import { curateExample } from "./curate-example.mjs";
+import { curateExample, unwrittenWants } from "./curate-example.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -13,6 +20,7 @@ export async function makeExample({
   boardId,
   includePlanned = false,
   out = path.join(root, "example"),
+  pages = path.join(root, "tools", "example-pages.json"),
 } = {}) {
   const url = new URL(base);
   if (!["http:", "https:"].includes(url.protocol))
@@ -44,7 +52,18 @@ export async function makeExample({
   for (const key of ["assets", "screens", "pins", "transitions", "ideas"])
     if (!Array.isArray(snapshot[key]))
       throw new Error(`Invalid example snapshot: ${key} is missing.`);
-  const project = includePlanned ? snapshot : curateExample(snapshot);
+  // Which frames the example leaves out, and what each undrawn page should do, in the
+  // author's words (tools/example-pages.json).
+  const settings = await readFile(pages, "utf8").then(JSON.parse, (error) => {
+    if (error.code === "ENOENT") return {};
+    throw error;
+  });
+  const project = curateExample(snapshot, {
+    omit: settings.omit,
+    pages: settings.pages,
+    keepPlanned: includePlanned,
+  });
+  project.unwritten = unwrittenWants(project, settings.pages);
 
   // Download into a sibling staging directory. Failed requests never erase the published copy.
   const stage = await mkdtemp(path.join(path.dirname(out), ".example-"));
@@ -63,9 +82,10 @@ export async function makeExample({
         Buffer.from(await response.arrayBuffer()),
       );
     }
+    const { unwritten, ...board } = project;
     await writeFile(
       path.join(next, "board.json"),
-      `${JSON.stringify(project, null, 2)}\n`,
+      `${JSON.stringify(board, null, 2)}\n`,
     );
     try {
       await rename(out, previous);
@@ -117,7 +137,9 @@ node tools/make-example.mjs --base http://127.0.0.1:5180 --board-id "board-id"
 
 Defaults: app http://127.0.0.1:5173, board named Sketchcoded.
 Use the running app's address and your own board name or ID. No hosting account is needed.
-Isolated, undeveloped planning frames are omitted. Use --include-planned for the full snapshot.`);
+Isolated, undeveloped planning frames are omitted. Use --include-planned for the full snapshot.
+tools/example-pages.json lists frames to leave out (by code) and, for each undrawn page,
+what it should do in the author's words, one line per idea code or "pin N".`);
     } else {
       if (values.board && values["board-id"])
         throw new Error("Choose --board or --board-id, not both.");
@@ -134,6 +156,10 @@ Isolated, undeveloped planning frames are omitted. Use --include-planned for the
       console.log(
         `example: “${board.name}” · ${board.screens.length} frames (${drawn} drawn) · ${board.pins.length} pins · ${board.transitions.length} threads · ${board.ideas.length} ideas · ${board.assets.length} drawings`,
       );
+      if (board.unwritten.length)
+        console.log(
+          `No line in tools/example-pages.json yet (the example shows the title instead):\n  ${board.unwritten.join("\n  ")}`,
+        );
     }
   } catch (error) {
     console.error(error.message);

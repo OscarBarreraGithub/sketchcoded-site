@@ -1,0 +1,42 @@
+{
+  "omit": ["P10"],
+  "pages": {
+    "P4": {
+      "I24": "list every screen once (entry screens, app screens and detail sketches), with a screen reached twice linking back to its first entry so loops stay simple",
+      "I25": "find a title, a pin, a condition or a destination from one search box",
+      "I26": "open a screen for editing straight from its entry",
+      "I27": "center a screen on the board",
+      "I28": "show the ideas each screen still has waiting to be pinned",
+      "pin 1": "take me back to the board from the Board tab"
+    },
+    "P5": {
+      "I29": "let me add an idea at any time: a title, details, the screen it belongs on and where it leads",
+      "I30": "keep unassigned ideas in a pool, with a folder for each screen",
+      "I31": "turn an assigned idea into a pin on the drawing, with its text already written",
+      "I32": "keep placed ideas listed, greyed out with their pin number, so nothing lands on two pages",
+      "I33": "let me move an idea to another screen; a placed idea gives up its pin so it can be placed again",
+      "I34": "put a titled frame on the board before it is drawn, with its ideas listed",
+      "I35": "copy the plan as a Markdown outline for chat, the same outline that ships in flow.md",
+      "pin 1": "take me back to the board from the Board tab"
+    },
+    "P7": {
+      "I45": "require a short version: the label on the yarn and the option in the scenario chooser",
+      "I46": "set how it navigates: open, replace, start fresh, open as a dialog, go back or dismiss",
+      "I47": "say in plain words when it happens; the condition is never executed",
+      "I48": "hold the details and data: behavior, exceptions, states and the information needed",
+      "I49": "mark the fallback branch and pick the yarn's color",
+      "I50": "remove the yarn, with undo from the board",
+      "pin 1": "close and take me back to the board"
+    },
+    "P9": {
+      "I55": "start from an entry screen, or from any screen as a labeled test entry",
+      "I56": "follow a path when I click a pin, and show a scenario chooser with the conditions when a pin has several",
+      "I57": "switch between web and mobile, listing the pins not yet placed on mobile under the drawing",
+      "I58": "rewind the test, as a testing control separate from the app's own Back, which must be drawn",
+      "I59": "open detail references as an enlarged sketch without changing the app's history",
+      "I60": "restart from the chosen screen, and hide the pins to see the sketch clean",
+      "I96": "turn a frame left to the AI into a real page I can walk: a top bar, a heading, a main action, cards from its ideas, fields for a sign-in, a dialog for a modal",
+      "pin 1": "end the test and take me back to the board"
+    }
+  }
+}

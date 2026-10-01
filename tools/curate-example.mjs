@@ -1,15 +1,41 @@
-/** Hide isolated, undeveloped planning frames while preserving every authored route and drawing. */
-export function curateExample(project) {
+/**
+ * Shape a board snapshot into the public example.
+ *
+ * - Frames listed in `omit` (by code) are left out with their pins and ideas. A pin whose only
+ *   path led to one of them stays as a note on its drawing, with its own description.
+ * - Isolated, undeveloped planning frames are hidden unless `keepPlanned` is set. Every authored
+ *   route and drawing is kept.
+ * - A frame without a drawing carries `wants`: what its author wants the page to do, one line per
+ *   idea and per way onward, from `pages` (keyed by frame code, then idea code or "pin N").
+ *   An idea or pin without a written line falls back to its title.
+ */
+export function curateExample(
+  project,
+  { omit = [], pages = {}, keepPlanned = false } = {},
+) {
+  const left = new Set(
+    project.screens
+      .filter((screen) => omit.includes(screen.code))
+      .map((screen) => screen.id),
+  );
+  const kept = {
+    screens: project.screens.filter((screen) => !left.has(screen.id)),
+    pins: project.pins.filter((pin) => !left.has(pin.screenId)),
+    transitions: project.transitions.filter(
+      (transition) => !left.has(transition.target),
+    ),
+  };
   const used = new Set();
-  for (const pin of project.pins) {
+  for (const pin of kept.pins) {
     used.add(pin.screenId);
     if (pin.detailTarget) used.add(pin.detailTarget);
   }
-  for (const transition of project.transitions) {
+  for (const transition of kept.transitions) {
     if (transition.target) used.add(transition.target);
   }
-  const screens = project.screens.filter(
+  const screens = kept.screens.filter(
     (screen) =>
+      keepPlanned ||
       screen.entry ||
       screen.assetId ||
       screen.mobileAssetId ||
@@ -22,22 +48,71 @@ export function curateExample(project) {
       .flatMap((screen) => [screen.assetId, screen.mobileAssetId])
       .filter(Boolean),
   );
-  const pins = project.pins.filter((pin) => ids.has(pin.screenId));
-  const pinIds = new Set(pins.map((pin) => pin.id));
-  return {
-    ...project,
-    screens,
-    pins,
-    transitions: project.transitions.filter((transition) =>
-      pinIds.has(transition.pinId),
+  const transitions = kept.transitions.filter((transition) =>
+    kept.pins.some(
+      (pin) => pin.id === transition.pinId && ids.has(pin.screenId),
     ),
-    ideas: project.ideas.filter((idea) => ids.has(idea.screenId)),
+  );
+  const pins = kept.pins
+    .filter((pin) => ids.has(pin.screenId))
+    .map((pin) => {
+      const lostItsPath =
+        (pin.kind ?? "interaction") === "interaction" &&
+        project.transitions.some((t) => t.pinId === pin.id) &&
+        !transitions.some((t) => t.pinId === pin.id);
+      return lostItsPath ? { ...pin, kind: "annotation" } : pin;
+    });
+  const ideas = project.ideas.filter((idea) => ids.has(idea.screenId));
+  const wants = (screen) => {
+    const lines = pages[screen.code] ?? {};
+    const own = pins.filter((pin) => pin.screenId === screen.id);
+    return [
+      ...ideas
+        .filter((idea) => idea.screenId === screen.id)
+        .map((idea) => ({ text: lines[idea.code] ?? idea.title })),
+      ...own
+        .map((pin, i) => ({ pin, key: `pin ${i + 1}` }))
+        .filter(({ pin }) => transitions.some((t) => t.pinId === pin.id))
+        .map(({ pin, key }) => ({
+          text: lines[key] ?? pin.title,
+          pinId: pin.id,
+        })),
+    ];
+  };
+  const { standardPages, ...rest } = project;
+  return {
+    ...rest,
+    screens: screens.map((screen) =>
+      screen.assetId ? screen : { ...screen, wants: wants(screen) },
+    ),
+    pins,
+    transitions,
+    ideas,
     assets: project.assets.filter((asset) => assets.has(asset.id)),
     layout: Object.fromEntries(
       Object.entries(project.layout ?? {}).filter(([id]) => ids.has(id)),
     ),
-    standardPages: Object.fromEntries(
-      Object.entries(project.standardPages ?? {}).filter(([id]) => ids.has(id)),
-    ),
   };
+}
+
+/** Ideas and ways onward on undrawn frames that have no line written for them in `pages`. */
+export function unwrittenWants(project, pages = {}) {
+  const missing = [];
+  for (const screen of project.screens) {
+    if (screen.assetId) continue;
+    const lines = pages[screen.code] ?? {};
+    for (const idea of project.ideas)
+      if (idea.screenId === screen.id && !lines[idea.code])
+        missing.push(`${screen.code} ${idea.code} “${idea.title}”`);
+    project.pins
+      .filter((pin) => pin.screenId === screen.id)
+      .forEach((pin, i) => {
+        if (
+          project.transitions.some((t) => t.pinId === pin.id) &&
+          !lines[`pin ${i + 1}`]
+        )
+          missing.push(`${screen.code} pin ${i + 1} “${pin.title}”`);
+      });
+  }
+  return missing;
 }

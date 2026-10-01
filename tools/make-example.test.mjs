@@ -25,7 +25,6 @@ const board = {
   pins: [],
   transitions: [],
   ideas: [],
-  standardPages: {},
   layout: {},
 };
 
@@ -87,9 +86,11 @@ test("custom addresses and board IDs work; failures preserve the existing exampl
       "keep this on failure",
     );
     invalidFile = false;
-    const result = await makeExample({ base, boardId: board.id, out });
+    // No settings file: nothing is left out by code and no lines are written.
+    const pages = path.join(root, "no-settings.json");
+    const result = await makeExample({ base, boardId: board.id, out, pages });
     const curated = { ...board, screens: [board.screens[0]] };
-    assert.deepEqual(result, curated);
+    assert.deepEqual(result, { ...curated, unwritten: [] });
     assert.deepEqual(
       JSON.parse(await readFile(path.join(out, "board.json"), "utf8")),
       curated,
@@ -105,11 +106,16 @@ test("custom addresses and board IDs work; failures preserve the existing exampl
       boardId: board.id,
       out,
       includePlanned: true,
+      pages,
     });
-    assert.deepEqual(complete, board);
+    const full = {
+      ...board,
+      screens: [board.screens[0], { ...board.screens[1], wants: [] }],
+    };
+    assert.deepEqual(complete, { ...full, unwritten: [] });
     assert.deepEqual(
       JSON.parse(await readFile(path.join(out, "board.json"), "utf8")),
-      board,
+      full,
     );
   } finally {
     server.closeAllConnections();

@@ -638,7 +638,6 @@
   function show() {
     const screen = shownScreen();
     const a = playerAsset(screen);
-    const built = !a && board.standardPages?.[screen.id];
     frameBox.classList.toggle("planned", !a);
     $("code").textContent = screen.code;
     $("title").textContent = screen.title;
@@ -655,38 +654,13 @@
       shot.src = `example/art/${a.file}`;
       shot.alt = screen.title;
     }
-    frameBox
-      .querySelectorAll(".player-waiting, .standard-page")
-      .forEach((node) => node.remove());
-    if (built) renderStandard(built);
-    else if (!a) {
-      const waiting = ideasOf(screen.id);
-      const panel = el("div", "player-waiting");
-      panel.append(
-        el(
-          "strong",
-          null,
-          screen.leftToAi
-            ? `${screen.title} is left to the AI.`
-            : `${screen.title} has no drawing yet.`,
-        ),
-        el("p", null, screen.purpose || ""),
-      );
-      if (waiting.length) {
-        panel.append(el("span", null, "Planned for this screen:"));
-        const list = el("ul");
-        for (const idea of waiting.slice(0, 9))
-          list.append(el("li", null, idea.title));
-        if (waiting.length > 9)
-          list.append(el("li", "more", `and ${waiting.length - 9} more`));
-        panel.append(list);
-      }
-      frameBox.append(panel);
-    }
+    frameBox.querySelectorAll(".plan-page").forEach((node) => node.remove());
+    if (!a) renderPlan(screen);
     frameBox
       .querySelectorAll(".player-pin, .player-unplaced")
       .forEach((pin) => pin.remove());
-    const pins = built
+    // An undrawn page lists its ways onward among what it should do (renderPlan).
+    const pins = !a
       ? []
       : pinsOf(screen.id).filter(
           (pin) => !details.length || pin.kind === "detail",
@@ -707,7 +681,7 @@
       );
     pins.forEach((pin) => {
       const i = pinsOf(screen.id).findIndex((p) => p.id === pin.id);
-      if (!a || (onMobile ? !pin.mobile : pin.provisional)) {
+      if (onMobile ? !pin.mobile : pin.provisional) {
         const button = el("button", "button", `${i + 1}. ${pin.title}`);
         button.addEventListener("click", () => tryPin(pin));
         unplaced.append(button);
@@ -726,54 +700,42 @@
     sizeFrame();
     playerStage.scrollTop = 0;
     requestAnimationFrame(updateScrollHint);
-    $("note").textContent = built
-      ? "A standard page from the plan. Only the authored paths work."
-      : !a
-        ? "This frame is planned, not drawn yet. That is what a board looks like while it is being made."
-        : pins.length
-          ? "Click a numbered pin to take a path."
-          : "Nothing leads on from here. Step back, or return to the board.";
-    if (!steps && arrivedVia.length)
+    // An undrawn page is only its plan: no note under it.
+    $("note").hidden = !a;
+    $("note").textContent = pins.length
+      ? "Click a numbered pin to take a path."
+      : "Nothing leads on from here. Step back, or return to the board.";
+    if (a && !steps && arrivedVia.length)
       $("note").textContent =
         `Arrived from ${arrivedVia.map((id) => byId(board.screens, id).title).join(" → ")}, the way a visitor gets here. ` +
         $("note").textContent;
   }
 
-  function renderStandard(spec) {
-    const page = el("section", `standard-page shape-${spec.shape}`);
-    const action = (a) => {
-      const b = el("button", "button", a.label);
-      b.type = "button";
-      b.addEventListener("click", () => tryPin(byId(board.pins, a.pinId)));
-      return b;
-    };
-    const nav = el("nav", "standard-nav");
-    for (const a of spec.nav) nav.append(action(a));
-    page.append(
-      el("small", null, spec.product),
-      nav,
-      el("h1", null, spec.title),
-      el("p", null, spec.lede),
-    );
-    if (spec.primary) page.append(action(spec.primary));
-    for (const block of spec.blocks) {
-      if (block.block === "field") {
-        const label = el("label", null, block.label),
-          input = el("input");
-        input.type = block.type;
-        input.placeholder = block.hint?.slice(0, 60) ?? "";
-        label.append(input);
-        page.append(label);
-      } else {
-        const card = el("article");
-        card.append(el("h2", null, block.title), el("p", null, block.body));
-        if (block.action) card.append(action(block.action));
-        page.append(card);
+  /**
+   * A page with no drawing yet, as its author wrote it: a one-line summary, then what they want
+   * the page to do. A line that is a way onward follows its yarn.
+   */
+  function renderPlan(screen) {
+    const page = el("section", "plan-page");
+    if (screen.purpose) page.append(el("p", "plan-summary", screen.purpose));
+    const wants = screen.wants ?? [];
+    if (wants.length) {
+      page.append(el("p", "plan-lead", "I want this page to:"));
+      const list = el("ul");
+      for (const want of wants) {
+        const item = el("li");
+        if (want.pinId) {
+          const go = el("button", "plan-go", want.text);
+          go.type = "button";
+          go.addEventListener("click", () =>
+            tryPin(byId(board.pins, want.pinId)),
+          );
+          item.append(go);
+        } else item.textContent = want.text;
+        list.append(item);
       }
+      page.append(list);
     }
-    const footer = el("footer", "standard-nav");
-    for (const a of spec.footer) footer.append(action(a));
-    page.append(footer);
     frameBox.append(page);
   }
   function tryPin(pin) {

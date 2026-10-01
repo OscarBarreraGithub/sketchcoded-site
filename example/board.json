@@ -27,7 +27,28 @@
       "entry": false,
       "role": "screen",
       "leftToAi": true,
-      "code": "P4"
+      "code": "P4",
+      "wants": [
+        {
+          "text": "list every screen once (entry screens, app screens and detail sketches), with a screen reached twice linking back to its first entry so loops stay simple"
+        },
+        {
+          "text": "find a title, a pin, a condition or a destination from one search box"
+        },
+        {
+          "text": "open a screen for editing straight from its entry"
+        },
+        {
+          "text": "center a screen on the board"
+        },
+        {
+          "text": "show the ideas each screen still has waiting to be pinned"
+        },
+        {
+          "text": "take me back to the board from the Board tab",
+          "pinId": "9cca0724-ef10-4594-9de9-38e20ef7793b"
+        }
+      ]
     },
     {
       "id": "planning",
@@ -37,7 +58,34 @@
       "entry": false,
       "role": "screen",
       "leftToAi": true,
-      "code": "P5"
+      "code": "P5",
+      "wants": [
+        {
+          "text": "let me add an idea at any time: a title, details, the screen it belongs on and where it leads"
+        },
+        {
+          "text": "keep unassigned ideas in a pool, with a folder for each screen"
+        },
+        {
+          "text": "turn an assigned idea into a pin on the drawing, with its text already written"
+        },
+        {
+          "text": "keep placed ideas listed, greyed out with their pin number, so nothing lands on two pages"
+        },
+        {
+          "text": "let me move an idea to another screen; a placed idea gives up its pin so it can be placed again"
+        },
+        {
+          "text": "put a titled frame on the board before it is drawn, with its ideas listed"
+        },
+        {
+          "text": "copy the plan as a Markdown outline for chat, the same outline that ships in flow.md"
+        },
+        {
+          "text": "take me back to the board from the Board tab",
+          "pinId": "2d2b08a2-f0a9-45c0-9059-1b2802ffbb18"
+        }
+      ]
     },
     {
       "id": "screen-editor",
@@ -56,7 +104,31 @@
       "entry": false,
       "role": "modal",
       "leftToAi": true,
-      "code": "P7"
+      "code": "P7",
+      "wants": [
+        {
+          "text": "require a short version: the label on the yarn and the option in the scenario chooser"
+        },
+        {
+          "text": "set how it navigates: open, replace, start fresh, open as a dialog, go back or dismiss"
+        },
+        {
+          "text": "say in plain words when it happens; the condition is never executed"
+        },
+        {
+          "text": "hold the details and data: behavior, exceptions, states and the information needed"
+        },
+        {
+          "text": "mark the fallback branch and pick the yarn's color"
+        },
+        {
+          "text": "remove the yarn, with undo from the board"
+        },
+        {
+          "text": "close and take me back to the board",
+          "pinId": "7ca25c44-36e0-4cd8-83dc-e2345bb3baa1"
+        }
+      ]
     },
     {
       "id": "test-flow",
@@ -66,17 +138,34 @@
       "entry": false,
       "role": "modal",
       "leftToAi": true,
-      "code": "P9"
-    },
-    {
-      "id": "help",
-      "assetId": null,
-      "title": "How it works",
-      "purpose": "Six steps from a sketch to a story, plus keyboard shortcuts.",
-      "entry": false,
-      "role": "modal",
-      "leftToAi": true,
-      "code": "P10"
+      "code": "P9",
+      "wants": [
+        {
+          "text": "start from an entry screen, or from any screen as a labeled test entry"
+        },
+        {
+          "text": "follow a path when I click a pin, and show a scenario chooser with the conditions when a pin has several"
+        },
+        {
+          "text": "switch between web and mobile, listing the pins not yet placed on mobile under the drawing"
+        },
+        {
+          "text": "rewind the test, as a testing control separate from the app's own Back, which must be drawn"
+        },
+        {
+          "text": "open detail references as an enlarged sketch without changing the app's history"
+        },
+        {
+          "text": "restart from the chosen screen, and hide the pins to see the sketch clean"
+        },
+        {
+          "text": "turn a frame left to the AI into a real page I can walk: a top bar, a heading, a main action, cards from its ideas, fields for a sign-in, a dialog for a modal"
+        },
+        {
+          "text": "end the test and take me back to the board",
+          "pinId": "38265d5f-cee4-47fd-aadc-36aa17284cf3"
+        }
+      ]
     }
   ],
   "pins": [
@@ -261,7 +350,7 @@
       "description": "Play the sketches."
     },
     {
-      "kind": "interaction",
+      "kind": "annotation",
       "id": "pin-board-help",
       "screenId": "board",
       "x": 0.92,
@@ -454,17 +543,6 @@
       "title": "Back to the board",
       "description": "Ends the test and returns to the board.",
       "provisional": true
-    },
-    {
-      "kind": "interaction",
-      "id": "3b9f78ff-9470-4e2d-9f60-5a31e648f91a",
-      "screenId": "help",
-      "x": 0.86,
-      "y": 0.12,
-      "color": "olive",
-      "title": "Close",
-      "description": "Closes How it works and returns to the board.",
-      "provisional": true
     }
   ],
   "transitions": [
@@ -509,18 +587,6 @@
       "pinId": "pin-idea-30",
       "target": "test-flow",
       "summary": "Test flow",
-      "condition": "",
-      "logic": "",
-      "context": "",
-      "fallback": false,
-      "navigation": "modal",
-      "color": "blue"
-    },
-    {
-      "id": "yarn-board-help",
-      "pinId": "pin-board-help",
-      "target": "help",
-      "summary": "Help button",
       "condition": "",
       "logic": "",
       "context": "",
@@ -605,18 +671,6 @@
       "pinId": "38265d5f-cee4-47fd-aadc-36aa17284cf3",
       "target": null,
       "summary": "Back to the board",
-      "condition": "",
-      "logic": "",
-      "context": "",
-      "fallback": false,
-      "navigation": "dismiss",
-      "color": "olive"
-    },
-    {
-      "id": "db2905cf-2ebe-411a-add4-72d9cd02d07f",
-      "pinId": "3b9f78ff-9470-4e2d-9f60-5a31e648f91a",
-      "target": null,
-      "summary": "Close",
       "condition": "",
       "logic": "",
       "context": "",
@@ -1064,22 +1118,6 @@
       "pinId": null
     },
     {
-      "id": "idea-70",
-      "code": "I61",
-      "title": "Six steps",
-      "detail": "Plan, bring sketches, make a little space, pin an intention, follow the yarn, check and play.",
-      "screenId": "help",
-      "pinId": null
-    },
-    {
-      "id": "idea-71",
-      "code": "I62",
-      "title": "Shortcuts",
-      "detail": "Space + drag, scroll to zoom, Shift + scroll, F to fit, Cmd/Ctrl + Z.",
-      "screenId": "help",
-      "pinId": null
-    },
-    {
       "id": "landing-title",
       "code": "I63",
       "title": "Title and tagline",
@@ -1354,351 +1392,50 @@
   ],
   "layout": {
     "home": {
-      "x": 19.49100783600278,
-      "y": 176.2176222626509,
+      "x": -102.59064697906287,
+      "y": 96.97163580374864,
       "width": 400
     },
     "board": {
-      "x": 658.6483709208709,
-      "y": 165.63881135452613,
+      "x": 673.6408548455281,
+      "y": 69.25855755315851,
       "width": 400
     },
     "outline": {
-      "x": 1304.580929475975,
-      "y": 352.36511754004175,
+      "x": 1259.6034777020036,
+      "y": 1005.6090599715334,
       "width": 400
     },
     "planning": {
-      "x": 1828.6294911261994,
-      "y": 577.9640313440111,
+      "x": 1785.793822770036,
+      "y": 794.2841565426363,
       "width": 400
     },
     "screen-editor": {
-      "x": -194.46349822580834,
-      "y": 1068.6647743583185,
+      "x": 565.8696150960916,
+      "y": 959.4338200501019,
       "width": 400
     },
     "connection-editor": {
-      "x": 409.6984328849243,
-      "y": 1181.036310537191,
+      "x": -76.48640295753015,
+      "y": 624.172621907067,
       "width": 400
     },
     "test-flow": {
-      "x": 2036.2934914523864,
-      "y": 1062.1989894174856,
-      "width": 400
-    },
-    "help": {
-      "x": 1060.6394056620222,
-      "y": 1092.8044791898437,
+      "x": 2006.308523603072,
+      "y": 406.81326356818585,
       "width": 400
     }
   },
   "viewport": {
-    "x": 204.22771707500038,
-    "y": -39.31896928072092,
-    "zoom": 0.5492948111981107
+    "x": 222.49626244492265,
+    "y": 7.443281613460385,
+    "zoom": 0.49519758814409304
   },
   "colorLabels": {
     "red": "Main path",
     "gold": "Branch",
     "blue": "Detour",
     "olive": "Way back"
-  },
-  "standardPages": {
-    "outline": {
-      "shape": "page",
-      "product": "Sketchcoded",
-      "title": "App outline",
-      "lede": "The same app as a searchable directory: every screen once, with its pins and paths.",
-      "nav": [],
-      "primary": null,
-      "blocks": [
-        {
-          "block": "card",
-          "id": "idea-33",
-          "title": "Each screen once",
-          "body": "Entry screens, app screens, detail sketches; destinations link back to the same entry so loops stay simple.",
-          "action": null
-        },
-        {
-          "block": "field",
-          "id": "idea-34",
-          "label": "Search screens, pins and paths",
-          "hint": "One box finds a title, a pin, a condition or a destination.",
-          "type": "text"
-        },
-        {
-          "block": "card",
-          "id": "idea-35",
-          "title": "Edit screen",
-          "body": "Open the frame from its entry.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-36",
-          "title": "Show on board",
-          "body": "Center the frame on the board.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-37",
-          "title": "Ideas waiting per screen",
-          "body": "Each screen lists the ideas assigned but not yet pinned.",
-          "action": null
-        }
-      ],
-      "footer": [
-        {
-          "pinId": "9cca0724-ef10-4594-9de9-38e20ef7793b",
-          "label": "Back to the board",
-          "note": "The Board tab returns to the board.",
-          "kind": "back",
-          "to": "Back",
-          "url": null,
-          "branches": 1
-        }
-      ]
-    },
-    "planning": {
-      "shape": "page",
-      "product": "Sketchcoded",
-      "title": "Planning",
-      "lede": "Every functionality idea, which screen it belongs on, and whether it has become a pin yet.",
-      "nav": [],
-      "primary": null,
-      "blocks": [
-        {
-          "block": "card",
-          "id": "idea-38",
-          "title": "Add an idea any time",
-          "body": "Title, details, which screen it belongs on, where it leads.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-39",
-          "title": "Pool and folders",
-          "body": "Unassigned ideas wait in a pool; each screen has a folder.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-40",
-          "title": "Place on the drawing",
-          "body": "Turns an assigned idea into a pin with its text already written.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-41",
-          "title": "Placed ideas grey out",
-          "body": "Pinned ideas stay visible with their pin number so nothing lands on two pages.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-42",
-          "title": "Move an idea",
-          "body": "Change its screen; a placed idea gives up its pin so it can be placed again.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-43",
-          "title": "Plan a frame before drawing",
-          "body": "A titled frame appears on the board with its ideas listed.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-44",
-          "title": "Copy as text",
-          "body": "A markdown outline for talking about the plan in chat; the same outline ships in flow.md.",
-          "action": null
-        }
-      ],
-      "footer": [
-        {
-          "pinId": "2d2b08a2-f0a9-45c0-9059-1b2802ffbb18",
-          "label": "Back to the board",
-          "note": "The Board tab returns to the board.",
-          "kind": "back",
-          "to": "Back",
-          "url": null,
-          "branches": 1
-        }
-      ]
-    },
-    "connection-editor": {
-      "shape": "dialog",
-      "product": "Sketchcoded",
-      "title": "Connection editor",
-      "lede": "One yarn: source pin, destination, navigation, short summary, condition, details, and data needed.",
-      "nav": [],
-      "primary": null,
-      "blocks": [
-        {
-          "block": "card",
-          "id": "idea-54",
-          "title": "Short version",
-          "body": "The required label on the yarn and the option in the scenario chooser.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-55",
-          "title": "Navigation",
-          "body": "Open, replace, start fresh, open as dialog, go back, dismiss.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-56",
-          "title": "When does this happen",
-          "body": "A plain-language condition. It is never executed.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-57",
-          "title": "Details and data",
-          "body": "Behavior, exceptions and states; what data or information is needed.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-58",
-          "title": "Fallback and yarn color",
-          "body": "Mark the default branch; pick red, olive, blue or gold.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-59",
-          "title": "Remove yarn",
-          "body": "Undoable from the board.",
-          "action": null
-        }
-      ],
-      "footer": [
-        {
-          "pinId": "7ca25c44-36e0-4cd8-83dc-e2345bb3baa1",
-          "label": "Close",
-          "note": "Closes the connection editor and returns to the board.",
-          "kind": "back",
-          "to": "Close",
-          "url": null,
-          "branches": 1
-        }
-      ]
-    },
-    "test-flow": {
-      "shape": "dialog",
-      "product": "Sketchcoded",
-      "title": "Test flow",
-      "lede": "Play through the sketches: pick a start, click pins, choose scenarios, switch web and mobile, rewind the test.",
-      "nav": [],
-      "primary": null,
-      "blocks": [
-        {
-          "block": "card",
-          "id": "idea-64",
-          "title": "Choose a start",
-          "body": "Entry screens, or any screen as a labeled test entry.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-65",
-          "title": "Click pins to follow paths",
-          "body": "One yarn follows directly; several show a scenario chooser with conditions.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-66",
-          "title": "Web or mobile",
-          "body": "Switch layouts; pins not yet on mobile are listed under the drawing.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-67",
-          "title": "Rewind test",
-          "body": "A testing control, separate from app Back, which must be drawn.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-68",
-          "title": "Closer looks",
-          "body": "Detail references open an enlarged sketch without changing app history.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-69",
-          "title": "Restart and hide pins",
-          "body": "Start over from the chosen screen; hide pins to see the sketch clean.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-e84218a6-33a7-495c-8e1c-cac60cf7dbd8",
-          "title": "Left to the AI is built out",
-          "body": "A frame wearing the post-it with no drawing gets a real page: top bar, heading and lede, a main action, cards from the ideas, fields for a sign-in, a dialog for a modal, a quiet ending for a terminal screen. Test flow walks it as a site; only the redirects work. flow.md carries the same page.",
-          "action": null
-        }
-      ],
-      "footer": [
-        {
-          "pinId": "38265d5f-cee4-47fd-aadc-36aa17284cf3",
-          "label": "Back to the board",
-          "note": "Ends the test and returns to the board.",
-          "kind": "back",
-          "to": "Close",
-          "url": null,
-          "branches": 1
-        }
-      ]
-    },
-    "help": {
-      "shape": "dialog",
-      "product": "Sketchcoded",
-      "title": "How it works",
-      "lede": "Six steps from a sketch to a story, plus keyboard shortcuts.",
-      "nav": [],
-      "primary": null,
-      "blocks": [
-        {
-          "block": "card",
-          "id": "idea-70",
-          "title": "Six steps",
-          "body": "Plan, bring sketches, make a little space, pin an intention, follow the yarn, check and play.",
-          "action": null
-        },
-        {
-          "block": "card",
-          "id": "idea-71",
-          "title": "Shortcuts",
-          "body": "Space + drag, scroll to zoom, Shift + scroll, F to fit, Cmd/Ctrl + Z.",
-          "action": null
-        }
-      ],
-      "footer": [
-        {
-          "pinId": "3b9f78ff-9470-4e2d-9f60-5a31e648f91a",
-          "label": "Close",
-          "note": "Closes How it works and returns to the board.",
-          "kind": "back",
-          "to": "Close",
-          "url": null,
-          "branches": 1
-        }
-      ]
-    }
   }
 }
