@@ -29,7 +29,7 @@ Keep public copy consistent with the app's README and `docs/FUNCTIONALITY.md`. T
 
 ## Update the example
 
-Optional: run the local Sketchcoded app with the intended board, then use Node 22.12 or later:
+Optional: run the local Sketchcoded app with the intended board, then use Node 22.12 or later. The example opens on the view the board was left on in the app (its zoom and position), so arrange and zoom the board there first:
 
 ```sh
 node tools/make-example.mjs --help
@@ -69,4 +69,4 @@ Run `node --test` for the exporter and staging tools. GitHub Actions runs them o
 
 After any visual change, check every page (home, guide, example and the 404 page) the way the app's build checklist requires: actual browser zoom at 125%, 150%, 200% and 250% in 1440×900 and 1280×720 windows, plus a phone-width window. The page itself never scrolls, panels show a visible scroll hint until their end, no text is under 12px, and nothing overlaps. In the example, yarn labels and ways back must stay clear of every frame at every zoom, and Test the flow must reach each page and come back. Record what was checked in the app repository's `docs/PROGRESS.md`.
 
-The official example contains three original drawings and six pages left to the AI, all connected. Boards and Review flow stay in the local planning backlog and are omitted from the public example while they are isolated and undeveloped.
+The official example contains three original drawings and six pages left to the AI, all connected. The exporter still omits any isolated, undeveloped frame a board may have.

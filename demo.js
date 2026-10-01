@@ -71,13 +71,6 @@
     return a ? (width * a.height) / a.width : width * 0.5;
   };
   const cardHeight = (screen) => 30 + shotHeight(screen) + 46;
-  /** A frame and the ways back noted under it, so fitting and panning never cut a note off. */
-  const footprint = (screen) => {
-    const notes = board.transitions.filter(
-      (t) => isHistory(t) && byId(board.pins, t.pinId)?.screenId === screen.id,
-    ).length;
-    return cardHeight(screen) + (notes ? 12 + notes * 50 : 0);
-  };
   const pinsOf = (id) => board.pins.filter((pin) => pin.screenId === id);
   const yarnOf = (pinId) => board.transitions.filter((t) => t.pinId === pinId);
   const isHistory = (t) =>
@@ -127,13 +120,6 @@
       s * s * s * d[i];
     return { x: mix(0), y: mix(1) };
   };
-  /** Each frame's whole footprint on the cork, tape included. */
-  const cardBox = (screen) => ({
-    x: layout[screen.id].x,
-    y: layout[screen.id].y - 35,
-    width: layout[screen.id].width,
-    height: cardHeight(screen) + 35,
-  });
   const overlap = (a, b) =>
     Math.max(0, Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x)) *
     Math.max(0, Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y));
@@ -201,6 +187,20 @@
         el("b", "card-code", screen.code),
         el("span", null, ROLES[screen.role] ?? "SCREEN"),
       );
+      // A way back is a small mark in the footer, as in the app: its words show on hover or focus.
+      for (const t of board.transitions.filter(
+        (t) =>
+          isHistory(t) && byId(board.pins, t.pinId)?.screenId === screen.id,
+      )) {
+        const mark = el("span", "way-back-mark", "\u21b6");
+        mark.tabIndex = 0;
+        mark.setAttribute(
+          "aria-label",
+          `Way back: ${t.summary || t.navigation}`,
+        );
+        mark.append(el("span", null, t.summary || t.navigation));
+        foot.append(mark);
+      }
       paper.append(foot);
 
       const tape = el("button", "card-tape");
@@ -245,30 +245,12 @@
       label.yarn = path.points;
       overlay.append(label);
     }
-    // A way back is not a line: it is a note under the frame it leaves from, as on the board.
-    for (const screen of board.screens) {
-      const backs = board.transitions.filter(
-        (t) =>
-          isHistory(t) && byId(board.pins, t.pinId)?.screenId === screen.id,
-      );
-      backs.forEach((t, i) => {
-        const tag = el(
-          "div",
-          "history-tag",
-          `\u21b6 ${t.summary || t.navigation}`,
-        );
-        const pos = layout[screen.id];
-        tag.dataset.screen = screen.id;
-        tag.style.cssText = `left:${pos.x + 15}px;top:${pos.y + cardHeight(screen) + 12 + i * 34}px`;
-        overlay.append(tag);
-      });
-    }
     placeLabels();
   }
 
   /**
    * Nothing overlaps: each yarn label slides along its own yarn to the first spot clear of every
-   * frame, the ways back and the labels already placed, starting from the middle. Label size
+   * frame and the labels already placed, starting from the middle. Label size
    * follows the zoom, so this runs again whenever the zoom changes.
    */
   let placedAt = null;
@@ -291,29 +273,6 @@
       };
     });
     const clear = (box) => taken.reduce((sum, t) => sum + overlap(box, t), 0);
-    // A way back is a note beside the frame it leaves from: under it if there is room, otherwise
-    // to its right, above it on the right, or to its left.
-    const notes = new Map();
-    for (const tag of overlay.querySelectorAll(".history-tag")) {
-      const screen = byId(board.screens, tag.dataset.screen),
-        frame = taken[board.screens.indexOf(screen)];
-      const index = notes.get(screen.id) ?? 0;
-      notes.set(screen.id, index + 1);
-      const w = tag.offsetWidth + margin * 2,
-        h = tag.offsetHeight + margin * 2,
-        step = index * h;
-      const spots = [
-        { x: frame.x + 15, y: frame.y + frame.height + step },
-        { x: frame.x + frame.width - w + 15, y: frame.y + frame.height + step },
-        { x: frame.x + frame.width, y: frame.y + frame.height - h - step },
-        { x: frame.x + frame.width - w, y: frame.y - h - step },
-        { x: frame.x - w, y: frame.y + frame.height - h - step },
-      ].map((p) => ({ ...p, width: w, height: h }));
-      const box = spots.find((s) => !clear(s)) ?? spots[0];
-      tag.style.left = `${box.x + margin}px`;
-      tag.style.top = `${box.y + margin}px`;
-      taken.push(box);
-    }
     // A label with no clear spot anywhere on its yarn waits as a small mark; hovering or
     // focusing it shows the words.
     const spots = [0.5, 0.42, 0.58, 0.34, 0.66, 0.26, 0.74, 0.18, 0.82];
@@ -368,7 +327,7 @@
           ...board.screens.map((s) => layout[s.id].x + layout[s.id].width),
         ) * view.zoom;
       const bottom =
-        Math.max(...board.screens.map((s) => layout[s.id].y + footprint(s))) *
+        Math.max(...board.screens.map((s) => layout[s.id].y + cardHeight(s))) *
         view.zoom;
       const clamp = (v, a, b) =>
         Math.max(Math.min(a, b), Math.min(Math.max(a, b), v));
@@ -412,7 +371,7 @@
       ),
       // cardHeight already counts the foot; the tape above is why ys starts 35 higher.
       bottom = Math.max(
-        ...board.screens.map((s) => layout[s.id].y + footprint(s)),
+        ...board.screens.map((s) => layout[s.id].y + cardHeight(s)),
       );
     const box = { x: Math.min(...xs), y: Math.min(...ys) };
     box.width = right - box.x;
@@ -574,9 +533,24 @@
   $("zoom-in").addEventListener("click", () => zoomAt(1.2));
   $("zoom-out").addEventListener("click", () => zoomAt(1 / 1.2));
   $("fit").addEventListener("click", fit);
-  let fitted = false;
+  /** Where the board opens: the view its author left it on, or the whole board without one. */
+  function start() {
+    const v = board.viewport;
+    if (!v || !(v.zoom > 0)) return fit();
+    view = { x: v.x, y: v.y, zoom: Math.max(0.2, Math.min(2.5, v.zoom)) };
+    apply();
+  }
+  // Until someone moves the board, a resized window shows the opening view again.
+  let started = false,
+    moved = false;
+  for (const type of ["pointerdown", "wheel"])
+    stage.addEventListener(type, () => (moved = true), { passive: true });
+  for (const name of ["zoom-in", "zoom-out", "fit"])
+    $(name).addEventListener("click", () => (moved = true));
   addEventListener("resize", () => {
-    if (fitted) fit();
+    if (!started) return;
+    if (moved) apply();
+    else start();
   });
 
   // ----------------------------------------------------- walking the flow
@@ -1034,8 +1008,8 @@
       drawCards();
       drawThreads();
       drawLegend();
-      fit();
-      fitted = true;
+      start();
+      started = true;
     })
     .catch(() => {
       loading.textContent =

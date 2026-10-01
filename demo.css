@@ -263,21 +263,9 @@
   color: #6b5a40;
   z-index: 7;
 }
-.history-tag {
-  position: absolute;
-  z-index: 4;
-  padding: 6px 11px;
-  border-radius: 999px;
-  background: #eef1e6;
-  border: 1px dashed #b3bfa4;
-  color: #5f6e55;
-  font: 600 max(12px, calc(12px / var(--board-zoom, 1))) var(--sans);
-  white-space: nowrap;
-  pointer-events: none;
-}
 .demo-world.far .pin,
 .demo-world.far .yarn-label,
-.demo-world.far .history-tag {
+.demo-world.far .way-back-mark {
   opacity: 0;
 }
 .demo-world.far .card-foot {
@@ -865,4 +853,41 @@
   .demo-hint {
     display: none;
   }
+}
+
+/* A way back is a small mark in its frame's footer; the words float above it on hover or focus. */
+.way-back-mark {
+  position: relative;
+  margin-left: auto;
+  width: max(22px, calc(22px / var(--board-zoom, 1)));
+  height: max(22px, calc(22px / var(--board-zoom, 1)));
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  color: #718060;
+  font: 600 max(14px, calc(14px / var(--board-zoom, 1))) / 1 var(--sans);
+  cursor: help;
+}
+.way-back-mark:hover,
+.way-back-mark:focus-visible {
+  background: #eef1e6;
+}
+.way-back-mark > span {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  right: 0;
+  z-index: 7;
+  display: none;
+  padding: 6px 11px;
+  border: 1px solid #b3bfa4;
+  border-radius: 999px;
+  background: #eef1e6;
+  box-shadow: 0 2px 6px #4a3c2433;
+  color: #5f6e55;
+  font: 600 max(12px, calc(12px / var(--board-zoom, 1))) var(--sans);
+  white-space: nowrap;
+}
+.way-back-mark:hover > span,
+.way-back-mark:focus-visible > span {
+  display: block;
 }
