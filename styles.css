@@ -73,32 +73,6 @@ a {
   width: min(1120px, 100% - 40px);
   margin: 0 auto;
 }
-/* Header */
-.site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--line);
-}
-.brand {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  font: 700 22px/1 var(--sans);
-  letter-spacing: -0.4px;
-  text-decoration: none;
-}
-/* The space belongs after the logo only, so the red full stop stays on the name. */
-.brand img {
-  width: 38px;
-  height: 38px;
-  margin-right: 8px;
-}
-.brand span {
-  color: var(--red);
-}
 /* Hero */
 .hero {
   display: grid;
@@ -111,6 +85,13 @@ a {
   font: 400 clamp(44px, 6vw, 72px)/1 var(--serif);
   letter-spacing: -1px;
   margin-bottom: 18px;
+}
+/* The logo sits beside the name in the title; the site has no header bar. */
+.title-logo {
+  height: 0.5em;
+  width: auto;
+  margin-left: 0.1em;
+  vertical-align: 0.34em;
 }
 .tagline {
   font: 500 clamp(19px, 2vw, 24px)/1.4 var(--sans);
@@ -140,10 +121,11 @@ a {
   text-decoration: none;
   color: inherit;
 }
-/* Beside the text, the example sits a little lower than the title, so the page reads staggered. */
+/* Beside the text, the example starts below the title, level with the tagline, so the page reads
+   staggered. */
 @media (min-width: 861px) {
   .example {
-    margin-top: 56px;
+    margin-top: 120px;
   }
 }
 .example figure {
@@ -261,11 +243,6 @@ a {
 .button.primary:hover {
   background: #2b4033;
 }
-.requirements {
-  color: var(--muted);
-  font-size: 16px;
-  margin-top: 12px;
-}
 /* Guidelines: our rules for web design, compact, at the bottom of the home page. */
 .guidelines {
   padding: 8px 0 56px;
@@ -328,12 +305,6 @@ a {
 }
 /* Mobile: one column; the setup block sits below the example frame, as drawn. */
 @media (max-width: 860px) {
-  .site-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-    padding-bottom: 14px;
-  }
   .hero,
   .setup {
     grid-template-columns: 1fr;
@@ -353,7 +324,7 @@ a {
   }
 }
 /* The source link stands on its own under the setup prompt, centred, with the mark. */
-/* Beside the prompt: how ideas become the plan, then the source and the sister projects. */
+/* Beside the prompt: how ideas become the plan, then the source. */
 .setup-side {
   align-self: center;
 }
