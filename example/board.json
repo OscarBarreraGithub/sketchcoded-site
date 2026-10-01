@@ -79,16 +79,6 @@
       "code": "P10"
     },
     {
-      "id": "demo-readonly",
-      "assetId": null,
-      "title": "Example demo (read-only)",
-      "purpose": "Explore a read-only example of Sketchcoded: original hand drawings, connected pages and conventional layouts for pages left to the AI. Move frames temporarily and walk their authored paths; reload to reset the board.",
-      "entry": false,
-      "role": "screen",
-      "leftToAi": true,
-      "code": "P11"
-    },
-    {
       "id": "guide",
       "assetId": null,
       "title": "Guide",
@@ -488,17 +478,6 @@
     },
     {
       "kind": "interaction",
-      "id": "2d260e1c-9b6e-42c9-ab9b-04661599c6d1",
-      "screenId": "demo-readonly",
-      "x": 0.86,
-      "y": 0.12,
-      "color": "olive",
-      "title": "Home",
-      "description": "The sketchcoded logo at the top left returns to the home page.",
-      "provisional": true
-    },
-    {
-      "kind": "interaction",
       "id": "50dc89d9-518b-4d7a-ab05-a0e9a6852ef5",
       "screenId": "guide",
       "x": 0.86,
@@ -513,7 +492,7 @@
     {
       "id": "yarn-landing-example",
       "pinId": "pin-landing-example",
-      "target": "demo-readonly",
+      "target": "board",
       "summary": "Example: this website",
       "condition": "",
       "logic": "",
@@ -676,18 +655,6 @@
       "context": "",
       "fallback": false,
       "navigation": "dismiss",
-      "color": "olive"
-    },
-    {
-      "id": "ebf754d8-aaa2-4644-bc28-baf2e93f4762",
-      "pinId": "2d260e1c-9b6e-42c9-ab9b-04661599c6d1",
-      "target": null,
-      "summary": "Back to Home",
-      "condition": "",
-      "logic": "",
-      "context": "",
-      "fallback": false,
-      "navigation": "back",
       "color": "olive"
     },
     {
@@ -1434,7 +1401,7 @@
       "code": "I102",
       "title": "Focused example board",
       "detail": "Show the original drawings and connected pages. Undrawn pages are left to the AI. Omit isolated, undeveloped planning frames from the public example while retaining them in the full local plan. Moving frames in the example is temporary; reload restores their positions.",
-      "screenId": "demo-readonly",
+      "screenId": "board",
       "pinId": null
     }
   ],
@@ -1442,11 +1409,6 @@
     "home": {
       "x": 19.49100783600278,
       "y": 176.2176222626509,
-      "width": 400
-    },
-    "demo-readonly": {
-      "x": 566.3273385573352,
-      "y": 64.5575538142216,
       "width": 400
     },
     "guide": {
@@ -1786,34 +1748,6 @@
           "note": "Closes How it works and returns to the board.",
           "kind": "back",
           "to": "Close",
-          "url": null,
-          "branches": 1
-        }
-      ]
-    },
-    "demo-readonly": {
-      "shape": "page",
-      "product": "Sketchcoded",
-      "title": "Example demo (read-only)",
-      "lede": "Explore a read-only example of Sketchcoded: original hand drawings, connected pages and conventional layouts for pages left to the AI. Move frames temporarily and walk their authored paths; reload to reset the board.",
-      "nav": [],
-      "primary": null,
-      "blocks": [
-        {
-          "block": "card",
-          "id": "focused-public-example",
-          "title": "Focused example board",
-          "body": "Show the original drawings and connected pages. Undrawn pages are left to the AI. Omit isolated, undeveloped planning frames from the public example while retaining them in the full local plan. Moving frames in the example is temporary; reload restores their positions.",
-          "action": null
-        }
-      ],
-      "footer": [
-        {
-          "pinId": "2d260e1c-9b6e-42c9-ab9b-04661599c6d1",
-          "label": "Home",
-          "note": "The sketchcoded logo at the top left returns to the home page.",
-          "kind": "back",
-          "to": "Back",
           "url": null,
           "branches": 1
         }

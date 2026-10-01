@@ -585,6 +585,7 @@
   let rewinds = [];
   let details = [];
   let mobile = false;
+  let arrivedVia = [];
   const playerAsset = (screen) =>
     byId(
       board.assets,
@@ -645,7 +646,7 @@
     rewinds = [];
     details = [];
     mobile = false;
-    stack = [{ screenId, kind: "page" }];
+    ({ stack, via: arrivedVia } = arrival(screenId));
     steps = 0;
     player.hidden = false;
     document.body.style.overflow = "hidden";
@@ -756,6 +757,10 @@
         : pins.length
           ? "Click a numbered pin to take a path."
           : "Nothing leads on from here. Step back, or return to the board.";
+    if (!steps && arrivedVia.length)
+      $("note").textContent =
+        `Arrived from ${arrivedVia.map((id) => byId(board.screens, id).title).join(" → ")}, the way a visitor gets here. ` +
+        $("note").textContent;
   }
 
   function renderStandard(spec) {
@@ -858,27 +863,21 @@
     choiceList.querySelector("button")?.focus();
   }
 
-  function take(t) {
-    let next = stack.map((frame) => ({ ...frame }));
+  /** One authored step on a history, as the app's shared navigation takes it. */
+  function step(from, t) {
+    let next = from.map((frame) => ({ ...frame }));
     if (t.navigation === "back") {
-      if (next.length < 2) {
-        $("note").textContent =
-          "There is no previous screen in this app history.";
-        return;
-      }
+      if (next.length < 2)
+        return { error: "There is no previous screen in this app history." };
       next.pop();
     } else if (t.navigation === "dismiss") {
       const modal = next.findLastIndex((frame) => frame.kind === "modal");
-      if (modal < 1) {
-        $("note").textContent = "There is no dialog caller to dismiss to.";
-        return;
-      }
+      if (modal < 1)
+        return { error: "There is no dialog caller to dismiss to." };
       next = next.slice(0, modal);
     } else {
-      if (!byId(board.screens, t.target)) {
-        $("note").textContent = "This destination is missing.";
-        return;
-      }
+      if (!byId(board.screens, t.target))
+        return { error: "This destination is missing." };
       const frame = {
         screenId: t.target,
         kind: t.navigation === "modal" ? "modal" : "page",
@@ -889,11 +888,65 @@
         next[next.length - 1] = frame;
       } else next.push(frame);
     }
+    return { next };
+  }
+  function take(t) {
+    const { next, error } = step(stack, t);
+    if (error) {
+      $("note").textContent = error;
+      return;
+    }
     rewinds.push({ stack, steps });
     stack = next;
     steps += 1;
     details = [];
     show();
+  }
+
+  /**
+   * Starting away from an entry: arrive the way a visitor would, along the shortest authored
+   * route from an entry, as the app does, so a page's own Back and Close lead where they really
+   * do. The route only sets up history; it is not a test step and rewind stops at the start.
+   */
+  function arrival(screenId) {
+    const alone = { stack: [{ screenId, kind: "page" }], via: [] };
+    const entries = board.screens
+      .filter((s) => s.entry && s.role !== "detail")
+      .map((s) => s.id);
+    if (!entries.length || entries.includes(screenId)) return alone;
+    const onward = (from) =>
+      board.transitions.filter((t) => {
+        const pin = byId(board.pins, t.pinId);
+        return (
+          pin?.screenId === from &&
+          (pin.kind ?? "interaction") === "interaction" &&
+          !isHistory(t) &&
+          byId(board.screens, t.target)
+        );
+      });
+    const reachedBy = new Map(entries.map((id) => [id, null]));
+    const queue = [...entries];
+    for (let i = 0; i < queue.length && !reachedBy.has(screenId); i++)
+      for (const t of onward(queue[i]))
+        if (!reachedBy.has(t.target)) {
+          reachedBy.set(t.target, t);
+          queue.push(t.target);
+        }
+    if (!reachedBy.has(screenId)) return alone;
+    const route = [];
+    for (let at = screenId, t = reachedBy.get(at); t; t = reachedBy.get(at)) {
+      route.unshift(t);
+      at = byId(board.pins, t.pinId).screenId;
+    }
+    let history = [
+      { screenId: byId(board.pins, route[0].pinId).screenId, kind: "page" },
+    ];
+    const via = [history[0].screenId];
+    for (const t of route) {
+      history = step(history, t).next;
+      via.push(t.target);
+    }
+    return { stack: history, via: via.slice(0, -1) };
   }
 
   $("play").addEventListener("click", () => {
