@@ -118,7 +118,7 @@
       "y": 0.5069008582041757,
       "color": "red",
       "title": "Example: this website",
-      "description": "Sends to a read-only version of the demo. Make it obvious this should be clicked. For now the destination is an empty frame to drop a sketch into later."
+      "description": "Sends to a read-only version of the demo. Make it obvious this should be clicked."
     },
     {
       "kind": "annotation",
@@ -419,6 +419,94 @@
       "color": "olive",
       "title": "Remove a pin or the screen",
       "description": "Both are undoable; yarn goes with them."
+    },
+    {
+      "kind": "interaction",
+      "id": "9cca0724-ef10-4594-9de9-38e20ef7793b",
+      "screenId": "outline",
+      "x": 0.86,
+      "y": 0.12,
+      "color": "olive",
+      "title": "Back to the board",
+      "description": "The Board tab returns to the board.",
+      "provisional": true
+    },
+    {
+      "kind": "interaction",
+      "id": "2d2b08a2-f0a9-45c0-9059-1b2802ffbb18",
+      "screenId": "planning",
+      "x": 0.86,
+      "y": 0.12,
+      "color": "olive",
+      "title": "Back to the board",
+      "description": "The Board tab returns to the board.",
+      "provisional": true
+    },
+    {
+      "kind": "interaction",
+      "id": "541cea23-5944-4df4-902c-23703d0b322a",
+      "screenId": "screen-editor",
+      "x": 0.86,
+      "y": 0.92,
+      "color": "olive",
+      "title": "Close",
+      "description": "Closes the screen editor and returns to the board.",
+      "provisional": true
+    },
+    {
+      "kind": "interaction",
+      "id": "7ca25c44-36e0-4cd8-83dc-e2345bb3baa1",
+      "screenId": "connection-editor",
+      "x": 0.86,
+      "y": 0.12,
+      "color": "olive",
+      "title": "Close",
+      "description": "Closes the connection editor and returns to the board.",
+      "provisional": true
+    },
+    {
+      "kind": "interaction",
+      "id": "38265d5f-cee4-47fd-aadc-36aa17284cf3",
+      "screenId": "test-flow",
+      "x": 0.86,
+      "y": 0.12,
+      "color": "olive",
+      "title": "Back to the board",
+      "description": "Ends the test and returns to the board.",
+      "provisional": true
+    },
+    {
+      "kind": "interaction",
+      "id": "3b9f78ff-9470-4e2d-9f60-5a31e648f91a",
+      "screenId": "help",
+      "x": 0.86,
+      "y": 0.12,
+      "color": "olive",
+      "title": "Close",
+      "description": "Closes How it works and returns to the board.",
+      "provisional": true
+    },
+    {
+      "kind": "interaction",
+      "id": "2d260e1c-9b6e-42c9-ab9b-04661599c6d1",
+      "screenId": "demo-readonly",
+      "x": 0.86,
+      "y": 0.12,
+      "color": "olive",
+      "title": "Home",
+      "description": "The sketchcoded logo at the top left returns to the home page.",
+      "provisional": true
+    },
+    {
+      "kind": "interaction",
+      "id": "50dc89d9-518b-4d7a-ab05-a0e9a6852ef5",
+      "screenId": "guide",
+      "x": 0.86,
+      "y": 0.12,
+      "color": "olive",
+      "title": "Home",
+      "description": "The sketchcoded logo at the top left returns to the home page.",
+      "provisional": true
     }
   ],
   "transitions": [
@@ -517,6 +605,102 @@
       "fallback": false,
       "navigation": "modal",
       "color": "blue"
+    },
+    {
+      "id": "7a519a62-6982-495a-a17f-fa93e4976b8b",
+      "pinId": "9cca0724-ef10-4594-9de9-38e20ef7793b",
+      "target": null,
+      "summary": "Back to the board",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "back",
+      "color": "olive"
+    },
+    {
+      "id": "02d8b41a-1cc7-4c3a-9b82-3dfe25488515",
+      "pinId": "2d2b08a2-f0a9-45c0-9059-1b2802ffbb18",
+      "target": null,
+      "summary": "Back to the board",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "back",
+      "color": "olive"
+    },
+    {
+      "id": "15cd3223-b834-4e7f-89e4-91134021a19f",
+      "pinId": "541cea23-5944-4df4-902c-23703d0b322a",
+      "target": null,
+      "summary": "Close",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "dismiss",
+      "color": "olive"
+    },
+    {
+      "id": "a7479ef6-103c-45fe-853d-9cf474dc9464",
+      "pinId": "7ca25c44-36e0-4cd8-83dc-e2345bb3baa1",
+      "target": null,
+      "summary": "Close",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "dismiss",
+      "color": "olive"
+    },
+    {
+      "id": "924d62a1-a5aa-484e-9f0e-b3133827c761",
+      "pinId": "38265d5f-cee4-47fd-aadc-36aa17284cf3",
+      "target": null,
+      "summary": "Back to the board",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "dismiss",
+      "color": "olive"
+    },
+    {
+      "id": "db2905cf-2ebe-411a-add4-72d9cd02d07f",
+      "pinId": "3b9f78ff-9470-4e2d-9f60-5a31e648f91a",
+      "target": null,
+      "summary": "Close",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "dismiss",
+      "color": "olive"
+    },
+    {
+      "id": "ebf754d8-aaa2-4644-bc28-baf2e93f4762",
+      "pinId": "2d260e1c-9b6e-42c9-ab9b-04661599c6d1",
+      "target": null,
+      "summary": "Back to Home",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "back",
+      "color": "olive"
+    },
+    {
+      "id": "5fa9683e-ef6c-4c11-96d5-4548413a371d",
+      "pinId": "50dc89d9-518b-4d7a-ab05-a0e9a6852ef5",
+      "target": null,
+      "summary": "Back to Home",
+      "condition": "",
+      "logic": "",
+      "context": "",
+      "fallback": false,
+      "navigation": "back",
+      "color": "olive"
     }
   ],
   "assets": [
@@ -1307,10 +1491,10 @@
     }
   },
   "colorLabels": {
-    "red": "navigation",
-    "olive": "content or behavior note",
-    "blue": "link out",
-    "gold": "needs a decision"
+    "red": "Main path",
+    "gold": "Branch",
+    "blue": "Detour",
+    "olive": "Way back"
   },
   "standardPages": {
     "outline": {
@@ -1357,7 +1541,17 @@
           "action": null
         }
       ],
-      "footer": []
+      "footer": [
+        {
+          "pinId": "9cca0724-ef10-4594-9de9-38e20ef7793b",
+          "label": "Back to the board",
+          "note": "The Board tab returns to the board.",
+          "kind": "back",
+          "to": "Back",
+          "url": null,
+          "branches": 1
+        }
+      ]
     },
     "planning": {
       "shape": "page",
@@ -1417,7 +1611,17 @@
           "action": null
         }
       ],
-      "footer": []
+      "footer": [
+        {
+          "pinId": "2d2b08a2-f0a9-45c0-9059-1b2802ffbb18",
+          "label": "Back to the board",
+          "note": "The Board tab returns to the board.",
+          "kind": "back",
+          "to": "Back",
+          "url": null,
+          "branches": 1
+        }
+      ]
     },
     "connection-editor": {
       "shape": "dialog",
@@ -1470,7 +1674,17 @@
           "action": null
         }
       ],
-      "footer": []
+      "footer": [
+        {
+          "pinId": "7ca25c44-36e0-4cd8-83dc-e2345bb3baa1",
+          "label": "Close",
+          "note": "Closes the connection editor and returns to the board.",
+          "kind": "back",
+          "to": "Close",
+          "url": null,
+          "branches": 1
+        }
+      ]
     },
     "test-flow": {
       "shape": "dialog",
@@ -1530,7 +1744,17 @@
           "action": null
         }
       ],
-      "footer": []
+      "footer": [
+        {
+          "pinId": "38265d5f-cee4-47fd-aadc-36aa17284cf3",
+          "label": "Back to the board",
+          "note": "Ends the test and returns to the board.",
+          "kind": "back",
+          "to": "Close",
+          "url": null,
+          "branches": 1
+        }
+      ]
     },
     "help": {
       "shape": "dialog",
@@ -1555,7 +1779,17 @@
           "action": null
         }
       ],
-      "footer": []
+      "footer": [
+        {
+          "pinId": "3b9f78ff-9470-4e2d-9f60-5a31e648f91a",
+          "label": "Close",
+          "note": "Closes How it works and returns to the board.",
+          "kind": "back",
+          "to": "Close",
+          "url": null,
+          "branches": 1
+        }
+      ]
     },
     "demo-readonly": {
       "shape": "page",
@@ -1573,7 +1807,17 @@
           "action": null
         }
       ],
-      "footer": []
+      "footer": [
+        {
+          "pinId": "2d260e1c-9b6e-42c9-ab9b-04661599c6d1",
+          "label": "Home",
+          "note": "The sketchcoded logo at the top left returns to the home page.",
+          "kind": "back",
+          "to": "Back",
+          "url": null,
+          "branches": 1
+        }
+      ]
     },
     "guide": {
       "shape": "page",
@@ -1591,7 +1835,17 @@
           "action": null
         }
       ],
-      "footer": []
+      "footer": [
+        {
+          "pinId": "50dc89d9-518b-4d7a-ab05-a0e9a6852ef5",
+          "label": "Home",
+          "note": "The sketchcoded logo at the top left returns to the home page.",
+          "kind": "back",
+          "to": "Back",
+          "url": null,
+          "branches": 1
+        }
+      ]
     }
   }
 }

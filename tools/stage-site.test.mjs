@@ -18,6 +18,7 @@ test("publishing contains only public files and removes stale staged content", a
     const files = [
       "index.html",
       "guide.html",
+      "404.html",
       "styles.css",
       "links.js",
       "demo.html",

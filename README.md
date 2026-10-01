@@ -5,10 +5,11 @@ The public landing page, guide and read-only example for Sketchcoded. Static HTM
 ## Files and configuration
 
 - `index.html`, `guide.html` and `styles.css`: the landing page and guide.
+- `404.html`: the page for any address that does not exist. Its links start at the site root because it can be served from any path.
 - `links.js`: the public repository, projects page and demo addresses. Both the setup prompt and manual clone commands are generated from this configuration. A fork can replace these links without changing application code.
 - `demo.html`, `demo.css` and `demo.js`: a read-only board and flow walker. Temporary frame movement resets on reload.
 - `example/board.json` and `example/art/`: a curated snapshot of an authored board. The bundled example works without the local app or the original author's data.
-- `assets/`: local images, icons and fonts. Fonts are not loaded from third parties.
+- `assets/`: local images, icons and fonts. `assets/board.png` is a screenshot of the example board in the current app; retake it when the app's look changes. Fonts are not loaded from third parties.
 - `_headers`: Cloudflare Pages cache and safety headers. Adapt these if another host uses a different format.
 - `tools/stage-site.mjs`: copies only public website files into `.site-dist/` for deployment. Repository notes, maintenance tools and local configuration stay out of the published site.
 
@@ -62,14 +63,10 @@ Upload the contents of `.site-dist/`, preserving relative paths. This is a file-
 
 Choose the project explicitly; no account credentials or hosting project are bundled. The official site at sketchcoded.com belongs to its maintainers; a fork uses its own project and domain. Connecting a custom domain is a separate hosting task. Preserve any existing email DNS records, including MX and SPF, and keep tokens and local Wrangler state out of Git.
 
-## Verification
+## Checks
 
-The 2026-09-28 review checked the homepage, guide and demo at actual Chromium tab zoom of 125%, 150%, 200% and 250%, at 1440×900 and 1280×720. The site uses fixed shells with scrolling panels. The app repository's `docs/REVIEW_2026-09-28.md` records navigation and layout evidence. Recheck affected pages after visual changes.
+Run `node --test` for the exporter and staging tools. GitHub Actions runs them on Windows, macOS and Linux with Node 22.12 and 24.
 
-The portability follow-up passed the exporter regression (custom board ID and port, duplicate names, invalid asset paths and failed downloads), plus 16 homepage/guide checks across both laptop sizes and all four zoom levels. Setup commands and links follow a substituted fork configuration. Code wraps within the guide, and the scroll hint has a reserved rail so it cannot cover text. No browser runtime errors were reported.
+After any visual change, check every page (home, guide, example and the 404 page) the way the app's build checklist requires: actual browser zoom at 125%, 150%, 200% and 250% in 1440×900 and 1280×720 windows, plus a phone-width window. The page itself never scrolls, panels show a visible scroll hint until their end, no text is under 12px, and nothing overlaps. In the example, yarn labels and ways back must stay clear of every frame at every zoom, and Test the flow must reach each page and come back. Record what was checked in the app repository's `docs/PROGRESS.md`.
 
-The publishing regression verifies that staging excludes repository notes, tool scripts, local configuration and stale deployment files.
-
-GitHub Actions runs these tools on Windows, macOS and Linux with Node 22.12 and 24. Text files use LF line endings across platforms.
-
-The focused official example contains three original drawings and seven pages left to the AI. Boards and Review flow remain in the local planning backlog; they are omitted from the public example while isolated and undeveloped.
+The official example contains three original drawings and seven pages left to the AI. Boards and Review flow stay in the local planning backlog and are omitted from the public example while they are isolated and undeveloped.

@@ -29,6 +29,13 @@
     violet: "#7b5e93",
     teal: "#3d8585",
   };
+  /** The categories a board starts with, as the app names them; a board may rename them. */
+  const CATEGORIES = {
+    red: "Main path",
+    gold: "Branch",
+    blue: "Detour",
+    olive: "Way back",
+  };
   const ROLES = {
     screen: "SCREEN",
     auth: "AUTHENTICATION",
@@ -64,6 +71,13 @@
     return a ? (width * a.height) / a.width : width * 0.5;
   };
   const cardHeight = (screen) => 30 + shotHeight(screen) + 46;
+  /** A frame and the ways back noted under it, so fitting and panning never cut a note off. */
+  const footprint = (screen) => {
+    const notes = board.transitions.filter(
+      (t) => isHistory(t) && byId(board.pins, t.pinId)?.screenId === screen.id,
+    ).length;
+    return cardHeight(screen) + (notes ? 12 + notes * 50 : 0);
+  };
   const pinsOf = (id) => board.pins.filter((pin) => pin.screenId === id);
   const yarnOf = (pinId) => board.transitions.filter((t) => t.pinId === pinId);
   const isHistory = (t) =>
@@ -90,12 +104,39 @@
     const bend =
       Math.max(50, Math.abs(x2 - x1) * 0.22) +
       Math.max(0, parallel.indexOf(t)) * 52;
+    const points = [
+      [x1, y1],
+      [x1 + (x2 - x1) * 0.3, y1 + bend],
+      [x2 - (x2 - x1) * 0.2, y2 + bend],
+      [x2, y2],
+    ];
     return {
-      d: `M ${x1} ${y1} C ${x1 + (x2 - x1) * 0.3} ${y1 + bend}, ${x2 - (x2 - x1) * 0.2} ${y2 + bend}, ${x2} ${y2}`,
+      d: `M ${x1} ${y1} C ${points[1].join(" ")}, ${points[2].join(" ")}, ${x2} ${y2}`,
+      points,
       x: (x1 + x2) / 2,
       y: (y1 + y2) / 2 + bend * 0.75,
     };
   }
+  /** A point along the yarn, from 0 at the pin to 1 at the frame it opens. */
+  const along = ([a, b, c, d], s) => {
+    const r = 1 - s;
+    const mix = (i) =>
+      r * r * r * a[i] +
+      3 * r * r * s * b[i] +
+      3 * r * s * s * c[i] +
+      s * s * s * d[i];
+    return { x: mix(0), y: mix(1) };
+  };
+  /** Each frame's whole footprint on the cork, tape included. */
+  const cardBox = (screen) => ({
+    x: layout[screen.id].x,
+    y: layout[screen.id].y - 35,
+    width: layout[screen.id].width,
+    height: cardHeight(screen) + 35,
+  });
+  const overlap = (a, b) =>
+    Math.max(0, Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x)) *
+    Math.max(0, Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y));
 
   // ------------------------------------------------------------------- board
   function drawCards() {
@@ -147,6 +188,8 @@
         shotButton.append(note);
       }
       pinsOf(screen.id).forEach((pin, index) => {
+        // On a drawing, a provisional pin's spot is a placeholder until the user places it.
+        if (a && pin.provisional) return;
         const dot = el("span", "pin", String(index + 1));
         dot.style.cssText = `left:${pin.x * 100}%;top:${pin.y * 100}%`;
         shotButton.append(dot);
@@ -197,7 +240,9 @@
         }),
       );
       const label = el("div", "yarn-label", t.summary);
+      label.title = t.summary;
       label.style.cssText = `left:${path.x}px;top:${path.y}px`;
+      label.yarn = path.points;
       overlay.append(label);
     }
     // A way back is not a line: it is a note under the frame it leaves from, as on the board.
@@ -213,9 +258,93 @@
           `\u21b6 ${t.summary || t.navigation}`,
         );
         const pos = layout[screen.id];
+        tag.dataset.screen = screen.id;
         tag.style.cssText = `left:${pos.x + 15}px;top:${pos.y + cardHeight(screen) + 12 + i * 34}px`;
         overlay.append(tag);
       });
+    }
+    placeLabels();
+  }
+
+  /**
+   * Nothing overlaps: each yarn label slides along its own yarn to the first spot clear of every
+   * frame, the ways back and the labels already placed, starting from the middle. Label size
+   * follows the zoom, so this runs again whenever the zoom changes.
+   */
+  let placedAt = null;
+  function placeLabels() {
+    placedAt = view.zoom;
+    const margin = 6;
+    // Measured on the page, so the paper's border, the tilt and the tape are inside the box.
+    const origin = world.getBoundingClientRect();
+    const taken = [...cards.querySelectorAll(".card")].map((card) => {
+      const parts = [card, card.querySelector(".card-tape")].map((node) =>
+        node.getBoundingClientRect(),
+      );
+      const left = Math.min(...parts.map((r) => r.left)),
+        top = Math.min(...parts.map((r) => r.top));
+      return {
+        x: (left - origin.left) / view.zoom,
+        y: (top - origin.top) / view.zoom,
+        width: (Math.max(...parts.map((r) => r.right)) - left) / view.zoom,
+        height: (Math.max(...parts.map((r) => r.bottom)) - top) / view.zoom,
+      };
+    });
+    const clear = (box) => taken.reduce((sum, t) => sum + overlap(box, t), 0);
+    // A way back is a note beside the frame it leaves from: under it if there is room, otherwise
+    // to its right, above it on the right, or to its left.
+    const notes = new Map();
+    for (const tag of overlay.querySelectorAll(".history-tag")) {
+      const screen = byId(board.screens, tag.dataset.screen),
+        frame = taken[board.screens.indexOf(screen)];
+      const index = notes.get(screen.id) ?? 0;
+      notes.set(screen.id, index + 1);
+      const w = tag.offsetWidth + margin * 2,
+        h = tag.offsetHeight + margin * 2,
+        step = index * h;
+      const spots = [
+        { x: frame.x + 15, y: frame.y + frame.height + step },
+        { x: frame.x + frame.width - w + 15, y: frame.y + frame.height + step },
+        { x: frame.x + frame.width, y: frame.y + frame.height - h - step },
+        { x: frame.x + frame.width - w, y: frame.y - h - step },
+        { x: frame.x - w, y: frame.y + frame.height - h - step },
+      ].map((p) => ({ ...p, width: w, height: h }));
+      const box = spots.find((s) => !clear(s)) ?? spots[0];
+      tag.style.left = `${box.x + margin}px`;
+      tag.style.top = `${box.y + margin}px`;
+      taken.push(box);
+    }
+    // A label with no clear spot anywhere on its yarn waits as a small mark; hovering or
+    // focusing it shows the words.
+    const spots = [0.5, 0.42, 0.58, 0.34, 0.66, 0.26, 0.74, 0.18, 0.82];
+    for (const label of overlay.querySelectorAll(".yarn-label")) {
+      label.classList.remove("as-dot");
+      const w = label.offsetWidth + margin * 2,
+        h = label.offsetHeight + margin * 2;
+      let spot = null;
+      for (const s of spots) {
+        const p = along(label.yarn, s);
+        const box = { x: p.x - w / 2, y: p.y - h / 2, width: w, height: h };
+        if (!clear(box)) {
+          spot = { p, box };
+          break;
+        }
+      }
+      label.removeAttribute("tabindex");
+      if (!spot) {
+        label.classList.add("as-dot");
+        label.tabIndex = 0;
+        const d = label.offsetWidth + margin * 2;
+        for (const s of spots) {
+          const p = along(label.yarn, s);
+          const box = { x: p.x - d / 2, y: p.y - d / 2, width: d, height: d };
+          if (!spot || !clear(box)) spot = { p, box };
+          if (!clear(box)) break;
+        }
+      }
+      label.style.left = `${spot.p.x}px`;
+      label.style.top = `${spot.p.y}px`;
+      taken.push(spot.box);
     }
   }
 
@@ -239,12 +368,12 @@
           ...board.screens.map((s) => layout[s.id].x + layout[s.id].width),
         ) * view.zoom;
       const bottom =
-        Math.max(...board.screens.map((s) => layout[s.id].y + cardHeight(s))) *
+        Math.max(...board.screens.map((s) => layout[s.id].y + footprint(s))) *
         view.zoom;
       const clamp = (v, a, b) =>
         Math.max(Math.min(a, b), Math.min(Math.max(a, b), v));
       view.x = clamp(view.x, pad - left, r.width - pad - right);
-      view.y = clamp(view.y, pad - top, r.height - 100 - bottom);
+      view.y = clamp(view.y, pad - top, r.height - pad - bottom);
       // Sparse layouts may have empty corners inside their bounds. Keep one frame visible.
       let best = null;
       for (const screen of board.screens) {
@@ -269,11 +398,12 @@
     world.style.setProperty("--board-zoom", view.zoom);
     world.classList.toggle("far", view.zoom < 0.4);
     zoomLabel.textContent = `${Math.round(view.zoom * 100)}%`;
+    if (board && placedAt !== view.zoom) placeLabels();
   };
 
   /** The whole board, centred, with room around it. */
   function fit() {
-    const pad = { top: 74, right: 40, bottom: 84, left: 40 };
+    const pad = { top: 44, right: 32, bottom: 24, left: 32 };
     const rect = stage.getBoundingClientRect();
     const xs = board.screens.map((s) => layout[s.id].x),
       ys = board.screens.map((s) => layout[s.id].y - 35);
@@ -282,7 +412,7 @@
       ),
       // cardHeight already counts the foot; the tape above is why ys starts 35 higher.
       bottom = Math.max(
-        ...board.screens.map((s) => layout[s.id].y + cardHeight(s)),
+        ...board.screens.map((s) => layout[s.id].y + footprint(s)),
       );
     const box = { x: Math.min(...xs), y: Math.min(...ys) };
     box.width = right - box.x;
@@ -382,7 +512,7 @@
   let pan = null,
     pinch = null;
   stage.addEventListener("pointerdown", (e) => {
-    if (e.target.closest(".card, .demo-controls, .demo-legend")) return;
+    if (e.target.closest(".card")) return;
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     stage.setPointerCapture(e.pointerId);
     if (pointers.size === 1) {
@@ -585,9 +715,22 @@
           (pin) => !details.length || pin.kind === "detail",
         );
     const unplaced = el("div", "player-unplaced");
+    const onMobile = mobile && screen.mobileAssetId;
+    // As in the app: a pin missing from this drawing (not on the mobile drawing, or still at its
+    // provisional placeholder) waits beside it as a button.
+    if (a && pins.some((pin) => (onMobile ? !pin.mobile : pin.provisional)))
+      unplaced.append(
+        el(
+          "span",
+          null,
+          onMobile
+            ? "Not placed on the mobile drawing yet:"
+            : "Not placed on the drawing yet:",
+        ),
+      );
     pins.forEach((pin) => {
       const i = pinsOf(screen.id).findIndex((p) => p.id === pin.id);
-      if (!a || (mobile && screen.mobileAssetId && !pin.mobile)) {
+      if (!a || (onMobile ? !pin.mobile : pin.provisional)) {
         const button = el("button", "button", `${i + 1}. ${pin.title}`);
         button.addEventListener("click", () => tryPin(pin));
         unplaced.append(button);
@@ -820,7 +963,7 @@
     );
     legend.textContent = "";
     for (const color of used) {
-      const name = board.colorLabels?.[color] ?? color;
+      const name = board.colorLabels?.[color] || CATEGORIES[color] || color;
       const item = el("span");
       const dot = el("i");
       dot.style.background = COLORS[color];

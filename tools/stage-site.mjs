@@ -13,6 +13,7 @@ export async function stageSite(
   for (const name of [
     "index.html",
     "guide.html",
+    "404.html",
     "styles.css",
     "links.js",
     "demo.html",

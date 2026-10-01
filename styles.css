@@ -85,14 +85,15 @@ a {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   font: 700 22px/1 var(--sans);
   letter-spacing: -0.4px;
   text-decoration: none;
 }
+/* The space belongs after the logo only, so the red full stop stays on the name. */
 .brand img {
   width: 30px;
   height: 30px;
+  margin-right: 10px;
 }
 .brand span {
   color: var(--red);
@@ -317,6 +318,23 @@ a {
 .card .button {
   align-self: flex-start;
 }
+.not-found {
+  padding: 64px 0;
+}
+.not-found h1 {
+  font: 400 clamp(36px, 5vw, 56px)/1.1 var(--serif);
+  margin-bottom: 12px;
+}
+.not-found p {
+  color: var(--muted);
+  font-size: 18px;
+}
+.not-found-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
 .site-footer {
   border-top: 1px solid var(--line);
   padding: 24px 0 40px;
@@ -384,6 +402,9 @@ a {
 .guide p,
 .guide li {
   color: #4a5346;
+}
+.guide p + p {
+  margin-top: 12px;
 }
 .guide ul,
 .guide ol {
