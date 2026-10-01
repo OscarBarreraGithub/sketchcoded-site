@@ -596,7 +596,17 @@
     }),
   );
   new ResizeObserver(updateScrollHint).observe(frameBox);
-  new ResizeObserver(updateScrollHint).observe($("note"));
+  // Pins sit on the drawing, not on the whole frame, which may also hold the pins still to place.
+  new ResizeObserver(() => {
+    const box = { x: shot.offsetLeft, y: shot.offsetTop };
+    Object.assign(box, { w: shot.offsetWidth, h: shot.offsetHeight });
+    for (const [key, value] of Object.entries(box))
+      frameBox.style.setProperty(`--shot-${key}`, `${value}px`);
+  }).observe(shot);
+  new ResizeObserver(() => {
+    if (!player.hidden) sizeFrame();
+    updateScrollHint();
+  }).observe($("note"));
   function sizeFrame() {
     const screen = shownScreen();
     const a = screen && playerAsset(screen);
@@ -609,14 +619,35 @@
     // As in the app, a drawing never shrinks until its pins pile up: its long side keeps 420px,
     // and past that the stage scrolls.
     const least = Math.min(aspect >= 1 ? 420 : 420 * aspect, a.width) + pad;
-    const width = Math.max(
-      160,
-      least,
-      Math.floor(
-        Math.min(stageSize.width, (stageSize.height - pad) * aspect + pad),
-      ),
-    );
-    frameBox.style.width = `${width}px`;
+    // The drawing shares the stage's height with what sits under it: the pins still to place,
+    // inside the frame, and the note below it. Together they fit without scrolling.
+    const note = $("note");
+    const besides = () => {
+      const unplaced = frameBox.querySelector(".player-unplaced");
+      return (
+        (note.offsetHeight
+          ? note.offsetHeight + parseFloat(getComputedStyle(playerStage).rowGap)
+          : 0) +
+        (unplaced
+          ? unplaced.offsetHeight +
+            parseFloat(getComputedStyle(unplaced).marginTop)
+          : 0)
+      );
+    };
+    const fit = () =>
+      Math.max(
+        160,
+        least,
+        Math.floor(
+          Math.min(
+            stageSize.width,
+            (stageSize.height - besides() - pad) * aspect + pad,
+          ),
+        ),
+      );
+    frameBox.style.width = `${fit()}px`;
+    // The pins still to place rewrap at the new width, so measure them once more.
+    frameBox.style.width = `${fit()}px`;
   }
 
   function open(screenId) {
@@ -692,7 +723,7 @@
       const dot = el("button", "player-pin", String(i + 1));
       dot.type = "button";
       const pos = mobile && pin.mobile ? pin.mobile : pin;
-      dot.style.cssText = `left:calc(10px + ${pos.x} * (100% - 20px));top:calc(10px + ${pos.y} * (100% - 20px))`;
+      dot.style.cssText = `left:calc(var(--shot-x) + ${pos.x} * var(--shot-w));top:calc(var(--shot-y) + ${pos.y} * var(--shot-h))`;
       dot.title = pin.title;
       dot.setAttribute("aria-label", `Try ${pin.title}`);
       dot.dataset.pin = pin.id;
@@ -700,9 +731,6 @@
       frameBox.append(dot);
     });
     if (unplaced.children.length) frameBox.append(unplaced);
-    sizeFrame();
-    playerStage.scrollTop = 0;
-    requestAnimationFrame(updateScrollHint);
     // An undrawn page is only its plan: no note under it.
     $("note").hidden = !a;
     $("note").textContent = pins.length
@@ -712,6 +740,9 @@
       $("note").textContent =
         `Arrived from ${arrivedVia.map((id) => byId(board.screens, id).title).join(" → ")}, the way a visitor gets here. ` +
         $("note").textContent;
+    sizeFrame();
+    playerStage.scrollTop = 0;
+    requestAnimationFrame(updateScrollHint);
   }
 
   /**

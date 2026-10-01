@@ -418,6 +418,11 @@
   place-items: center;
 }
 .player-frame {
+  /* Where the drawing sits in the frame (measured in demo.js); pins are placed on it. */
+  --shot-x: 10px;
+  --shot-y: 10px;
+  --shot-w: calc(100% - 20px);
+  --shot-h: calc(100% - 20px);
   position: relative;
   max-width: 100%;
   background: #fffef5;
@@ -733,8 +738,8 @@
 
 /* A page with no drawing yet: its summary, then what its author wants it to do. */
 .player-frame.planned {
-  width: min(680px, 100%);
-  padding: 28px 30px;
+  width: min(880px, 100%);
+  padding: 24px 32px;
 }
 .plan-page {
   display: flex;
@@ -807,7 +812,6 @@
   line-height: 1.5;
   width: min(680px, 100%);
   overflow-wrap: anywhere;
-  padding-bottom: 54px;
 }
 .player-note[hidden] {
   display: none;
@@ -835,7 +839,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* What the walk shows sits in the middle when it fits and starts at the top when it does not. */
   justify-content: flex-start;
+  justify-content: safe center;
   gap: 16px;
   scrollbar-width: auto;
   scrollbar-color: #b0b89e #414438;
