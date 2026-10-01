@@ -140,6 +140,12 @@ a {
   text-decoration: none;
   color: inherit;
 }
+/* Beside the text, the example sits a little lower than the title, so the page reads staggered. */
+@media (min-width: 861px) {
+  .example {
+    margin-top: 56px;
+  }
+}
 .example figure {
   background: #fffef5;
   border: 1px solid var(--line);
@@ -260,22 +266,6 @@ a {
   font-size: 16px;
   margin-top: 12px;
 }
-.local {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 18px 20px;
-  border-left: 3px solid var(--green);
-  background: #f3f5ec;
-  border-radius: 0 10px 10px 0;
-}
-.local strong {
-  display: block;
-}
-.local p {
-  color: var(--muted);
-  font-size: 16px;
-}
 /* Guidelines: our rules for web design, compact, at the bottom of the home page. */
 .guidelines {
   padding: 8px 0 56px;
@@ -363,8 +353,10 @@ a {
   }
 }
 /* The source link stands on its own under the setup prompt, centred, with the mark. */
-/* Beside the prompt: how ideas become the plan, running locally, then the source and the sister
-   projects. */
+/* Beside the prompt: how ideas become the plan, then the source and the sister projects. */
+.setup-side {
+  align-self: center;
+}
 .setup-note {
   color: var(--muted);
   margin-bottom: 20px;
