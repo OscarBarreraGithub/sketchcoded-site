@@ -5,9 +5,10 @@
  *   path led to one of them stays as a note on its drawing, with its own description.
  * - Isolated, undeveloped planning frames are hidden unless `keepPlanned` is set. Every authored
  *   route and drawing is kept.
- * - A frame without a drawing carries `wants`: what its author wants the page to do, one line per
- *   idea and per way onward, from `pages` (keyed by frame code, then idea code or "pin N").
- *   An idea or pin without a written line falls back to its title.
+ * - A frame without a drawing carries `summary`, one line on what the page is for, and `wants`:
+ *   what its author wants the page to do, one line per idea and per way onward. Both come from
+ *   `pages`, keyed by frame code, then "summary", an idea code or "pin N". A missing summary
+ *   falls back to the frame's purpose, a missing line to the idea's or pin's title.
  */
 export function curateExample(
   project,
@@ -83,7 +84,13 @@ export function curateExample(
   return {
     ...rest,
     screens: screens.map((screen) =>
-      screen.assetId ? screen : { ...screen, wants: wants(screen) },
+      screen.assetId
+        ? screen
+        : {
+            ...screen,
+            summary: pages[screen.code]?.summary ?? screen.purpose ?? "",
+            wants: wants(screen),
+          },
     ),
     pins,
     transitions,
@@ -101,6 +108,7 @@ export function unwrittenWants(project, pages = {}) {
   for (const screen of project.screens) {
     if (screen.assetId) continue;
     const lines = pages[screen.code] ?? {};
+    if (!lines.summary) missing.push(`${screen.code} summary`);
     for (const idea of project.ideas)
       if (idea.screenId === screen.id && !lines[idea.code])
         missing.push(`${screen.code} ${idea.code} “${idea.title}”`);

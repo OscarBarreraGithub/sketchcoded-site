@@ -717,7 +717,8 @@
    */
   function renderPlan(screen) {
     const page = el("section", "plan-page");
-    if (screen.purpose) page.append(el("p", "plan-summary", screen.purpose));
+    const summary = screen.summary ?? screen.purpose;
+    if (summary) page.append(el("p", "plan-summary", summary));
     const wants = screen.wants ?? [];
     if (wants.length) {
       page.append(el("p", "plan-lead", "I want this page to:"));

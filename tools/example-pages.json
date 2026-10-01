@@ -2,6 +2,7 @@
   "omit": ["P10"],
   "pages": {
     "P4": {
+      "summary": "The whole app as one list: every screen, its pins and where they lead, without the yarn in the way.",
       "I24": "list every screen once (entry screens, app screens and detail sketches), with a screen reached twice linking back to its first entry so loops stay simple",
       "I25": "find a title, a pin, a condition or a destination from one search box",
       "I26": "open a screen for editing straight from its entry",
@@ -10,6 +11,7 @@
       "pin 1": "take me back to the board from the Board tab"
     },
     "P5": {
+      "summary": "Every idea for the app in one place, from the first thought until it is pinned on a screen.",
       "I29": "let me add an idea at any time: a title, details, the screen it belongs on and where it leads",
       "I30": "keep unassigned ideas in a pool, with a folder for each screen",
       "I31": "turn an assigned idea into a pin on the drawing, with its text already written",
@@ -20,6 +22,7 @@
       "pin 1": "take me back to the board from the Board tab"
     },
     "P7": {
+      "summary": "Where I describe one connection: what starts it, when it happens and where it leads.",
       "I45": "require a short version: the label on the yarn and the option in the scenario chooser",
       "I46": "set how it navigates: open, replace, start fresh, open as a dialog, go back or dismiss",
       "I47": "say in plain words when it happens; the condition is never executed",
@@ -29,6 +32,7 @@
       "pin 1": "close and take me back to the board"
     },
     "P9": {
+      "summary": "Click through the sketches the way a visitor would, to check that every path leads somewhere.",
       "I55": "start from an entry screen, or from any screen as a labeled test entry",
       "I56": "follow a path when I click a pin, and show a scenario chooser with the conditions when a pin has several",
       "I57": "switch between web and mobile, listing the pins not yet placed on mobile under the drawing",

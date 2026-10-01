@@ -89,7 +89,11 @@ test("a frame left out by code takes its paths along, and undrawn pages say what
     layout: { home: {}, outline: {}, help: {} },
   };
   const pages = {
-    P2: { I1: "list every screen once", "pin 1": "take me back" },
+    P2: {
+      summary: "The app as one list.",
+      I1: "list every screen once",
+      "pin 1": "take me back",
+    },
   };
   const result = curateExample(project, { omit: ["P3"], pages });
   assert.deepEqual(
@@ -114,6 +118,7 @@ test("a frame left out by code takes its paths along, and undrawn pages say what
     { text: "Search" },
     { text: "take me back", pinId: "back" },
   ]);
+  assert.equal(result.screens[1].summary, "The app as one list.");
   assert.equal(result.screens[0].wants, undefined);
   assert.deepEqual(unwrittenWants(result, pages), ["P2 I2 “Search”"]);
 });

@@ -19,8 +19,8 @@ const board = {
   name: "A new user's board",
   assets: [{ id: "drawing", file }],
   screens: [
-    { id: "home", entry: true, assetId: "drawing" },
-    { id: "backlog", assetId: null },
+    { id: "home", code: "P1", entry: true, assetId: "drawing" },
+    { id: "backlog", code: "P2", assetId: null },
   ],
   pins: [],
   transitions: [],
@@ -110,9 +110,13 @@ test("custom addresses and board IDs work; failures preserve the existing exampl
     });
     const full = {
       ...board,
-      screens: [board.screens[0], { ...board.screens[1], wants: [] }],
+      screens: [
+        board.screens[0],
+        { ...board.screens[1], summary: "", wants: [] },
+      ],
     };
-    assert.deepEqual(complete, { ...full, unwritten: [] });
+    // A page without a drawing and without a summary line is listed for writing.
+    assert.deepEqual(complete, { ...full, unwritten: ["P2 summary"] });
     assert.deepEqual(
       JSON.parse(await readFile(path.join(out, "board.json"), "utf8")),
       full,
