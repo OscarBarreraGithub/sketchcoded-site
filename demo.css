@@ -1,4 +1,4 @@
-/* The public example: a cork board you can move around, and any screen walks its own flow.
+/* The public example: a cork board you can move around, and any screen tests the flow from there.
    Read only. No sidebars, no editing, nothing saved: reloading puts every frame back.
    The rules the app follows apply here too: the page never scrolls, nothing read under 15px,
    targets at least 44px, and it works at any browser zoom and on a phone. */
@@ -180,7 +180,9 @@
   background: #fdfbf4;
 }
 .card-shot::after {
-  content: "Walk it →";
+  content: "Test from here →";
+  z-index: 6;
+  white-space: nowrap;
   position: absolute;
   inset: auto 0 0 0;
   padding: 26px 10px 10px;

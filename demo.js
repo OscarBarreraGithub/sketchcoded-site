@@ -142,7 +142,7 @@
       shotButton.type = "button";
       shotButton.setAttribute(
         "aria-label",
-        `Walk the flow from ${screen.title}`,
+        `Test the flow from ${screen.title}`,
       );
       if (a) {
         const img = el("img");
@@ -207,7 +207,7 @@
       tape.type = "button";
       tape.append(el("span", null, screen.title));
       if (screen.entry) tape.append(el("span", "card-home", "\u2302"));
-      tape.setAttribute("aria-label", `Walk the flow from ${screen.title}`);
+      tape.setAttribute("aria-label", `Test the flow from ${screen.title}`);
       card.append(paper, tape);
       cards.append(card);
       dragable(card, screen.id);
