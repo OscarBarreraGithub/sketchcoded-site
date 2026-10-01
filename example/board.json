@@ -77,16 +77,6 @@
       "role": "modal",
       "leftToAi": true,
       "code": "P10"
-    },
-    {
-      "id": "guide",
-      "assetId": null,
-      "title": "Guide",
-      "purpose": "Read more: setup, everyday controls, agent handoff and recovery. Review flow checks the graph. Agents inspect the rendered board and pages left to the AI, and check the finished site when building it, against the full checklist including text overlap and browser zoom.",
-      "entry": false,
-      "role": "screen",
-      "leftToAi": true,
-      "code": "P12"
     }
   ],
   "pins": [
@@ -141,14 +131,14 @@
       "description": "Rephrase: runs on your computer; your sketches never leave it. No account, no API key."
     },
     {
-      "kind": "interaction",
+      "kind": "link",
       "id": "pin-landing-guide",
       "screenId": "home",
       "x": 0.7,
       "y": 0.76,
-      "color": "red",
+      "color": "blue",
       "title": "Read more: Guide",
-      "description": "Opens the guide: setup, controls, agent handoff, recovery, structural Review flow and the full checklist agents verify when working on the board or building its site."
+      "description": "Opens the guide: setup, controls, agent handoff, recovery, structural Review flow and the full checklist agents verify when working on the board or building its site. Opens https://sketchcoded.com/guide."
     },
     {
       "kind": "link",
@@ -475,17 +465,6 @@
       "title": "Close",
       "description": "Closes How it works and returns to the board.",
       "provisional": true
-    },
-    {
-      "kind": "interaction",
-      "id": "50dc89d9-518b-4d7a-ab05-a0e9a6852ef5",
-      "screenId": "guide",
-      "x": 0.86,
-      "y": 0.12,
-      "color": "olive",
-      "title": "Home",
-      "description": "The sketchcoded logo at the top left returns to the home page.",
-      "provisional": true
     }
   ],
   "transitions": [
@@ -494,18 +473,6 @@
       "pinId": "pin-landing-example",
       "target": "board",
       "summary": "Example: this website",
-      "condition": "",
-      "logic": "",
-      "context": "",
-      "fallback": false,
-      "navigation": "push",
-      "color": "red"
-    },
-    {
-      "id": "yarn-landing-guide",
-      "pinId": "pin-landing-guide",
-      "target": "guide",
-      "summary": "Read more: Guide",
       "condition": "",
       "logic": "",
       "context": "",
@@ -655,18 +622,6 @@
       "context": "",
       "fallback": false,
       "navigation": "dismiss",
-      "color": "olive"
-    },
-    {
-      "id": "5fa9683e-ef6c-4c11-96d5-4548413a371d",
-      "pinId": "50dc89d9-518b-4d7a-ab05-a0e9a6852ef5",
-      "target": null,
-      "summary": "Back to Home",
-      "condition": "",
-      "logic": "",
-      "context": "",
-      "fallback": false,
-      "navigation": "back",
       "color": "olive"
     }
   ],
@@ -1389,14 +1344,6 @@
       "pinId": null
     },
     {
-      "id": "guide-agent-verification",
-      "code": "I101",
-      "title": "Agents verify what they build",
-      "detail": "Explain the two places agents apply the full checklist: affected board views and pages left to the AI, and the finished site constructed from a board. Show how the agent reports browser evidence and unresolved failures. Review flow is structural.",
-      "screenId": "guide",
-      "pinId": null
-    },
-    {
       "id": "focused-public-example",
       "code": "I102",
       "title": "Focused example board",
@@ -1409,11 +1356,6 @@
     "home": {
       "x": 19.49100783600278,
       "y": 176.2176222626509,
-      "width": 400
-    },
-    "guide": {
-      "x": -299.43655733206634,
-      "y": 607.5128410932233,
       "width": 400
     },
     "board": {
@@ -1753,34 +1695,6 @@
           "note": "Closes How it works and returns to the board.",
           "kind": "back",
           "to": "Close",
-          "url": null,
-          "branches": 1
-        }
-      ]
-    },
-    "guide": {
-      "shape": "page",
-      "product": "Sketchcoded",
-      "title": "Guide",
-      "lede": "Read more: setup, everyday controls, agent handoff and recovery. Review flow checks the graph. Agents inspect the rendered board and pages left to the AI, and check the finished site when building it, against the full checklist including text overlap and browser zoom.",
-      "nav": [],
-      "primary": null,
-      "blocks": [
-        {
-          "block": "card",
-          "id": "guide-agent-verification",
-          "title": "Agents verify what they build",
-          "body": "Explain the two places agents apply the full checklist: affected board views and pages left to the AI, and the finished site constructed from a board. Show how the agent reports browser evidence and unresolved failures. Review flow is structural.",
-          "action": null
-        }
-      ],
-      "footer": [
-        {
-          "pinId": "50dc89d9-518b-4d7a-ab05-a0e9a6852ef5",
-          "label": "Home",
-          "note": "The sketchcoded logo at the top left returns to the home page.",
-          "kind": "back",
-          "to": "Back",
           "url": null,
           "branches": 1
         }

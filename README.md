@@ -9,7 +9,7 @@ The public landing page, guide and read-only example for Sketchcoded. Static HTM
 - `links.js`: the public repository, projects page and demo addresses. Both the setup prompt and manual clone commands are generated from this configuration. A fork can replace these links without changing application code.
 - `demo.html`, `demo.css` and `demo.js`: a read-only board and flow walker. Temporary frame movement resets on reload.
 - `example/board.json` and `example/art/`: a curated snapshot of an authored board. The bundled example works without the local app or the original author's data.
-- `assets/`: local images, icons and fonts. `assets/board.png` is a screenshot of the example board in the current app; retake it when the app's look changes. Fonts are not loaded from third parties.
+- `assets/`: local images, icons and fonts. `assets/favicon.svg`, the logo, is a copy of the app's `public/favicon.svg` (built by `npm run logo` there from the owner's drawing). `assets/board.png` is a screenshot of the example board in the current app; retake it when the app's look changes. Fonts are not loaded from third parties.
 - `_headers`: Cloudflare Pages cache and safety headers. Adapt these if another host uses a different format.
 - `tools/stage-site.mjs`: copies only public website files into `.site-dist/` for deployment. Repository notes, maintenance tools and local configuration stay out of the published site.
 
@@ -69,4 +69,4 @@ Run `node --test` for the exporter and staging tools. GitHub Actions runs them o
 
 After any visual change, check every page (home, guide, example and the 404 page) the way the app's build checklist requires: actual browser zoom at 125%, 150%, 200% and 250% in 1440×900 and 1280×720 windows, plus a phone-width window. The page itself never scrolls, panels show a visible scroll hint until their end, no text is under 12px, and nothing overlaps. In the example, yarn labels and ways back must stay clear of every frame at every zoom, and Test the flow must reach each page and come back. Record what was checked in the app repository's `docs/PROGRESS.md`.
 
-The official example contains three original drawings and six pages left to the AI, all connected. The exporter still omits any isolated, undeveloped frame a board may have.
+The official example contains three original drawings and five pages left to the AI, all connected. The exporter still omits any isolated, undeveloped frame a board may have.
