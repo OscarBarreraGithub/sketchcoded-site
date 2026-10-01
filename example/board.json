@@ -221,7 +221,7 @@
       "y": 0.77,
       "color": "olive",
       "title": "Runs local, sketches never leave",
-      "description": "Rephrase: runs on your computer; your sketches never leave it. No account, no API key."
+      "description": "Runs on your computer; your sketches never leave it. No account, no API key."
     },
     {
       "kind": "link",
@@ -1157,7 +1157,7 @@
       "id": "landing-local",
       "code": "I67",
       "title": "Runs local, sketches never leave",
-      "detail": "Rephrase: runs on your computer; your sketches never leave it. No account, no API key.",
+      "detail": "Runs on your computer; your sketches never leave it. No account, no API key.",
       "screenId": "home",
       "pinId": "pin-landing-local"
     },
@@ -1432,9 +1432,9 @@
     }
   },
   "viewport": {
-    "x": 222.49626244492265,
-    "y": 7.443281613460385,
-    "zoom": 0.49519758814409304
+    "x": 109.88462808334658,
+    "y": 1.075992493349844,
+    "zoom": 0.4472593694892178
   },
   "colorLabels": {
     "red": "Main path",
