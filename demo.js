@@ -659,7 +659,7 @@
     frameBox.querySelectorAll(".plan-page").forEach((node) => node.remove());
     if (!a) renderPlan(screen);
     frameBox
-      .querySelectorAll(".player-pin, .player-unplaced")
+      .querySelectorAll(".player-pin, .player-unplaced, .pin-note")
       .forEach((pin) => pin.remove());
     // An undrawn page lists its ways onward among what it should do (renderPlan).
     const pins = !a
@@ -695,6 +695,7 @@
       dot.style.cssText = `left:calc(10px + ${pos.x} * (100% - 20px));top:calc(10px + ${pos.y} * (100% - 20px))`;
       dot.title = pin.title;
       dot.setAttribute("aria-label", `Try ${pin.title}`);
+      dot.dataset.pin = pin.id;
       dot.addEventListener("click", () => tryPin(pin));
       frameBox.append(dot);
     });
@@ -741,42 +742,73 @@
     }
     frameBox.append(page);
   }
-  function tryPin(pin) {
-    if (pin.kind === "annotation") {
-      $("note").textContent =
-        pin.description || "This stays on the current screen.";
-      return;
-    }
-    if (pin.kind === "link") {
-      const url = pin.description?.match(
-        /https?:\/\/[^\s)\]}>"']+|\bwww\.[^\s)\]}>"']+/i,
-      )?.[0];
-      $("note").textContent = url
-        ? "This pin leaves the app: "
-        : "This link needs an address in its description.";
+  /**
+   * A pin that does not lead to another frame says what it is, beside the pin: its title, then
+   * its description, with a link pin's address as a link. Clicking elsewhere closes it.
+   */
+  function pinNote(pin, fallback) {
+    frameBox.querySelector(".pin-note")?.remove();
+    const note = el("div", "pin-note");
+    note.setAttribute("role", "status");
+    note.append(el("strong", null, pin.title || "Untitled pin"));
+    const text = pin.description || fallback;
+    if (text) {
+      const line = el("p");
+      const url = pin.kind === "link" && text.match(LINK)?.[0];
       if (url) {
+        const [before, after] = text.split(url);
         const a = el("a", null, url);
         a.href = url.startsWith("www.") ? `https://${url}` : url;
         a.target = "_blank";
         a.rel = "noreferrer";
-        $("note").append(a);
-      }
+        line.append(before, a, after ?? "");
+      } else line.textContent = text;
+      note.append(line);
+    }
+    const dot = frameBox.querySelector(`[data-pin="${CSS.escape(pin.id)}"]`);
+    if (!dot) {
+      $("note").hidden = false;
+      $("note").textContent = `${pin.title}${text ? `: ${text}` : ""}`;
       return;
     }
+    const pos = mobile && pin.mobile ? pin.mobile : pin;
+    note.style.cssText = dot.style.cssText;
+    note.classList.toggle("flip-x", pos.x > 0.55);
+    note.classList.toggle("flip-y", pos.y > 0.6);
+    frameBox.append(note);
+    // Keep it inside the part of the walk that is in view, however the drawing is scrolled.
+    const box = note.getBoundingClientRect(),
+      view = playerStage.getBoundingClientRect(),
+      edge = 8;
+    const dx =
+      Math.max(0, view.left + edge - box.left) -
+      Math.max(0, box.right - (view.right - edge));
+    const dy =
+      Math.max(0, view.top + edge - box.top) -
+      Math.max(0, box.bottom - (view.bottom - edge));
+    note.style.marginLeft = `${dx}px`;
+    note.style.marginTop = `${dy}px`;
+  }
+  const LINK = /https?:\/\/[^\s)\]}>"']+|\bwww\.[^\s)\]}>"']+/i;
+  frameBox.addEventListener("click", (e) => {
+    if (!e.target.closest(".player-pin, .pin-note"))
+      frameBox.querySelector(".pin-note")?.remove();
+  });
+  function tryPin(pin) {
+    if (pin.kind === "annotation")
+      return pinNote(pin, "This stays on the current screen.");
+    if (pin.kind === "link")
+      return pinNote(pin, "This link needs an address in its description.");
     if (pin.kind === "detail") {
-      if (!byId(board.screens, pin.detailTarget)) {
-        $("note").textContent = "This detail needs an attached drawing.";
-        return;
-      }
+      if (!byId(board.screens, pin.detailTarget))
+        return pinNote(pin, "This detail needs an attached drawing.");
       details.push(pin.detailTarget);
       show();
       return;
     }
     const options = yarnOf(pin.id);
-    if (!options.length) {
-      $("note").textContent = `“${pin.title}” has no path tied to it yet.`;
-      return;
-    }
+    if (!options.length) return pinNote(pin, "No path is tied to it yet.");
+    frameBox.querySelector(".pin-note")?.remove();
     if (options.length === 1) return take(options[0]);
     $("choice-title").textContent = pin.title;
     $("choice-detail").textContent = pin.description ?? "";
@@ -943,7 +975,9 @@
       }
     }
     if (e.key !== "Escape") return;
-    if (!choice.hidden) choice.hidden = true;
+    const note = frameBox.querySelector(".pin-note");
+    if (note) note.remove();
+    else if (!choice.hidden) choice.hidden = true;
     else if (!player.hidden) close();
   });
   playerStage.addEventListener("click", (e) => {

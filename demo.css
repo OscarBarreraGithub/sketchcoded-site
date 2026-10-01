@@ -688,6 +688,49 @@
 .card-shot.planned::after {
   padding-top: 14px;
 }
+/* A pin that stays on its screen or leaves the app says what it is, beside the pin (pinNote). */
+.pin-note {
+  position: absolute;
+  z-index: 9;
+  width: max-content;
+  max-width: min(340px, calc(100vw - 48px));
+  transform: translate(26px, 10px);
+  padding: 10px 14px 12px;
+  border: 1px solid #d6dccb;
+  border-radius: 10px;
+  background: #fffef5;
+  color: #253b2f;
+  box-shadow: 0 8px 22px #0005;
+  line-height: 1.45;
+  text-align: left;
+  /* It never blocks another pin: clicks pass through to the drawing, except on its link. */
+  pointer-events: none;
+}
+.pin-note.flip-x {
+  transform: translate(calc(-100% - 26px), 10px);
+}
+.pin-note.flip-y {
+  transform: translate(26px, calc(-100% - 10px));
+}
+.pin-note.flip-x.flip-y {
+  transform: translate(calc(-100% - 26px), calc(-100% - 10px));
+}
+.pin-note strong {
+  display: block;
+  font-size: 17px;
+}
+.pin-note p {
+  margin-top: 4px;
+  font-size: 16px;
+  color: #4c5648;
+  overflow-wrap: anywhere;
+}
+.pin-note a {
+  color: var(--green);
+  text-decoration: underline;
+  pointer-events: auto;
+}
+
 /* A page with no drawing yet: its summary, then what its author wants it to do. */
 .player-frame.planned {
   width: min(680px, 100%);
