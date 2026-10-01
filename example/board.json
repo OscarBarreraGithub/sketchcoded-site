@@ -154,9 +154,6 @@
           "text": "switch between web and mobile, listing the pins not yet placed on mobile under the drawing"
         },
         {
-          "text": "rewind the test, as a testing control separate from the app's own Back, which must be drawn"
-        },
-        {
           "text": "open detail references as an enlarged sketch without changing the app's history"
         },
         {
@@ -181,7 +178,7 @@
       "y": 0.24,
       "color": "olive",
       "title": "Title and tagline",
-      "description": "Sketchcoded. Ideas, connected."
+      "description": "Sketchcoded. Prompts make apps. Sketching makes your vision."
     },
     {
       "kind": "interaction",
@@ -231,7 +228,7 @@
       "y": 0.76,
       "color": "blue",
       "title": "Read more: Guide",
-      "description": "Opens the guide: setup, controls, agent handoff, recovery, structural Review flow and the full checklist agents verify when working on the board or building its site. Opens https://sketchcoded.com/guide."
+      "description": "Jumps to the design principles at the bottom of the home page. https://sketchcoded.com/#guidelines"
     },
     {
       "kind": "link",
@@ -287,8 +284,8 @@
       "kind": "annotation",
       "id": "pin-board-ideas-panel",
       "screenId": "board",
-      "x": 0.13,
-      "y": 0.53,
+      "x": 0.15,
+      "y": 0.51,
       "color": "olive",
       "title": "Ideas panel",
       "description": "Organized ideas beside the library: expand, scroll, and make clear what is still left to do."
@@ -297,7 +294,7 @@
       "kind": "annotation",
       "id": "pin-board-name",
       "screenId": "board",
-      "x": 0.31,
+      "x": 0.365,
       "y": 0.12,
       "color": "olive",
       "title": "Project name",
@@ -317,8 +314,8 @@
       "kind": "interaction",
       "id": "pin-idea-31",
       "screenId": "board",
-      "x": 0.49,
-      "y": 0.19,
+      "x": 0.487,
+      "y": 0.183,
       "color": "red",
       "title": "Switch to App outline",
       "description": "Board, Outline and Plan tabs. Make it obvious which one is selected."
@@ -327,8 +324,8 @@
       "kind": "interaction",
       "id": "pin-idea-32",
       "screenId": "board",
-      "x": 0.56,
-      "y": 0.19,
+      "x": 0.58,
+      "y": 0.183,
       "color": "red",
       "title": "Switch to Planning",
       "description": "Open the functionality backlog."
@@ -337,7 +334,7 @@
       "kind": "annotation",
       "id": "pin-idea-25",
       "screenId": "board",
-      "x": 0.77,
+      "x": 0.755,
       "y": 0.12,
       "color": "olive",
       "title": "Export project",
@@ -347,8 +344,8 @@
       "kind": "interaction",
       "id": "pin-idea-30",
       "screenId": "board",
-      "x": 0.85,
-      "y": 0.13,
+      "x": 0.84,
+      "y": 0.12,
       "color": "red",
       "title": "Test flow",
       "description": "Play the sketches."
@@ -358,7 +355,7 @@
       "id": "pin-board-help",
       "screenId": "board",
       "x": 0.92,
-      "y": 0.13,
+      "y": 0.125,
       "color": "red",
       "title": "Help button",
       "description": "The ? button opens How it works."
@@ -519,12 +516,11 @@
       "kind": "interaction",
       "id": "541cea23-5944-4df4-902c-23703d0b322a",
       "screenId": "screen-editor",
-      "x": 0.86,
-      "y": 0.92,
+      "x": 0.91,
+      "y": 0.13,
       "color": "olive",
       "title": "Close",
-      "description": "Closes the screen editor and returns to the board.",
-      "provisional": true
+      "description": "Closes the screen editor and returns to the board."
     },
     {
       "kind": "interaction",
@@ -1125,7 +1121,7 @@
       "id": "landing-title",
       "code": "I63",
       "title": "Title and tagline",
-      "detail": "Sketchcoded. Ideas, connected.",
+      "detail": "Sketchcoded. Prompts make apps. Sketching makes your vision.",
       "screenId": "home",
       "pinId": "pin-landing-title"
     },
@@ -1165,7 +1161,7 @@
       "id": "landing-guide",
       "code": "I68",
       "title": "Read more: Guide",
-      "detail": "Opens the guide: setup, controls, agent handoff, recovery, structural Review flow and the full checklist agents verify when working on the board or building its site.",
+      "detail": "Jumps to the design principles at the bottom of the home page.",
       "screenId": "home",
       "pinId": "pin-landing-guide"
     },
