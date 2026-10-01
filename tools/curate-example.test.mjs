@@ -122,3 +122,23 @@ test("a frame left out by code takes its paths along, and undrawn pages say what
   assert.equal(result.screens[0].wants, undefined);
   assert.deepEqual(unwrittenWants(result, pages), ["P2 I2 “Search”"]);
 });
+
+test("a line set to null leaves that idea off its page", () => {
+  const project = {
+    screens: [{ id: "flow", code: "P9", assetId: null, leftToAi: true }],
+    pins: [],
+    transitions: [],
+    ideas: [
+      { code: "I1", title: "Start anywhere", screenId: "flow" },
+      { code: "I2", title: "Rewind the test", screenId: "flow" },
+    ],
+    assets: [],
+    layout: { flow: {} },
+  };
+  const pages = {
+    P9: { summary: "Click through.", I1: "start anywhere", I2: null },
+  };
+  const result = curateExample(project, { pages, keepPlanned: true });
+  assert.deepEqual(result.screens[0].wants, [{ text: "start anywhere" }]);
+  assert.deepEqual(unwrittenWants(project, pages), []);
+});

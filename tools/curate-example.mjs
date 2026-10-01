@@ -8,7 +8,8 @@
  * - A frame without a drawing carries `summary`, one line on what the page is for, and `wants`:
  *   what its author wants the page to do, one line per idea and per way onward. Both come from
  *   `pages`, keyed by frame code, then "summary", an idea code or "pin N". A missing summary
- *   falls back to the frame's purpose, a missing line to the idea's or pin's title.
+ *   falls back to the frame's purpose, a missing line to the idea's or pin's title, and a line
+ *   set to null leaves that idea out of the list.
  */
 export function curateExample(
   project,
@@ -69,7 +70,9 @@ export function curateExample(
     const own = pins.filter((pin) => pin.screenId === screen.id);
     return [
       ...ideas
-        .filter((idea) => idea.screenId === screen.id)
+        .filter(
+          (idea) => idea.screenId === screen.id && lines[idea.code] !== null,
+        )
         .map((idea) => ({ text: lines[idea.code] ?? idea.title })),
       ...own
         .map((pin, i) => ({ pin, key: `pin ${i + 1}` }))
@@ -110,7 +113,7 @@ export function unwrittenWants(project, pages = {}) {
     const lines = pages[screen.code] ?? {};
     if (!lines.summary) missing.push(`${screen.code} summary`);
     for (const idea of project.ideas)
-      if (idea.screenId === screen.id && !lines[idea.code])
+      if (idea.screenId === screen.id && lines[idea.code] === undefined)
         missing.push(`${screen.code} ${idea.code} “${idea.title}”`);
     project.pins
       .filter((pin) => pin.screenId === screen.id)

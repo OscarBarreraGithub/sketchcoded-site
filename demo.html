@@ -27,15 +27,12 @@
   </head>
   <body class="demo-body">
     <header class="demo-header">
-      <a class="brand" href="./"
-        ><img src="assets/favicon.svg" alt="" />sketchcoded<span>.</span></a
+      <a class="button demo-back" href="./" aria-label="Back to the home page"
+        ><span aria-hidden="true">←</span>
+        <span class="demo-back-label">Home</span></a
       >
       <p class="demo-intro">
         <strong>Sketchcoded, on its own board.</strong>
-        <span
-          >The original drawings and connected pages. Drag a frame; click one to
-          test the flow from it.</span
-        >
       </p>
       <button class="button primary demo-play" type="button" data-play>
         <svg viewBox="0 0 16 16" aria-hidden="true" width="14" height="14">
@@ -118,8 +115,13 @@
           Show mobile drawing
         </button>
         <span class="player-steps" data-steps>0 steps</span>
-        <button class="button small" type="button" data-rewind>
-          Rewind test
+        <button
+          class="button small player-detail-close"
+          type="button"
+          data-close-detail
+          hidden
+        >
+          Close detail
         </button>
         <button class="button small" type="button" data-restart>Restart</button>
         <button

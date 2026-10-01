@@ -36,7 +36,7 @@
       "I55": "start from an entry screen, or from any screen as a labeled test entry",
       "I56": "follow a path when I click a pin, and show a scenario chooser with the conditions when a pin has several",
       "I57": "switch between web and mobile, listing the pins not yet placed on mobile under the drawing",
-      "I58": "rewind the test, as a testing control separate from the app's own Back, which must be drawn",
+      "I58": null,
       "I59": "open detail references as an enlarged sketch without changing the app's history",
       "I60": "restart from the chosen screen, and hide the pins to see the sketch clean",
       "I96": "turn a frame left to the AI into a real page I can walk: a top bar, a heading, a main action, cards from its ideas, fields for a sign-in, a dialog for a modal",

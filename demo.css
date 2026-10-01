@@ -19,12 +19,12 @@
   border-bottom: 1px solid var(--line);
   background: #f8f8f1;
 }
-.demo-header .brand {
-  font-size: 22px;
-}
-.demo-header .brand img {
-  width: 26px;
-  height: 26px;
+/* The way back to the home page, at the top left. */
+.demo-back {
+  flex-shrink: 0;
+  gap: 6px;
+  min-height: 44px;
+  text-decoration: none;
 }
 .demo-intro {
   flex: 1;
@@ -573,7 +573,7 @@
   .player-steps {
     display: none;
   }
-  /* The title takes its own row so the three buttons share the next one evenly. */
+  /* The title takes its own row so the buttons share the next one evenly. */
   .player-where {
     flex-basis: 100%;
   }
@@ -781,7 +781,7 @@
   color: #2b4033;
 }
 
-/* Reachable targets and independent test rewind. */
+/* Reachable targets. */
 .player-pin {
   width: 44px;
   height: 44px;
@@ -878,7 +878,8 @@
   border-radius: 8px;
 }
 .player-scroll-hint[hidden],
-.player-layout[hidden] {
+.player-layout[hidden],
+.player-detail-close[hidden] {
   display: none;
 }
 @media (max-height: 500px) {
@@ -950,18 +951,19 @@
   display: block;
 }
 
-/* A laptop at 400% to 500% browser zoom (under 380 CSS px wide or 340 tall): the header keeps the
-   logo and Test the flow, the walk's buttons share their rows, and the colour key steps aside so
+/* A laptop at 400% to 500% browser zoom (under 380 CSS px wide or 340 tall): the header keeps
+   Home and Test the flow, the walk's buttons share their rows, and the colour key steps aside so
    the cork keeps some room. Nothing reaches past the window. */
 @media (max-width: 380px) {
   .demo-header {
     gap: 8px;
   }
-  .demo-header .brand {
-    font-size: 0;
+  .demo-back {
+    padding-left: 14px;
+    padding-right: 14px;
   }
-  .demo-header .brand img {
-    margin-right: 0;
+  .demo-back-label {
+    display: none;
   }
   .player-bar {
     flex-wrap: wrap;

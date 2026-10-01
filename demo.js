@@ -558,7 +558,6 @@
   // ----------------------------------------------------- walking the flow
   let stack = [];
   let steps = 0;
-  let rewinds = [];
   let details = [];
   let mobile = false;
   let arrivedVia = [];
@@ -652,7 +651,6 @@
 
   function open(screenId) {
     if (!board) return;
-    rewinds = [];
     details = [];
     mobile = false;
     ({ stack, via: arrivedVia } = arrival(screenId));
@@ -676,8 +674,7 @@
     $("title").textContent = screen.title;
     $("kind").hidden = current().kind !== "modal";
     $("steps").textContent = `${steps} ${steps === 1 ? "step" : "steps"}`;
-    $("rewind").disabled = !rewinds.length && !details.length;
-    $("rewind").textContent = details.length ? "Close detail" : "Rewind test";
+    $("close-detail").hidden = !details.length;
     $("layout").hidden = !screen.mobileAssetId;
     $("layout").textContent = mobile
       ? "Show web drawing"
@@ -887,10 +884,17 @@
         kind: t.navigation === "modal" ? "modal" : "page",
       };
       if (t.navigation === "reset") next = [frame];
-      else if (t.navigation === "replace") {
-        frame.kind = next.at(-1).kind;
-        next[next.length - 1] = frame;
-      } else next.push(frame);
+      else {
+        if (t.navigation === "replace") frame.kind = next.pop().kind;
+        // As in the app, Back never goes in circles: going to a screen already in the history
+        // takes the history back to it.
+        const earlier = next.findIndex((f) => f.screenId === frame.screenId);
+        if (earlier >= 0) {
+          frame.kind = next[earlier].kind;
+          next = next.slice(0, earlier);
+        }
+        next.push(frame);
+      }
     }
     return { next };
   }
@@ -900,7 +904,6 @@
       $("note").textContent = error;
       return;
     }
-    rewinds.push({ stack, steps });
     stack = next;
     steps += 1;
     details = [];
@@ -910,7 +913,7 @@
   /**
    * Starting away from an entry: arrive the way a visitor would, along the shortest authored
    * route from an entry, as the app does, so a page's own Back and Close lead where they really
-   * do. The route only sets up history; it is not a test step and rewind stops at the start.
+   * do. The route only sets up history; it is not a test step.
    */
   function arrival(screenId) {
     const alone = { stack: [{ screenId, kind: "page" }], via: [] };
@@ -964,16 +967,9 @@
     const entry = board.screens.find((s) => s.entry) ?? board.screens[0];
     open(entry.id);
   });
-  $("rewind").addEventListener("click", () => {
-    if (details.length) {
-      details.pop();
-      show();
-      return;
-    }
-    const saved = rewinds.pop();
-    if (!saved) return;
-    stack = saved.stack;
-    steps = saved.steps;
+  // The example has no Rewind test: its pages' own Back and Close, and Restart, cover the walk.
+  $("close-detail").addEventListener("click", () => {
+    details.pop();
     show();
   });
   $("layout").addEventListener("click", () => {
