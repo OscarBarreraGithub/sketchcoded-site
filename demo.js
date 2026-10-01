@@ -603,13 +603,15 @@
       return;
     }
     const pad = 20;
+    const aspect = a.width / a.height;
+    // As in the app, a drawing never shrinks until its pins pile up: its long side keeps 420px,
+    // and past that the stage scrolls.
+    const least = Math.min(aspect >= 1 ? 420 : 420 * aspect, a.width) + pad;
     const width = Math.max(
       160,
+      least,
       Math.floor(
-        Math.min(
-          stageSize.width,
-          (stageSize.height - pad) * (a.width / a.height) + pad,
-        ),
+        Math.min(stageSize.width, (stageSize.height - pad) * aspect + pad),
       ),
     );
     frameBox.style.width = `${width}px`;

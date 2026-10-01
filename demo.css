@@ -1,7 +1,7 @@
 /* The public example: a cork board you can move around, and any screen walks its own flow.
    Read only. No sidebars, no editing, nothing saved: reloading puts every frame back.
-   The rules the app follows apply here too: the page never scrolls, nothing under 12px, targets
-   at least 44px, and it works at any browser zoom and on a phone. */
+   The rules the app follows apply here too: the page never scrolls, nothing read under 15px,
+   targets at least 44px, and it works at any browser zoom and on a phone. */
 .demo-body {
   height: 100dvh;
   display: flex;
@@ -20,7 +20,7 @@
   background: #f8f8f1;
 }
 .demo-header .brand {
-  font-size: 19px;
+  font-size: 22px;
 }
 .demo-header .brand img {
   width: 26px;
@@ -33,12 +33,12 @@
   flex-wrap: wrap;
   gap: 4px 10px;
   align-items: baseline;
-  font-size: 13px;
+  font-size: 16px;
   color: var(--muted);
 }
 .demo-intro strong {
   color: var(--ink);
-  font-size: 14px;
+  font-size: 17px;
 }
 .demo-play {
   flex-shrink: 0;
@@ -92,7 +92,7 @@
   inset: 0;
   display: grid;
   place-items: center;
-  font: 500 15px var(--sans);
+  font: 500 18px var(--sans);
   color: #6a5a3c;
 }
 
@@ -147,7 +147,7 @@
   align-items: center;
   gap: 8px;
   font-family: var(--hand);
-  font-size: clamp(22px, calc(13px / var(--board-zoom, 1)), 46px);
+  font-size: clamp(24px, calc(16px / var(--board-zoom, 1)), 56px);
   font-weight: 600;
   line-height: 1.1;
   color: #686748;
@@ -160,7 +160,7 @@
   text-overflow: ellipsis;
 }
 .card-home {
-  font-size: 0.7em;
+  font-size: 1em;
   color: #9b986f;
 }
 .card-shot {
@@ -184,7 +184,7 @@
   position: absolute;
   inset: auto 0 0 0;
   padding: 26px 10px 10px;
-  font: 600 clamp(13px, calc(13px / var(--board-zoom, 1)), 30px) var(--sans);
+  font: 600 clamp(16px, calc(16px / var(--board-zoom, 1)), 36px) var(--sans);
   color: #fffdf4;
   text-align: right;
   background: linear-gradient(to top, #24322a9e, transparent);
@@ -201,7 +201,7 @@
   gap: 8px;
   height: 46px;
   padding: 0 4px;
-  font-size: clamp(12px, calc(12px / var(--board-zoom, 1)), 30px);
+  font-size: clamp(14px, calc(15px / var(--board-zoom, 1)), 36px);
   letter-spacing: 1.4px;
   color: #9b9b87;
 }
@@ -216,13 +216,13 @@
 .pin {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 23px;
-  height: 23px;
+  width: max(23px, calc(30px / var(--board-zoom, 1)));
+  height: max(23px, calc(30px / var(--board-zoom, 1)));
   border-radius: 50%;
   border: 2px solid #fff7e7;
   background: radial-gradient(circle at 35% 25%, #d88573, #ae4d41 70%);
   color: #fff8e9;
-  font: 700 12px var(--sans);
+  font: 700 max(12px, calc(15px / var(--board-zoom, 1))) var(--sans);
   display: grid;
   place-items: center;
   box-shadow: 1px 3px 5px #553d2855;
@@ -238,9 +238,9 @@
   background: #f7f1dd;
   border: 1px solid #d9cba3;
   color: #6b5a40;
-  font: 600 max(12px, calc(12px / var(--board-zoom, 1))) var(--sans);
+  font: 600 max(17px, calc(16px / var(--board-zoom, 1))) var(--sans);
   white-space: nowrap;
-  max-width: calc(240px / var(--board-zoom, 1));
+  max-width: calc(300px / var(--board-zoom, 1));
   overflow: hidden;
   text-overflow: ellipsis;
   box-shadow: 0 2px 4px #4a3c2430;
@@ -291,7 +291,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px 14px;
-  font-size: 13px;
+  font-size: 16px;
   color: #5d6455;
 }
 .demo-legend span {
@@ -319,7 +319,7 @@
   border: 0;
   border-radius: 999px;
   background: none;
-  font-size: 19px;
+  font-size: 22px;
   line-height: 1;
   color: #4c5648;
   cursor: pointer;
@@ -330,12 +330,12 @@
 .demo-zoom {
   min-width: 52px;
   text-align: center;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
   color: #5d6455;
 }
 .demo-hint {
-  font-size: 12px;
+  font-size: 15px;
   color: #6b5a3c;
   text-align: right;
 }
@@ -373,7 +373,7 @@
   align-items: center;
   gap: 8px;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 18px;
   min-width: 0;
 }
 .player-where span {
@@ -382,14 +382,14 @@
   white-space: nowrap;
 }
 .player-where b {
-  font-size: 12px;
+  font-size: 15px;
   color: #6f7e62;
   background: #eef1e6;
   border-radius: 4px;
   padding: 3px 7px;
 }
 .player-kind {
-  font-size: 12px;
+  font-size: 15px;
   letter-spacing: 1px;
   padding: 3px 8px;
   border-radius: 4px;
@@ -398,7 +398,7 @@
 }
 .player-steps {
   margin-left: auto;
-  font-size: 13px;
+  font-size: 16px;
   color: var(--muted);
 }
 .player-close {
@@ -437,13 +437,13 @@
   transform: translate(-50%, -50%);
   width: 34px;
   height: 34px;
-  min-width: 34px;
-  min-height: 34px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
   border: 2px solid #fff7e7;
   background: radial-gradient(circle at 35% 25%, #d88573, #ae4d41 70%);
   color: #fff8e9;
-  font: 700 14px var(--sans);
+  font: 700 17px var(--sans);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -470,7 +470,7 @@
 .player-note {
   flex-shrink: 0;
   text-align: center;
-  font-size: 13px;
+  font-size: 16px;
   color: #efeadb;
 }
 .player-choice {
@@ -496,15 +496,15 @@
   gap: 10px;
 }
 .player-choice-card .eyebrow {
-  font-size: 12px;
+  font-size: 15px;
   letter-spacing: 1.4px;
   color: #96a086;
 }
 .player-choice-card h2 {
-  font: 400 24px/1.2 var(--serif);
+  font: 400 27px/1.2 var(--serif);
 }
 .player-choice-card > p {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--muted);
 }
 .branch {
@@ -526,14 +526,14 @@
   background: #f1f3e9;
 }
 .branch strong {
-  font-size: 14px;
+  font-size: 17px;
 }
 .branch small {
-  font-size: 12px;
+  font-size: 15px;
   color: var(--muted);
 }
 .branch em {
-  font-size: 12px;
+  font-size: 15px;
   font-style: normal;
   color: #7d8872;
 }
@@ -638,10 +638,10 @@
   font-style: normal;
   letter-spacing: 1.1px;
   color: #a08c5a;
-  font-size: clamp(12px, calc(12px / var(--board-zoom, 1)), 26px);
+  font-size: clamp(14px, calc(15px / var(--board-zoom, 1)), 32px);
 }
 .card-waiting b {
-  font: 400 clamp(15px, calc(15px / var(--board-zoom, 1)), 36px)
+  font: 400 clamp(18px, calc(16px / var(--board-zoom, 1)), 40px)
     var(--serif, Georgia, serif);
   color: #4c5648;
 }
@@ -663,14 +663,14 @@
   text-align: left;
 }
 .player-waiting strong {
-  font: 400 24px/1.2 var(--serif, Georgia, serif);
+  font: 400 27px/1.2 var(--serif, Georgia, serif);
 }
 .player-waiting p {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--muted);
 }
 .player-waiting span {
-  font-size: 12px;
+  font-size: 15px;
   letter-spacing: 1.2px;
   color: #a08c5a;
 }
@@ -678,13 +678,13 @@
   margin: 0;
   padding-left: 20px;
   font-family: var(--hand, cursive);
-  font-size: 20px;
+  font-size: 23px;
   line-height: 1.35;
   color: #4c5648;
 }
 .player-waiting li.more {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 16px;
   color: var(--muted);
   list-style: none;
   margin-left: -20px;
@@ -741,18 +741,18 @@
   color: #253b2f;
 }
 .standard-page h1 {
-  font: 400 30px/1.2 var(--serif);
+  font: 400 33px/1.2 var(--serif);
   margin: 16px 0;
 }
 .standard-page h2 {
-  font-size: 20px;
+  font-size: 23px;
 }
 .standard-page p {
-  font-size: 16px;
+  font-size: 19px;
   margin: 12px 0;
 }
 .standard-page small {
-  font-size: 12px;
+  font-size: 15px;
 }
 .standard-page article {
   border-top: 1px solid #c8cfb9;
@@ -766,7 +766,7 @@
 }
 .standard-page input {
   min-height: 48px;
-  font: 16px var(--sans);
+  font: 19px var(--sans);
   padding: 8px 12px;
   border: 1px solid #aab89e;
   border-radius: 8px;
@@ -798,6 +798,14 @@
 }
 .player-frame {
   flex: none;
+}
+/* A drawing keeps the size its pins need (see sizeFrame); a narrower stage scrolls sideways too. */
+.player-stage {
+  overflow-x: auto;
+  align-items: safe center;
+}
+.player-frame:has(> img:not([hidden])) {
+  max-width: none;
 }
 .player-unplaced {
   display: flex;
@@ -835,7 +843,7 @@
   .player-where {
     flex: 1;
     max-width: 34%;
-    font-size: 13px;
+    font-size: 16px;
   }
   .player-steps {
     display: none;
@@ -859,13 +867,13 @@
 .way-back-mark {
   position: relative;
   margin-left: auto;
-  width: max(22px, calc(22px / var(--board-zoom, 1)));
-  height: max(22px, calc(22px / var(--board-zoom, 1)));
+  width: max(25px, calc(25px / var(--board-zoom, 1)));
+  height: max(25px, calc(25px / var(--board-zoom, 1)));
   border-radius: 50%;
   display: inline-grid;
   place-items: center;
   color: #718060;
-  font: 600 max(14px, calc(14px / var(--board-zoom, 1))) / 1 var(--sans);
+  font: 600 max(17px, calc(17px / var(--board-zoom, 1))) / 1 var(--sans);
   cursor: help;
 }
 .way-back-mark:hover,
@@ -884,10 +892,59 @@
   background: #eef1e6;
   box-shadow: 0 2px 6px #4a3c2433;
   color: #5f6e55;
-  font: 600 max(12px, calc(12px / var(--board-zoom, 1))) var(--sans);
+  font: 600 max(16px, calc(16px / var(--board-zoom, 1))) var(--sans);
   white-space: nowrap;
 }
 .way-back-mark:hover > span,
 .way-back-mark:focus-visible > span {
   display: block;
+}
+
+/* A laptop at 400% to 500% browser zoom (under 380 CSS px wide or 340 tall): the header keeps the
+   logo and Test the flow, the walk's buttons share their rows, and the colour key steps aside so
+   the cork keeps some room. Nothing reaches past the window. */
+@media (max-width: 380px) {
+  .demo-header {
+    gap: 8px;
+  }
+  .demo-header .brand {
+    font-size: 0;
+  }
+  .demo-header .brand img {
+    margin-right: 0;
+  }
+  .player-bar {
+    flex-wrap: wrap;
+  }
+  .player-bar .button {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+}
+@media (max-height: 340px) {
+  .demo-legend {
+    display: none;
+  }
+  /* The walk scrolls as one column: its bar, then the page at the window's full height. */
+  .player {
+    overflow-y: auto;
+    padding-bottom: 12px;
+  }
+  .player-stage {
+    flex: none;
+    height: calc(100dvh - 24px);
+  }
+  /* The hint stays in the window's corner while the walk scrolls, clear of its bar. */
+  .player-scroll-hint {
+    position: fixed;
+    bottom: 6px;
+    right: 6px;
+  }
+}
+@media (max-height: 500px), (max-width: 380px) {
+  .player-where {
+    overflow: hidden;
+  }
 }
