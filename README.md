@@ -42,3 +42,7 @@ Deploy `.site-dist/`, which holds only the public files, never the repository it
 ## Checks
 
 `node --test` covers the export and staging tools. After a visual change, check every page against the app's build checklist (`docs/BUILD_CHECKLIST.md` in the app repository): measure text and click targets at 100% zoom, try real browser zoom from 125% up to 500% in laptop-sized windows and on a phone, and make sure nothing overlaps and the example's flow reaches every page and comes back.
+
+## License
+
+The code is MIT licensed; see [LICENSE](LICENSE). The hand drawings in `example/art/` and the logo in `assets/` are the author's own and are not covered by it.
