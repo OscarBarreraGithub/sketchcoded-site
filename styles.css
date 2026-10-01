@@ -79,7 +79,7 @@ a {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   gap: 48px;
   align-items: start;
-  padding: 64px 0 40px;
+  padding: 64px 0 12px;
 }
 .hero h1 {
   font: 400 clamp(44px, 6vw, 72px)/1 var(--serif);
@@ -173,6 +173,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 /* Set up */
 .setup {
@@ -311,11 +312,25 @@ a {
     gap: 28px;
     padding-top: 40px;
   }
+  /* Stacked, the setup heading needs room of its own below the example frame. */
   .hero {
-    padding-bottom: 8px;
+    padding-bottom: 40px;
   }
   .setup {
     padding-top: 0;
+  }
+}
+/* A phone: the caption takes its own line and the button the frame's width. */
+@media (max-width: 520px) {
+  .example figcaption {
+    flex-wrap: wrap;
+  }
+  .example figcaption span:first-child {
+    flex: 1 1 100%;
+  }
+  .example .cta {
+    flex: 1 1 100%;
+    justify-content: center;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -374,18 +389,27 @@ a {
 }
 .site-scroll-hint {
   position: fixed;
-  bottom: 6px;
-  right: 24px;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
-  min-height: 44px;
-  padding: 8px 14px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: grid;
+  place-items: center;
   border: 1px solid #71826a;
-  border-radius: 24px;
+  border-radius: 50%;
   background: #fffef6;
   color: #29412f;
-  font: 600 15px var(--sans);
+  font: 600 20px/1 var(--sans);
   cursor: pointer;
+  opacity: 0.6;
   box-shadow: 0 2px 8px #0002;
+}
+.site-scroll-hint:hover,
+.site-scroll-hint:focus-visible {
+  opacity: 1;
 }
 .site-scroll-hint[hidden] {
   display: none;

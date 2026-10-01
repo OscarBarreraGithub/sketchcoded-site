@@ -7,7 +7,8 @@
  */
 (() => {
   const $ = (name) => document.querySelector(`[data-${name}]`);
-  const stage = $("stage"),
+  const scroller = $("scroll"),
+    stage = $("stage"),
     world = $("world"),
     yarnLayer = $("yarn"),
     cards = $("cards"),
@@ -76,7 +77,13 @@
   const isHistory = (t) =>
     t.navigation === "back" || t.navigation === "dismiss";
 
-  /** The curve from a pin to the top of the frame it opens, as the app draws it. */
+  /** Where a label may sit along its yarn, best first: the middle, then out towards the ends. */
+  const SPOTS = [0.5, 0.42, 0.58, 0.34, 0.66, 0.26, 0.74, 0.18, 0.82];
+  /**
+   * The curve from a pin to the top of the frame it opens, as the app draws it, and the spots its
+   * label may take. While the frames stack (on a phone), the yarn takes the route that
+   * stackFrames() gave it.
+   */
   function curve(t) {
     const pin = byId(board.pins, t.pinId);
     const from = pin && byId(board.screens, pin.screenId);
@@ -86,6 +93,36 @@
       b = layout[to.id];
     const x1 = a.x + 12 + pin.x * (a.width - 24),
       y1 = a.y + 30 + pin.y * shotHeight(from);
+    if (stacked) {
+      const route = stacked.routes.get(t);
+      if (!route) return null;
+      const x2 = b.x + b.width / 2 + route.offset,
+        y2 = b.y + 8;
+      const corners =
+        route.lane === null
+          ? [
+              [x1, y1],
+              [x1, route.band],
+              [x2, route.band],
+              [x2, y2],
+            ]
+          : [
+              [x1, y1],
+              [route.lane, y1],
+              [route.lane, route.band],
+              [x2, route.band],
+              [x2, y2],
+            ];
+      // The label sits where the yarn turns down into its frame, or further back along the turn.
+      const turn = route.lane ?? x1;
+      return {
+        d: rounded(corners, 24),
+        spots: [1, 0.75, 0.5, 0.25].map((s) => ({
+          x: turn + (x2 - turn) * s,
+          y: route.band,
+        })),
+      };
+    }
     const x2 = b.x + b.width / 2,
       y2 = b.y + 8;
     const parallel = board.transitions.filter(
@@ -105,10 +142,33 @@
     ];
     return {
       d: `M ${x1} ${y1} C ${points[1].join(" ")}, ${points[2].join(" ")}, ${x2} ${y2}`,
-      points,
-      x: (x1 + x2) / 2,
-      y: (y1 + y2) / 2 + bend * 0.75,
+      spots: SPOTS.map((s) => along(points, s)),
     };
+  }
+  /** A path through the corners, each one rounded the way yarn bends around a tack. */
+  function rounded(corners, radius) {
+    const points = corners.filter(
+      (p, i) =>
+        i === 0 ||
+        Math.hypot(p[0] - corners[i - 1][0], p[1] - corners[i - 1][1]) > 0.5,
+    );
+    let d = `M ${points[0].join(" ")}`;
+    for (let i = 1; i < points.length - 1; i++) {
+      const [a, b, c] = points.slice(i - 1, i + 2);
+      const into = Math.hypot(b[0] - a[0], b[1] - a[1]),
+        out = Math.hypot(c[0] - b[0], c[1] - b[1]);
+      const r = Math.min(radius, into / 2, out / 2);
+      const p = [
+        b[0] + ((a[0] - b[0]) * r) / into,
+        b[1] + ((a[1] - b[1]) * r) / into,
+      ];
+      const q = [
+        b[0] + ((c[0] - b[0]) * r) / out,
+        b[1] + ((c[1] - b[1]) * r) / out,
+      ];
+      d += ` L ${p.join(" ")} Q ${b.join(" ")} ${q.join(" ")}`;
+    }
+    return `${d} L ${points.at(-1).join(" ")}`;
   }
   /** A point along the yarn, from 0 at the pin to 1 at the frame it opens. */
   const along = ([a, b, c, d], s) => {
@@ -243,8 +303,8 @@
       );
       const label = el("div", "yarn-label", t.summary);
       label.title = t.summary;
-      label.style.cssText = `left:${path.x}px;top:${path.y}px`;
-      label.yarn = path.points;
+      label.style.cssText = `left:${path.spots[0].x}px;top:${path.spots[0].y}px`;
+      label.spots = path.spots;
       overlay.append(label);
     }
     placeLabels();
@@ -277,14 +337,12 @@
     const clear = (box) => taken.reduce((sum, t) => sum + overlap(box, t), 0);
     // A label with no clear spot anywhere on its yarn waits as a small mark; hovering or
     // focusing it shows the words.
-    const spots = [0.5, 0.42, 0.58, 0.34, 0.66, 0.26, 0.74, 0.18, 0.82];
     for (const label of overlay.querySelectorAll(".yarn-label")) {
       label.classList.remove("as-dot");
       const w = label.offsetWidth + margin * 2,
         h = label.offsetHeight + margin * 2;
       let spot = null;
-      for (const s of spots) {
-        const p = along(label.yarn, s);
+      for (const p of label.spots) {
         const box = { x: p.x - w / 2, y: p.y - h / 2, width: w, height: h };
         if (!clear(box)) {
           spot = { p, box };
@@ -296,8 +354,7 @@
         label.classList.add("as-dot");
         label.tabIndex = 0;
         const d = label.offsetWidth + margin * 2;
-        for (const s of spots) {
-          const p = along(label.yarn, s);
+        for (const p of label.spots) {
           const box = { x: p.x - d / 2, y: p.y - d / 2, width: d, height: d };
           if (!spot || !clear(box)) spot = { p, box };
           if (!clear(box)) break;
@@ -317,6 +374,17 @@
   };
 
   const apply = () => {
+    // Stacked, the column fills the width and the page scrolls, so there is no pan to clamp.
+    if (stacked) {
+      world.style.transform = `translate(${stacked.offset}px, 0) scale(${view.zoom})`;
+      world.style.setProperty("--board-zoom", view.zoom);
+      world.classList.remove("far");
+      stage.style.height = `${Math.ceil(stacked.height * view.zoom)}px`;
+      if (placedAt !== view.zoom) placeLabels();
+      updateBoardHint();
+      return;
+    }
+    stage.style.height = "";
     if (board?.screens.length) {
       const r = stage.getBoundingClientRect(),
         pad = 48;
@@ -417,6 +485,8 @@
   // ------------------------------------------------------- moving the board
   function dragable(card, id) {
     card.addEventListener("pointerdown", (e) => {
+      // Stacked, a drag scrolls the page; frames stay in their column.
+      if (stacked) return;
       if (e.button !== 0 && e.pointerType === "mouse") return;
       const start = {
         x: layout[id].x,
@@ -473,7 +543,7 @@
   let pan = null,
     pinch = null;
   stage.addEventListener("pointerdown", (e) => {
-    if (e.target.closest(".card")) return;
+    if (stacked || e.target.closest(".card")) return;
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     stage.setPointerCapture(e.pointerId);
     if (pointers.size === 1) {
@@ -516,7 +586,8 @@
   stage.addEventListener(
     "wheel",
     (e) => {
-      if (e.ctrlKey || e.metaKey) return; // leave the browser's own zoom alone
+      // Leave the browser's own zoom alone, and a stacked board to scroll as a page does.
+      if (stacked || e.ctrlKey || e.metaKey) return;
       e.preventDefault();
       const rect = stage.getBoundingClientRect();
       if (e.shiftKey) {
@@ -551,9 +622,155 @@
     $(name).addEventListener("click", () => (moved = true));
   addEventListener("resize", () => {
     if (!started) return;
+    // Crossing into or out of a phone's width, or turning a phone, lays the frames out again.
+    if (phone.matches !== !!stacked || (stacked && innerWidth !== arrangedAt))
+      return arrange();
+    if (stacked) return;
     if (moved) apply();
     else start();
   });
+
+  // ------------------------------------------------------------- on a phone
+  /**
+   * A phone is too narrow for the board as its author laid it out, so there the frames stack in
+   * one column, in the order a visitor meets them: the entry, then the pages its pins lead to, in
+   * pin order, and so on; frames nothing leads to follow in the board's reading order. The page
+   * scrolls instead of panning. Yarn to the next frame drops straight to it; yarn that skips
+   * frames runs down a lane at the left, the longest furthest out. Each thread turns into its
+   * frame just under its label, above the frame's tape. As on the board, nothing is saved.
+   */
+  const phone = matchMedia("(max-width: 599px)"),
+    touch = matchMedia("(pointer: coarse)");
+  let stacked = null,
+    arrangedAt = 0;
+  // Some browsers send the resize before the media query has caught up, so also follow the query.
+  phone.addEventListener("change", () => started && arrange());
+  /** World units: the room between frames (label band and tape), and the yarn lane. */
+  const STACK = { gap: 112, first: 48, band: 70, edge: 12, spacing: 9 };
+  const onward = (screenId) =>
+    pinsOf(screenId).flatMap((pin) =>
+      yarnOf(pin.id).filter(
+        (t) => !isHistory(t) && t.target && byId(board.screens, t.target),
+      ),
+    );
+  function stackFrames() {
+    const order = [],
+      seen = new Set();
+    const visit = (first) => {
+      const from = order.length;
+      seen.add(first.id);
+      order.push(first);
+      for (let i = from; i < order.length; i++)
+        for (const t of onward(order[i].id))
+          if (!seen.has(t.target)) {
+            seen.add(t.target);
+            order.push(byId(board.screens, t.target));
+          }
+    };
+    const placed = (s) => board.layout[s.id];
+    visit(board.screens.find((s) => s.entry) ?? board.screens[0]);
+    for (const s of [...board.screens].sort(
+      (a, b) => placed(a).y - placed(b).y || placed(a).x - placed(b).x,
+    ))
+      if (!seen.has(s.id)) visit(s);
+
+    const row = new Map(order.map((s, i) => [s.id, i]));
+    const threads = order.flatMap((s) =>
+      onward(s.id).map((t) => ({
+        t,
+        from: row.get(s.id),
+        to: row.get(t.target),
+      })),
+    );
+    // Rows, top to bottom; x waits for the lane's width.
+    const next = {};
+    let y = 0;
+    order.forEach((s, i) => {
+      const into = threads.some((r) => r.to === i);
+      y += i === 0 && !into ? STACK.first : STACK.gap;
+      next[s.id] = { x: 0, y, width: placed(s).width };
+      layout = next;
+      y += cardHeight(s);
+    });
+    // Each thread into a frame gets its own turn; two into one frame sit side by side.
+    const routes = new Map();
+    order.forEach((s, i) => {
+      const into = threads.filter((r) => r.to === i);
+      into.forEach((r, j) => {
+        const shift = j - (into.length - 1) / 2;
+        routes.set(r.t, {
+          lane: null,
+          band: next[s.id].y - STACK.band + shift * 10,
+          offset: shift * 14,
+        });
+      });
+    });
+    // Lane slots: the shortest runs nearest the frames, so a thread turning in crosses none that
+    // is still on its way down. Runs that never share a stretch of the lane share a slot.
+    const pinY = (r) => {
+      const pin = byId(board.pins, r.t.pinId),
+        s = order[r.from];
+      return next[s.id].y + 30 + pin.y * shotHeight(s);
+    };
+    const runs = threads
+      .filter((r) => r.to !== r.from + 1)
+      .map((r) => {
+        const ends = [pinY(r), routes.get(r.t).band];
+        return { r, lo: Math.min(...ends), hi: Math.max(...ends) };
+      })
+      .sort((a, b) => a.hi - a.lo - (b.hi - b.lo));
+    const taken = [];
+    for (const run of runs) {
+      run.slot = 0;
+      while (
+        taken.some(
+          (o) =>
+            o.slot === run.slot && o.lo < run.hi + 20 && run.lo < o.hi + 20,
+        )
+      )
+        run.slot++;
+      taken.push(run);
+    }
+    const slots = Math.max(0, ...runs.map((run) => run.slot + 1));
+    const lane = slots ? STACK.edge * 2 + (slots - 1) * STACK.spacing : 16;
+    for (const s of order) next[s.id].x = lane;
+    for (const run of runs)
+      routes.get(run.r.t).lane = lane - STACK.edge - run.slot * STACK.spacing;
+    const width = lane + Math.max(...order.map((s) => next[s.id].width)) + 8;
+    return { routes, width, height: y + 40 };
+  }
+  /** Lays the board out for the window: stacked on a phone, otherwise as its author left it. */
+  function arrange() {
+    document.body.classList.toggle("stacked", phone.matches);
+    arrangedAt = innerWidth;
+    if (phone.matches) {
+      stacked = stackFrames();
+      const room = stage.clientWidth;
+      view.zoom = Math.min(1, (room - 16) / stacked.width);
+      stacked.offset = (room - stacked.width * view.zoom) / 2;
+    } else {
+      if (stacked) layout = JSON.parse(JSON.stringify(board.layout));
+      stacked = null;
+    }
+    placedAt = null;
+    drawCards();
+    if (stacked) apply();
+    else start();
+    drawThreads();
+  }
+  // Stacked, the arrow says there is more board below until the visitor starts scrolling.
+  const boardHint = $("board-hint");
+  function updateBoardHint() {
+    boardHint.hidden =
+      !stacked ||
+      scroller.scrollTop > 2 ||
+      scroller.scrollHeight - scroller.clientHeight - scroller.scrollTop < 3;
+  }
+  scroller.addEventListener("scroll", updateBoardHint, { passive: true });
+  new ResizeObserver(updateBoardHint).observe(scroller);
+  boardHint.addEventListener("click", () =>
+    scroller.scrollBy({ top: scroller.clientHeight * 0.7, behavior: "smooth" }),
+  );
 
   // ----------------------------------------------------- walking the flow
   let stack = [];
@@ -616,8 +833,12 @@
     const pad = 20;
     const aspect = a.width / a.height;
     // As in the app, a drawing never shrinks until its pins pile up: its long side keeps 420px,
-    // and past that the stage scrolls.
-    const least = Math.min(aspect >= 1 ? 420 : 420 * aspect, a.width) + pad;
+    // and past that the stage scrolls. A phone is narrower than that, and scrolling a drawing
+    // sideways by touch is awkward, so there the drawing fits the width instead, down to 300px,
+    // where every pin's centre is still clear of its neighbours. A zoomed laptop keeps the rule.
+    let least = Math.min(aspect >= 1 ? 420 : 420 * aspect, a.width) + pad;
+    if (phone.matches && touch.matches)
+      least = Math.min(least, Math.max(stageSize.width, 300));
     // The drawing shares the stage's height with what sits under it: the pins still to place,
     // inside the frame, and the note below it. Together they fit without scrolling.
     const note = $("note");
@@ -1033,10 +1254,8 @@
       board = data;
       layout = JSON.parse(JSON.stringify(board.layout));
       loading.remove();
-      drawCards();
-      drawThreads();
       drawLegend();
-      start();
+      arrange();
       started = true;
     })
     .catch(() => {

@@ -40,8 +40,11 @@ document.querySelectorAll("[data-copy-prompt]").forEach((button) => {
   const panel = document.querySelector(".site-scroll");
   const hint = document.querySelector(".site-scroll-hint");
   if (!panel || !hint) return;
+  // The arrow says there is more below until the visitor starts scrolling.
   const update = () => {
-    hint.hidden = panel.scrollHeight - panel.clientHeight - panel.scrollTop < 3;
+    hint.hidden =
+      panel.scrollTop > 2 ||
+      panel.scrollHeight - panel.clientHeight - panel.scrollTop < 3;
   };
   panel.addEventListener("scroll", update);
   hint.addEventListener("click", () =>

@@ -26,76 +26,96 @@
     <link rel="stylesheet" href="demo.css" />
   </head>
   <body class="demo-body">
-    <header class="demo-header">
-      <a class="button demo-back" href="./" aria-label="Back to the home page"
-        ><span aria-hidden="true">←</span>
-        <span class="demo-back-label">Home</span></a
-      >
-      <p class="demo-intro">
-        <strong>Sketchcoded, on its own board.</strong>
-      </p>
-      <button class="button primary demo-play" type="button" data-play>
-        <svg viewBox="0 0 16 16" aria-hidden="true" width="14" height="14">
-          <path d="M4 2.5v11l9-5.5z" fill="currentColor" />
-        </svg>
-        Test the flow
-      </button>
-    </header>
+    <!-- On a phone the frames stack in one column and this scrolls: header, key, then the cork. -->
+    <div class="demo-scroll" data-scroll>
+      <header class="demo-header">
+        <a class="button demo-back" href="./" aria-label="Back to the home page"
+          ><span aria-hidden="true">←</span>
+          <span class="demo-back-label">Home</span></a
+        >
+        <p class="demo-intro">
+          <strong>Sketchcoded, on its own board.</strong>
+        </p>
+        <button class="button primary demo-play" type="button" data-play>
+          <svg viewBox="0 0 16 16" aria-hidden="true" width="14" height="14">
+            <path d="M4 2.5v11l9-5.5z" fill="currentColor" />
+          </svg>
+          Test the flow
+        </button>
+      </header>
 
-    <main
-      class="demo-stage"
-      data-stage
-      aria-label="This website, planned on a board"
+      <main
+        class="demo-stage"
+        data-stage
+        aria-label="This website, planned on a board"
+      >
+        <div class="demo-world" data-world>
+          <svg class="demo-yarn" data-yarn aria-hidden="true"></svg>
+          <div data-cards></div>
+          <div data-overlay></div>
+        </div>
+        <p class="demo-loading" data-loading>Bringing the board in…</p>
+      </main>
+      <!-- The legend and the controls sit below the cork, never on it, so they cover no frame. -->
+      <footer class="demo-dock">
+        <div
+          class="demo-legend"
+          data-legend
+          aria-label="What the colours mean"
+        ></div>
+        <div class="demo-controls">
+          <button
+            class="icon-button"
+            type="button"
+            data-zoom-out
+            aria-label="Zoom out"
+          >
+            −
+          </button>
+          <span class="demo-zoom" data-zoom>100%</span>
+          <button
+            class="icon-button"
+            type="button"
+            data-zoom-in
+            aria-label="Zoom in"
+          >
+            +
+          </button>
+          <button
+            class="icon-button"
+            type="button"
+            data-fit
+            aria-label="Fit the board"
+          >
+            ⤢
+          </button>
+        </div>
+        <p class="demo-hint">
+          <span class="only-board">
+            <span class="only-wide"
+              >Drag a frame to move it · drag the cork to pan · scroll to
+              zoom</span
+            >
+            <span class="only-narrow">Drag to move · pinch to zoom</span>
+            · reload to put it all back
+          </span>
+          <span class="only-stacked"
+            ><span class="by-touch">Tap</span
+            ><span class="by-mouse">Click</span> a frame to test the flow from
+            it.</span
+          >
+        </p>
+      </footer>
+    </div>
+    <button
+      class="site-scroll-hint"
+      type="button"
+      data-board-hint
+      hidden
+      aria-label="Scroll for more of the board"
     >
-      <div class="demo-world" data-world>
-        <svg class="demo-yarn" data-yarn aria-hidden="true"></svg>
-        <div data-cards></div>
-        <div data-overlay></div>
-      </div>
-      <p class="demo-loading" data-loading>Bringing the board in…</p>
-    </main>
-    <!-- The legend and the controls sit below the cork, never on it, so they cover no frame. -->
-    <footer class="demo-dock">
-      <div
-        class="demo-legend"
-        data-legend
-        aria-label="What the colours mean"
-      ></div>
-      <div class="demo-controls">
-        <button
-          class="icon-button"
-          type="button"
-          data-zoom-out
-          aria-label="Zoom out"
-        >
-          −
-        </button>
-        <span class="demo-zoom" data-zoom>100%</span>
-        <button
-          class="icon-button"
-          type="button"
-          data-zoom-in
-          aria-label="Zoom in"
-        >
-          +
-        </button>
-        <button
-          class="icon-button"
-          type="button"
-          data-fit
-          aria-label="Fit the board"
-        >
-          ⤢
-        </button>
-      </div>
-      <p class="demo-hint">
-        <span class="only-wide"
-          >Drag a frame to move it · drag the cork to pan · scroll to zoom</span
-        >
-        <span class="only-narrow">Drag to move · pinch to zoom</span>
-        · reload to put it all back
-      </p>
-    </footer>
+      <span aria-hidden="true">↓</span>
+    </button>
 
     <!-- Testing the flow: the drawing, its pins, and the paths the board says exist. -->
     <div

@@ -15,7 +15,7 @@ Then open http://127.0.0.1:8080. On Windows, use `py -3` in place of `python3`.
 ## What is here
 
 - `index.html`, `404.html` and `styles.css`: the pages. There is no separate guide; `_redirects` sends the old `/guide` address to the guidelines on the home page.
-- `demo.html`, `demo.css` and `demo.js`: the example, a board you can move around and test the flow on. Nothing is saved; a reload puts it back.
+- `demo.html`, `demo.css` and `demo.js`: the example, a board you can move around and test the flow on. Nothing is saved; a reload puts it back. On a phone the frames stack in one column that scrolls, in the order a visitor meets them.
 - `example/`: the board the example shows, exported from the author's own Sketchcoded board with its original drawings. Never replace them with invented artwork; a fork should publish a board it owns.
 - `links.js`: the repository and project addresses, in one place.
 - `assets/`: images and fonts. `assets/logo.svg` and `assets/favicon.svg` are copies of the app's logo and tab icon, and `assets/board.png` is a screenshot of the app; retake it when the app's look changes.
