@@ -11,8 +11,8 @@ document.querySelectorAll("[data-link]").forEach((el) => {
   const href = window.SKETCHCODED_LINKS[el.dataset.link];
   if (href) el.setAttribute("href", href);
 });
-// The setup prompt is generated from the GitHub address so the two never drift apart.
-const prompt = `Set up Sketchcoded on this computer. Clone ${window.SKETCHCODED_LINKS.github}, use Node 22.12 or later, run npm ci, then npm run dev. Reuse a running instance of this checkout; otherwise, if port 5173 is busy, use npm run dev -- --port 0. Open the local address printed by the server in my browser.`;
+// Keep setup details in the repository; the copied prompt only points to them.
+const prompt = `Set up Sketchcoded on this computer. Read and follow these setup instructions: ${window.SKETCHCODED_LINKS.github.replace(/\.git\/?$/, "").replace(/\/$/, "")}/blob/main/SETUP.md`;
 const commands = `git clone ${window.SKETCHCODED_LINKS.github.replace(/\.git\/?$/, "").replace(/\/$/, "")}.git sketchcoded
 cd sketchcoded
 npm ci
